@@ -1,0 +1,6364 @@
+{
+  "TASKS": [
+    {
+      "id": "T001",
+      "code": "T-2026-001",
+      "name": "支付中心重构测试",
+      "statusClass": "status-exec",
+      "statusText": "执行中",
+      "owner": "张小明",
+      "progress": 68,
+      "startDate": "2026-03-01",
+      "endDate": "2026-05-15",
+      "desc": "重构核心支付链路并完成全流程回归测试",
+      "subtasks": [
+        {
+          "id": "sub-1777208275207-6848-0",
+          "name": "测试子任务1（ST 阶段）",
+          "stage": "st",
+          "stageText": "ST 阶段",
+          "status": "pending",
+          "statusText": "未开始",
+          "owner": {
+            "name": "李工程师",
+            "short": "李",
+            "color": "#2ba471"
+          },
+          "passRate": null,
+          "dueDate": "2026-05-15",
+          "tags": [
+            "G01"
+          ],
+          "remark": "",
+          "updatedAt": "2026-04-26"
+        },
+        {
+          "id": "sub-1777208275208-8439-1",
+          "name": "测试子任务2（UAT 阶段）",
+          "stage": "uat",
+          "stageText": "UAT 阶段",
+          "status": "pending",
+          "statusText": "未开始",
+          "owner": {
+            "name": "张小明",
+            "short": "张",
+            "color": "#0052d9"
+          },
+          "passRate": null,
+          "dueDate": "2026-05-15",
+          "tags": [
+            "G01"
+          ],
+          "remark": "",
+          "updatedAt": "2026-04-26"
+        }
+      ]
+    },
+    {
+      "id": "T002",
+      "code": "T-2026-002",
+      "name": "会员体系 H5 新增优惠券模块",
+      "statusClass": "status-design",
+      "statusText": "设计中",
+      "owner": "李工程师",
+      "progress": 25,
+      "startDate": "2026-03-20",
+      "endDate": "2026-06-10",
+      "desc": "会员 H5 增加优惠券领取与核销模块"
+    },
+    {
+      "id": "T003",
+      "code": "T-2026-003",
+      "name": "商品搜索算法优化回归测试",
+      "statusClass": "status-review",
+      "statusText": "评审中",
+      "owner": "王测试",
+      "progress": 82,
+      "startDate": "2026-02-10",
+      "endDate": "2026-04-30",
+      "desc": "搜索排序算法升级后回归测试"
+    },
+    {
+      "id": "T004",
+      "code": "T-2026-004",
+      "name": "订单履约系统性能测试",
+      "statusClass": "status-exec",
+      "statusText": "执行中",
+      "owner": "赵架构师",
+      "progress": 45,
+      "startDate": "2026-03-15",
+      "endDate": "2026-05-30",
+      "desc": "订单履约链路端到端性能压测"
+    },
+    {
+      "id": "T005",
+      "code": "T-2026-005",
+      "name": "消息推送服务国际化改造",
+      "statusClass": "status-exec",
+      "statusText": "执行中",
+      "owner": "孙小红",
+      "progress": 55,
+      "startDate": "2026-03-25",
+      "endDate": "2026-06-01",
+      "desc": "消息推送多语言与多时区支持"
+    },
+    {
+      "id": "T006",
+      "code": "T-2026-006",
+      "name": "用户登录安全增强验收",
+      "statusClass": "status-done",
+      "statusText": "已完成",
+      "owner": "周小刚",
+      "progress": 100,
+      "startDate": "2026-01-10",
+      "endDate": "2026-03-20",
+      "desc": "登录链路安全增强项验收"
+    }
+  ],
+  "WORKBENCH": {
+    "T001": {
+      "summary": {
+        "totalCases": 324,
+        "designed": 298,
+        "executed": 210,
+        "passed": 180,
+        "failed": 30,
+        "blocked": 8,
+        "defects": 26
+      },
+      "todo": [
+        {
+          "id": "W1",
+          "type": "用例执行",
+          "text": "支付-退款失败场景 12 条用例待执行",
+          "time": "今天 10:00"
+        },
+        {
+          "id": "W2",
+          "type": "缺陷跟进",
+          "text": "BUG-2026-0123 待复测",
+          "time": "今天 14:30"
+        },
+        {
+          "id": "W3",
+          "type": "评审",
+          "text": "性能测试用例评审会",
+          "time": "明天 10:00"
+        }
+      ]
+    },
+    "T002": {
+      "summary": {
+        "totalCases": 120,
+        "designed": 60,
+        "executed": 0,
+        "passed": 0,
+        "failed": 0,
+        "blocked": 0,
+        "defects": 0
+      },
+      "todo": [
+        {
+          "id": "W1",
+          "type": "用例设计",
+          "text": "优惠券核销异常分支用例补充",
+          "time": "今天 17:00"
+        }
+      ]
+    },
+    "T003": {
+      "summary": {
+        "totalCases": 260,
+        "designed": 260,
+        "executed": 240,
+        "passed": 212,
+        "failed": 22,
+        "blocked": 6,
+        "defects": 18
+      },
+      "todo": [
+        {
+          "id": "W1",
+          "type": "评审",
+          "text": "测试报告定稿评审",
+          "time": "明天 16:00"
+        }
+      ]
+    },
+    "T004": {
+      "summary": {
+        "totalCases": 180,
+        "designed": 150,
+        "executed": 85,
+        "passed": 70,
+        "failed": 10,
+        "blocked": 5,
+        "defects": 9
+      },
+      "todo": []
+    },
+    "T005": {
+      "summary": {
+        "totalCases": 210,
+        "designed": 190,
+        "executed": 110,
+        "passed": 95,
+        "failed": 12,
+        "blocked": 3,
+        "defects": 11
+      },
+      "todo": []
+    },
+    "T006": {
+      "summary": {
+        "totalCases": 156,
+        "designed": 156,
+        "executed": 156,
+        "passed": 150,
+        "failed": 6,
+        "blocked": 0,
+        "defects": 6
+      },
+      "todo": []
+    }
+  },
+  "CASES": {
+    "T001": [
+      {
+        "id": "CASE-2600",
+        "name": "创建支付订单-主流程",
+        "title": "创建支付订单-主流程",
+        "code": "TC-T001-0",
+        "module": "支付核心 API 重构",
+        "path": "支付核心 API 重构 / 冒烟",
+        "type": "func",
+        "priority": "P0",
+        "status": "draft",
+        "statusText": "草稿",
+        "owner": "张小明",
+        "ownerObj": {
+          "name": "张小明",
+          "short": "张",
+          "color": "#0052d9"
+        },
+        "subtask": "sub-pay-api",
+        "stage": "smoke",
+        "updated": "2026-04-10 9:30",
+        "execType": "func",
+        "ownerIdx": 0,
+        "execStatus": "passed",
+        "executed": true,
+        "execTime": "2026-04-10 9:45",
+        "duration": 120,
+        "bugs": 0,
+        "round": 1
+      },
+      {
+        "id": "CASE-2601",
+        "name": "支付回调-签名校验",
+        "title": "支付回调-签名校验",
+        "code": "TC-T001-1",
+        "module": "支付核心 API 重构",
+        "path": "支付核心 API 重构 / 冒烟",
+        "type": "api",
+        "priority": "P1",
+        "status": "review",
+        "statusText": "评审中",
+        "owner": "李工程师",
+        "ownerObj": {
+          "name": "李工程师",
+          "short": "李",
+          "color": "#2ba471"
+        },
+        "subtask": "sub-pay-api",
+        "stage": "smoke",
+        "updated": "2026-04-11 10:30",
+        "execType": "api",
+        "ownerIdx": 1,
+        "execStatus": "passed",
+        "executed": true,
+        "execTime": "2026-04-11 10:45",
+        "duration": 240,
+        "bugs": 0,
+        "round": 1
+      },
+      {
+        "id": "CASE-2602",
+        "name": "退款申请-部分退款",
+        "title": "退款申请-部分退款",
+        "code": "TC-T001-2",
+        "module": "支付核心 API 重构",
+        "path": "支付核心 API 重构 / 冒烟",
+        "type": "func",
+        "priority": "P2",
+        "status": "approved",
+        "statusText": "已通过",
+        "owner": "王测试",
+        "ownerObj": {
+          "name": "王测试",
+          "short": "王",
+          "color": "#7b3fe4"
+        },
+        "subtask": "sub-pay-api",
+        "stage": "smoke",
+        "updated": "2026-04-12 11:30",
+        "execType": "func",
+        "ownerIdx": 2,
+        "execStatus": "passed",
+        "executed": true,
+        "execTime": "2026-04-12 11:45",
+        "duration": 360,
+        "bugs": 0,
+        "round": 1
+      },
+      {
+        "id": "CASE-2610",
+        "name": "创建支付订单-主流程",
+        "title": "创建支付订单-主流程",
+        "code": "TC-T001-10",
+        "module": "支付核心 API 重构",
+        "path": "支付核心 API 重构 / 系统测试",
+        "type": "func",
+        "priority": "P1",
+        "status": "review",
+        "statusText": "评审中",
+        "owner": "李工程师",
+        "ownerObj": {
+          "name": "李工程师",
+          "short": "李",
+          "color": "#2ba471"
+        },
+        "subtask": "sub-pay-api",
+        "stage": "st",
+        "updated": "2026-04-13 10:30",
+        "execType": "func",
+        "ownerIdx": 1,
+        "execStatus": "pending",
+        "executed": false,
+        "execTime": "",
+        "duration": 0,
+        "bugs": 0,
+        "round": 1
+      },
+      {
+        "id": "CASE-2611",
+        "name": "支付回调-签名校验",
+        "title": "支付回调-签名校验",
+        "code": "TC-T001-11",
+        "module": "支付核心 API 重构",
+        "path": "支付核心 API 重构 / 系统测试",
+        "type": "api",
+        "priority": "P2",
+        "status": "approved",
+        "statusText": "已通过",
+        "owner": "王测试",
+        "ownerObj": {
+          "name": "王测试",
+          "short": "王",
+          "color": "#7b3fe4"
+        },
+        "subtask": "sub-pay-api",
+        "stage": "st",
+        "updated": "2026-04-14 11:30",
+        "execType": "api",
+        "ownerIdx": 2,
+        "execStatus": "pending",
+        "executed": false,
+        "execTime": "",
+        "duration": 0,
+        "bugs": 0,
+        "round": 1
+      },
+      {
+        "id": "CASE-2612",
+        "name": "退款申请-部分退款",
+        "title": "退款申请-部分退款",
+        "code": "TC-T001-12",
+        "module": "支付核心 API 重构",
+        "path": "支付核心 API 重构 / 系统测试",
+        "type": "func",
+        "priority": "P3",
+        "status": "deprecated",
+        "statusText": "已废弃",
+        "owner": "赵架构师",
+        "ownerObj": {
+          "name": "赵架构师",
+          "short": "赵",
+          "color": "#e37318"
+        },
+        "subtask": "sub-pay-api",
+        "stage": "st",
+        "updated": "2026-04-15 12:30",
+        "execType": "func",
+        "ownerIdx": 3,
+        "execStatus": "pending",
+        "executed": false,
+        "execTime": "",
+        "duration": 0,
+        "bugs": 0,
+        "round": 1
+      },
+      {
+        "id": "CASE-2620",
+        "name": "创建支付订单-主流程",
+        "title": "创建支付订单-主流程",
+        "code": "TC-T001-20",
+        "module": "支付核心 API 重构",
+        "path": "支付核心 API 重构 / 回归",
+        "type": "func",
+        "priority": "P2",
+        "status": "approved",
+        "statusText": "已通过",
+        "owner": "王测试",
+        "ownerObj": {
+          "name": "王测试",
+          "short": "王",
+          "color": "#7b3fe4"
+        },
+        "subtask": "sub-pay-api",
+        "stage": "regression",
+        "updated": "2026-04-16 11:30",
+        "execType": "func",
+        "ownerIdx": 2,
+        "execStatus": "failed",
+        "executed": true,
+        "execTime": "2026-04-16 11:45",
+        "duration": 120,
+        "bugs": 1,
+        "round": 1
+      },
+      {
+        "id": "CASE-2621",
+        "name": "支付回调-签名校验",
+        "title": "支付回调-签名校验",
+        "code": "TC-T001-21",
+        "module": "支付核心 API 重构",
+        "path": "支付核心 API 重构 / 回归",
+        "type": "api",
+        "priority": "P3",
+        "status": "deprecated",
+        "statusText": "已废弃",
+        "owner": "赵架构师",
+        "ownerObj": {
+          "name": "赵架构师",
+          "short": "赵",
+          "color": "#e37318"
+        },
+        "subtask": "sub-pay-api",
+        "stage": "regression",
+        "updated": "2026-04-17 12:30",
+        "execType": "api",
+        "ownerIdx": 3,
+        "execStatus": "blocked",
+        "executed": true,
+        "execTime": "2026-04-17 12:45",
+        "duration": 240,
+        "bugs": 0,
+        "round": 1
+      },
+      {
+        "id": "CASE-2622",
+        "name": "退款申请-部分退款",
+        "title": "退款申请-部分退款",
+        "code": "TC-T001-22",
+        "module": "支付核心 API 重构",
+        "path": "支付核心 API 重构 / 回归",
+        "type": "func",
+        "priority": "P0",
+        "status": "draft",
+        "statusText": "草稿",
+        "owner": "孙小红",
+        "ownerObj": {
+          "name": "孙小红",
+          "short": "孙",
+          "color": "#d64b8a"
+        },
+        "subtask": "sub-pay-api",
+        "stage": "regression",
+        "updated": "2026-04-18 13:30",
+        "execType": "func",
+        "ownerIdx": 4,
+        "execStatus": "pending",
+        "executed": false,
+        "execTime": "",
+        "duration": 0,
+        "bugs": 0,
+        "round": 1
+      },
+      {
+        "id": "CASE-2630",
+        "name": "创建支付订单-主流程",
+        "title": "创建支付订单-主流程",
+        "code": "TC-T001-30",
+        "module": "支付核心 API 重构",
+        "path": "支付核心 API 重构 / UAT",
+        "type": "func",
+        "priority": "P3",
+        "status": "deprecated",
+        "statusText": "已废弃",
+        "owner": "赵架构师",
+        "ownerObj": {
+          "name": "赵架构师",
+          "short": "赵",
+          "color": "#e37318"
+        },
+        "subtask": "sub-pay-api",
+        "stage": "uat",
+        "updated": "2026-04-19 12:30",
+        "execType": "func",
+        "ownerIdx": 3,
+        "execStatus": "passed",
+        "executed": true,
+        "execTime": "2026-04-19 12:45",
+        "duration": 120,
+        "bugs": 0,
+        "round": 1
+      },
+      {
+        "id": "CASE-2631",
+        "name": "支付回调-签名校验",
+        "title": "支付回调-签名校验",
+        "code": "TC-T001-31",
+        "module": "支付核心 API 重构",
+        "path": "支付核心 API 重构 / UAT",
+        "type": "api",
+        "priority": "P0",
+        "status": "draft",
+        "statusText": "草稿",
+        "owner": "孙小红",
+        "ownerObj": {
+          "name": "孙小红",
+          "short": "孙",
+          "color": "#d64b8a"
+        },
+        "subtask": "sub-pay-api",
+        "stage": "uat",
+        "updated": "2026-04-20 13:30",
+        "execType": "api",
+        "ownerIdx": 4,
+        "execStatus": "passed",
+        "executed": true,
+        "execTime": "2026-04-20 13:45",
+        "duration": 240,
+        "bugs": 0,
+        "round": 1
+      },
+      {
+        "id": "CASE-2632",
+        "name": "退款申请-部分退款",
+        "title": "退款申请-部分退款",
+        "code": "TC-T001-32",
+        "module": "支付核心 API 重构",
+        "path": "支付核心 API 重构 / UAT",
+        "type": "func",
+        "priority": "P1",
+        "status": "review",
+        "statusText": "评审中",
+        "owner": "周小刚",
+        "ownerObj": {
+          "name": "周小刚",
+          "short": "周",
+          "color": "#1e9fff"
+        },
+        "subtask": "sub-pay-api",
+        "stage": "uat",
+        "updated": "2026-04-21 14:30",
+        "execType": "func",
+        "ownerIdx": 5,
+        "execStatus": "failed",
+        "executed": true,
+        "execTime": "2026-04-21 14:45",
+        "duration": 360,
+        "bugs": 1,
+        "round": 1
+      },
+      {
+        "id": "CASE-2640",
+        "name": "收银台首屏渲染",
+        "title": "收银台首屏渲染",
+        "code": "TC-T001-40",
+        "module": "收银台前端改版",
+        "path": "收银台前端改版 / 冒烟",
+        "type": "func",
+        "priority": "P0",
+        "status": "draft",
+        "statusText": "草稿",
+        "owner": "孙小红",
+        "ownerObj": {
+          "name": "孙小红",
+          "short": "孙",
+          "color": "#d64b8a"
+        },
+        "subtask": "sub-cashier",
+        "stage": "smoke",
+        "updated": "2026-04-22 13:30",
+        "execType": "func",
+        "ownerIdx": 4,
+        "execStatus": "pending",
+        "executed": false,
+        "execTime": "",
+        "duration": 0,
+        "bugs": 0,
+        "round": 1
+      },
+      {
+        "id": "CASE-2641",
+        "name": "收银台-优惠券选择",
+        "title": "收银台-优惠券选择",
+        "code": "TC-T001-41",
+        "module": "收银台前端改版",
+        "path": "收银台前端改版 / 冒烟",
+        "type": "func",
+        "priority": "P1",
+        "status": "review",
+        "statusText": "评审中",
+        "owner": "周小刚",
+        "ownerObj": {
+          "name": "周小刚",
+          "short": "周",
+          "color": "#1e9fff"
+        },
+        "subtask": "sub-cashier",
+        "stage": "smoke",
+        "updated": "2026-04-23 14:30",
+        "execType": "func",
+        "ownerIdx": 5,
+        "execStatus": "pending",
+        "executed": false,
+        "execTime": "",
+        "duration": 0,
+        "bugs": 0,
+        "round": 1
+      },
+      {
+        "id": "CASE-2642",
+        "name": "收银台-重复提交拦截",
+        "title": "收银台-重复提交拦截",
+        "code": "TC-T001-42",
+        "module": "收银台前端改版",
+        "path": "收银台前端改版 / 冒烟",
+        "type": "func",
+        "priority": "P2",
+        "status": "approved",
+        "statusText": "已通过",
+        "owner": "张小明",
+        "ownerObj": {
+          "name": "张小明",
+          "short": "张",
+          "color": "#0052d9"
+        },
+        "subtask": "sub-cashier",
+        "stage": "smoke",
+        "updated": "2026-04-24 15:30",
+        "execType": "func",
+        "ownerIdx": 0,
+        "execStatus": "passed",
+        "executed": true,
+        "execTime": "2026-04-24 15:45",
+        "duration": 360,
+        "bugs": 0,
+        "round": 1
+      },
+      {
+        "id": "CASE-2650",
+        "name": "收银台首屏渲染",
+        "title": "收银台首屏渲染",
+        "code": "TC-T001-50",
+        "module": "收银台前端改版",
+        "path": "收银台前端改版 / 系统测试",
+        "type": "func",
+        "priority": "P1",
+        "status": "review",
+        "statusText": "评审中",
+        "owner": "周小刚",
+        "ownerObj": {
+          "name": "周小刚",
+          "short": "周",
+          "color": "#1e9fff"
+        },
+        "subtask": "sub-cashier",
+        "stage": "st",
+        "updated": "2026-04-10 14:30",
+        "execType": "func",
+        "ownerIdx": 5,
+        "execStatus": "blocked",
+        "executed": true,
+        "execTime": "2026-04-10 14:45",
+        "duration": 120,
+        "bugs": 0,
+        "round": 1
+      },
+      {
+        "id": "CASE-2651",
+        "name": "收银台-优惠券选择",
+        "title": "收银台-优惠券选择",
+        "code": "TC-T001-51",
+        "module": "收银台前端改版",
+        "path": "收银台前端改版 / 系统测试",
+        "type": "func",
+        "priority": "P2",
+        "status": "approved",
+        "statusText": "已通过",
+        "owner": "张小明",
+        "ownerObj": {
+          "name": "张小明",
+          "short": "张",
+          "color": "#0052d9"
+        },
+        "subtask": "sub-cashier",
+        "stage": "st",
+        "updated": "2026-04-11 15:30",
+        "execType": "func",
+        "ownerIdx": 0,
+        "execStatus": "pending",
+        "executed": false,
+        "execTime": "",
+        "duration": 0,
+        "bugs": 0,
+        "round": 1
+      },
+      {
+        "id": "CASE-2652",
+        "name": "收银台-重复提交拦截",
+        "title": "收银台-重复提交拦截",
+        "code": "TC-T001-52",
+        "module": "收银台前端改版",
+        "path": "收银台前端改版 / 系统测试",
+        "type": "func",
+        "priority": "P3",
+        "status": "deprecated",
+        "statusText": "已废弃",
+        "owner": "李工程师",
+        "ownerObj": {
+          "name": "李工程师",
+          "short": "李",
+          "color": "#2ba471"
+        },
+        "subtask": "sub-cashier",
+        "stage": "st",
+        "updated": "2026-04-12 16:30",
+        "execType": "func",
+        "ownerIdx": 1,
+        "execStatus": "pending",
+        "executed": false,
+        "execTime": "",
+        "duration": 0,
+        "bugs": 0,
+        "round": 1
+      },
+      {
+        "id": "CASE-2660",
+        "name": "收银台首屏渲染",
+        "title": "收银台首屏渲染",
+        "code": "TC-T001-60",
+        "module": "收银台前端改版",
+        "path": "收银台前端改版 / UAT",
+        "type": "func",
+        "priority": "P2",
+        "status": "approved",
+        "statusText": "已通过",
+        "owner": "张小明",
+        "ownerObj": {
+          "name": "张小明",
+          "short": "张",
+          "color": "#0052d9"
+        },
+        "subtask": "sub-cashier",
+        "stage": "uat",
+        "updated": "2026-04-13 15:30",
+        "execType": "func",
+        "ownerIdx": 0,
+        "execStatus": "passed",
+        "executed": true,
+        "execTime": "2026-04-13 15:45",
+        "duration": 120,
+        "bugs": 0,
+        "round": 1
+      },
+      {
+        "id": "CASE-2661",
+        "name": "收银台-优惠券选择",
+        "title": "收银台-优惠券选择",
+        "code": "TC-T001-61",
+        "module": "收银台前端改版",
+        "path": "收银台前端改版 / UAT",
+        "type": "func",
+        "priority": "P3",
+        "status": "deprecated",
+        "statusText": "已废弃",
+        "owner": "李工程师",
+        "ownerObj": {
+          "name": "李工程师",
+          "short": "李",
+          "color": "#2ba471"
+        },
+        "subtask": "sub-cashier",
+        "stage": "uat",
+        "updated": "2026-04-14 16:30",
+        "execType": "func",
+        "ownerIdx": 1,
+        "execStatus": "failed",
+        "executed": true,
+        "execTime": "2026-04-14 16:45",
+        "duration": 240,
+        "bugs": 1,
+        "round": 1
+      },
+      {
+        "id": "CASE-2662",
+        "name": "收银台-重复提交拦截",
+        "title": "收银台-重复提交拦截",
+        "code": "TC-T001-62",
+        "module": "收银台前端改版",
+        "path": "收银台前端改版 / UAT",
+        "type": "func",
+        "priority": "P0",
+        "status": "draft",
+        "statusText": "草稿",
+        "owner": "王测试",
+        "ownerObj": {
+          "name": "王测试",
+          "short": "王",
+          "color": "#7b3fe4"
+        },
+        "subtask": "sub-cashier",
+        "stage": "uat",
+        "updated": "2026-04-15 17:30",
+        "execType": "func",
+        "ownerIdx": 2,
+        "execStatus": "failed",
+        "executed": true,
+        "execTime": "2026-04-15 17:45",
+        "duration": 360,
+        "bugs": 1,
+        "round": 1
+      },
+      {
+        "id": "CASE-2670",
+        "name": "风控规则命中-拦截",
+        "title": "风控规则命中-拦截",
+        "code": "TC-T001-70",
+        "module": "风控规则引擎接入",
+        "path": "风控规则引擎接入 / 系统测试",
+        "type": "func",
+        "priority": "P3",
+        "status": "deprecated",
+        "statusText": "已废弃",
+        "owner": "李工程师",
+        "ownerObj": {
+          "name": "李工程师",
+          "short": "李",
+          "color": "#2ba471"
+        },
+        "subtask": "sub-risk",
+        "stage": "st",
+        "updated": "2026-04-16 16:30",
+        "execType": "func",
+        "ownerIdx": 1,
+        "execStatus": "pending",
+        "executed": false,
+        "execTime": "",
+        "duration": 0,
+        "bugs": 0,
+        "round": 1
+      },
+      {
+        "id": "CASE-2671",
+        "name": "风控白名单放行",
+        "title": "风控白名单放行",
+        "code": "TC-T001-71",
+        "module": "风控规则引擎接入",
+        "path": "风控规则引擎接入 / 系统测试",
+        "type": "func",
+        "priority": "P0",
+        "status": "draft",
+        "statusText": "草稿",
+        "owner": "王测试",
+        "ownerObj": {
+          "name": "王测试",
+          "short": "王",
+          "color": "#7b3fe4"
+        },
+        "subtask": "sub-risk",
+        "stage": "st",
+        "updated": "2026-04-17 17:30",
+        "execType": "func",
+        "ownerIdx": 2,
+        "execStatus": "passed",
+        "executed": true,
+        "execTime": "2026-04-17 17:45",
+        "duration": 240,
+        "bugs": 0,
+        "round": 1
+      },
+      {
+        "id": "CASE-2672",
+        "name": "风控策略-阈值调整",
+        "title": "风控策略-阈值调整",
+        "code": "TC-T001-72",
+        "module": "风控规则引擎接入",
+        "path": "风控规则引擎接入 / 系统测试",
+        "type": "func",
+        "priority": "P1",
+        "status": "review",
+        "statusText": "评审中",
+        "owner": "赵架构师",
+        "ownerObj": {
+          "name": "赵架构师",
+          "short": "赵",
+          "color": "#e37318"
+        },
+        "subtask": "sub-risk",
+        "stage": "st",
+        "updated": "2026-04-18 9:30",
+        "execType": "func",
+        "ownerIdx": 3,
+        "execStatus": "passed",
+        "executed": true,
+        "execTime": "2026-04-18 9:45",
+        "duration": 360,
+        "bugs": 0,
+        "round": 1
+      },
+      {
+        "id": "CASE-2680",
+        "name": "风控规则命中-拦截",
+        "title": "风控规则命中-拦截",
+        "code": "TC-T001-80",
+        "module": "风控规则引擎接入",
+        "path": "风控规则引擎接入 / 回归",
+        "type": "func",
+        "priority": "P0",
+        "status": "draft",
+        "statusText": "草稿",
+        "owner": "王测试",
+        "ownerObj": {
+          "name": "王测试",
+          "short": "王",
+          "color": "#7b3fe4"
+        },
+        "subtask": "sub-risk",
+        "stage": "regression",
+        "updated": "2026-04-19 17:30",
+        "execType": "func",
+        "ownerIdx": 2,
+        "execStatus": "pending",
+        "executed": false,
+        "execTime": "",
+        "duration": 0,
+        "bugs": 0,
+        "round": 1
+      },
+      {
+        "id": "CASE-2681",
+        "name": "风控白名单放行",
+        "title": "风控白名单放行",
+        "code": "TC-T001-81",
+        "module": "风控规则引擎接入",
+        "path": "风控规则引擎接入 / 回归",
+        "type": "func",
+        "priority": "P1",
+        "status": "review",
+        "statusText": "评审中",
+        "owner": "赵架构师",
+        "ownerObj": {
+          "name": "赵架构师",
+          "short": "赵",
+          "color": "#e37318"
+        },
+        "subtask": "sub-risk",
+        "stage": "regression",
+        "updated": "2026-04-20 9:30",
+        "execType": "func",
+        "ownerIdx": 3,
+        "execStatus": "pending",
+        "executed": false,
+        "execTime": "",
+        "duration": 0,
+        "bugs": 0,
+        "round": 1
+      },
+      {
+        "id": "CASE-2682",
+        "name": "风控策略-阈值调整",
+        "title": "风控策略-阈值调整",
+        "code": "TC-T001-82",
+        "module": "风控规则引擎接入",
+        "path": "风控规则引擎接入 / 回归",
+        "type": "func",
+        "priority": "P2",
+        "status": "approved",
+        "statusText": "已通过",
+        "owner": "孙小红",
+        "ownerObj": {
+          "name": "孙小红",
+          "short": "孙",
+          "color": "#d64b8a"
+        },
+        "subtask": "sub-risk",
+        "stage": "regression",
+        "updated": "2026-04-21 10:30",
+        "execType": "func",
+        "ownerIdx": 4,
+        "execStatus": "pending",
+        "executed": false,
+        "execTime": "",
+        "duration": 0,
+        "bugs": 0,
+        "round": 1
+      },
+      {
+        "id": "CASE-2690",
+        "name": "银联渠道-支付成功",
+        "title": "银联渠道-支付成功",
+        "code": "TC-T001-90",
+        "module": "第三方渠道对接（银联/支付宝）",
+        "path": "第三方渠道对接（银联/支付宝） / 冒烟",
+        "type": "func",
+        "priority": "P1",
+        "status": "review",
+        "statusText": "评审中",
+        "owner": "赵架构师",
+        "ownerObj": {
+          "name": "赵架构师",
+          "short": "赵",
+          "color": "#e37318"
+        },
+        "subtask": "sub-channel",
+        "stage": "smoke",
+        "updated": "2026-04-22 9:30",
+        "execType": "func",
+        "ownerIdx": 3,
+        "execStatus": "failed",
+        "executed": true,
+        "execTime": "2026-04-22 9:45",
+        "duration": 120,
+        "bugs": 1,
+        "round": 1
+      },
+      {
+        "id": "CASE-2691",
+        "name": "支付宝渠道-异常降级",
+        "title": "支付宝渠道-异常降级",
+        "code": "TC-T001-91",
+        "module": "第三方渠道对接（银联/支付宝）",
+        "path": "第三方渠道对接（银联/支付宝） / 冒烟",
+        "type": "func",
+        "priority": "P2",
+        "status": "approved",
+        "statusText": "已通过",
+        "owner": "孙小红",
+        "ownerObj": {
+          "name": "孙小红",
+          "short": "孙",
+          "color": "#d64b8a"
+        },
+        "subtask": "sub-channel",
+        "stage": "smoke",
+        "updated": "2026-04-23 10:30",
+        "execType": "func",
+        "ownerIdx": 4,
+        "execStatus": "failed",
+        "executed": true,
+        "execTime": "2026-04-23 10:45",
+        "duration": 240,
+        "bugs": 1,
+        "round": 1
+      },
+      {
+        "id": "CASE-2692",
+        "name": "渠道路由-默认通道",
+        "title": "渠道路由-默认通道",
+        "code": "TC-T001-92",
+        "module": "第三方渠道对接（银联/支付宝）",
+        "path": "第三方渠道对接（银联/支付宝） / 冒烟",
+        "type": "func",
+        "priority": "P3",
+        "status": "deprecated",
+        "statusText": "已废弃",
+        "owner": "周小刚",
+        "ownerObj": {
+          "name": "周小刚",
+          "short": "周",
+          "color": "#1e9fff"
+        },
+        "subtask": "sub-channel",
+        "stage": "smoke",
+        "updated": "2026-04-24 11:30",
+        "execType": "func",
+        "ownerIdx": 5,
+        "execStatus": "blocked",
+        "executed": true,
+        "execTime": "2026-04-24 11:45",
+        "duration": 360,
+        "bugs": 0,
+        "round": 1
+      },
+      {
+        "id": "CASE-2700",
+        "name": "银联渠道-支付成功",
+        "title": "银联渠道-支付成功",
+        "code": "TC-T001-100",
+        "module": "第三方渠道对接（银联/支付宝）",
+        "path": "第三方渠道对接（银联/支付宝） / 系统测试",
+        "type": "func",
+        "priority": "P2",
+        "status": "approved",
+        "statusText": "已通过",
+        "owner": "孙小红",
+        "ownerObj": {
+          "name": "孙小红",
+          "short": "孙",
+          "color": "#d64b8a"
+        },
+        "subtask": "sub-channel",
+        "stage": "st",
+        "updated": "2026-04-10 10:30",
+        "execType": "func",
+        "ownerIdx": 4,
+        "execStatus": "passed",
+        "executed": true,
+        "execTime": "2026-04-10 10:45",
+        "duration": 120,
+        "bugs": 0,
+        "round": 1
+      },
+      {
+        "id": "CASE-2701",
+        "name": "支付宝渠道-异常降级",
+        "title": "支付宝渠道-异常降级",
+        "code": "TC-T001-101",
+        "module": "第三方渠道对接（银联/支付宝）",
+        "path": "第三方渠道对接（银联/支付宝） / 系统测试",
+        "type": "func",
+        "priority": "P3",
+        "status": "deprecated",
+        "statusText": "已废弃",
+        "owner": "周小刚",
+        "ownerObj": {
+          "name": "周小刚",
+          "short": "周",
+          "color": "#1e9fff"
+        },
+        "subtask": "sub-channel",
+        "stage": "st",
+        "updated": "2026-04-11 11:30",
+        "execType": "func",
+        "ownerIdx": 5,
+        "execStatus": "passed",
+        "executed": true,
+        "execTime": "2026-04-11 11:45",
+        "duration": 240,
+        "bugs": 0,
+        "round": 1
+      },
+      {
+        "id": "CASE-2702",
+        "name": "渠道路由-默认通道",
+        "title": "渠道路由-默认通道",
+        "code": "TC-T001-102",
+        "module": "第三方渠道对接（银联/支付宝）",
+        "path": "第三方渠道对接（银联/支付宝） / 系统测试",
+        "type": "func",
+        "priority": "P0",
+        "status": "draft",
+        "statusText": "草稿",
+        "owner": "张小明",
+        "ownerObj": {
+          "name": "张小明",
+          "short": "张",
+          "color": "#0052d9"
+        },
+        "subtask": "sub-channel",
+        "stage": "st",
+        "updated": "2026-04-12 12:30",
+        "execType": "func",
+        "ownerIdx": 0,
+        "execStatus": "passed",
+        "executed": true,
+        "execTime": "2026-04-12 12:45",
+        "duration": 360,
+        "bugs": 0,
+        "round": 1
+      },
+      {
+        "id": "CASE-2710",
+        "name": "银联渠道-支付成功",
+        "title": "银联渠道-支付成功",
+        "code": "TC-T001-110",
+        "module": "第三方渠道对接（银联/支付宝）",
+        "path": "第三方渠道对接（银联/支付宝） / UAT",
+        "type": "func",
+        "priority": "P3",
+        "status": "deprecated",
+        "statusText": "已废弃",
+        "owner": "周小刚",
+        "ownerObj": {
+          "name": "周小刚",
+          "short": "周",
+          "color": "#1e9fff"
+        },
+        "subtask": "sub-channel",
+        "stage": "uat",
+        "updated": "2026-04-13 11:30",
+        "execType": "func",
+        "ownerIdx": 5,
+        "execStatus": "pending",
+        "executed": false,
+        "execTime": "",
+        "duration": 0,
+        "bugs": 0,
+        "round": 1
+      },
+      {
+        "id": "CASE-2711",
+        "name": "支付宝渠道-异常降级",
+        "title": "支付宝渠道-异常降级",
+        "code": "TC-T001-111",
+        "module": "第三方渠道对接（银联/支付宝）",
+        "path": "第三方渠道对接（银联/支付宝） / UAT",
+        "type": "func",
+        "priority": "P0",
+        "status": "draft",
+        "statusText": "草稿",
+        "owner": "张小明",
+        "ownerObj": {
+          "name": "张小明",
+          "short": "张",
+          "color": "#0052d9"
+        },
+        "subtask": "sub-channel",
+        "stage": "uat",
+        "updated": "2026-04-14 12:30",
+        "execType": "func",
+        "ownerIdx": 0,
+        "execStatus": "pending",
+        "executed": false,
+        "execTime": "",
+        "duration": 0,
+        "bugs": 0,
+        "round": 1
+      },
+      {
+        "id": "CASE-2712",
+        "name": "渠道路由-默认通道",
+        "title": "渠道路由-默认通道",
+        "code": "TC-T001-112",
+        "module": "第三方渠道对接（银联/支付宝）",
+        "path": "第三方渠道对接（银联/支付宝） / UAT",
+        "type": "func",
+        "priority": "P1",
+        "status": "review",
+        "statusText": "评审中",
+        "owner": "李工程师",
+        "ownerObj": {
+          "name": "李工程师",
+          "short": "李",
+          "color": "#2ba471"
+        },
+        "subtask": "sub-channel",
+        "stage": "uat",
+        "updated": "2026-04-15 13:30",
+        "execType": "func",
+        "ownerIdx": 1,
+        "execStatus": "pending",
+        "executed": false,
+        "execTime": "",
+        "duration": 0,
+        "bugs": 0,
+        "round": 1
+      }
+    ],
+    "T002": [
+      {
+        "id": "CASE-2600",
+        "name": "优惠券发放-正常",
+        "title": "优惠券发放-正常",
+        "code": "TC-T002-0",
+        "module": "优惠券核心逻辑",
+        "path": "优惠券核心逻辑 / 冒烟",
+        "type": "func",
+        "priority": "P0",
+        "status": "draft",
+        "statusText": "草稿",
+        "owner": "张小明",
+        "ownerObj": {
+          "name": "张小明",
+          "short": "张",
+          "color": "#0052d9"
+        },
+        "subtask": "sub-coupon-core",
+        "stage": "smoke",
+        "updated": "2026-04-10 9:30",
+        "execType": "func",
+        "ownerIdx": 0,
+        "execStatus": "passed",
+        "executed": true,
+        "execTime": "2026-04-10 9:45",
+        "duration": 120,
+        "bugs": 0,
+        "round": 1
+      },
+      {
+        "id": "CASE-2601",
+        "name": "优惠券核销-金额充足",
+        "title": "优惠券核销-金额充足",
+        "code": "TC-T002-1",
+        "module": "优惠券核心逻辑",
+        "path": "优惠券核心逻辑 / 冒烟",
+        "type": "func",
+        "priority": "P1",
+        "status": "review",
+        "statusText": "评审中",
+        "owner": "李工程师",
+        "ownerObj": {
+          "name": "李工程师",
+          "short": "李",
+          "color": "#2ba471"
+        },
+        "subtask": "sub-coupon-core",
+        "stage": "smoke",
+        "updated": "2026-04-11 10:30",
+        "execType": "func",
+        "ownerIdx": 1,
+        "execStatus": "passed",
+        "executed": true,
+        "execTime": "2026-04-11 10:45",
+        "duration": 240,
+        "bugs": 0,
+        "round": 1
+      },
+      {
+        "id": "CASE-2602",
+        "name": "优惠券互斥校验",
+        "title": "优惠券互斥校验",
+        "code": "TC-T002-2",
+        "module": "优惠券核心逻辑",
+        "path": "优惠券核心逻辑 / 冒烟",
+        "type": "func",
+        "priority": "P2",
+        "status": "approved",
+        "statusText": "已通过",
+        "owner": "王测试",
+        "ownerObj": {
+          "name": "王测试",
+          "short": "王",
+          "color": "#7b3fe4"
+        },
+        "subtask": "sub-coupon-core",
+        "stage": "smoke",
+        "updated": "2026-04-12 11:30",
+        "execType": "func",
+        "ownerIdx": 2,
+        "execStatus": "passed",
+        "executed": true,
+        "execTime": "2026-04-12 11:45",
+        "duration": 360,
+        "bugs": 0,
+        "round": 1
+      },
+      {
+        "id": "CASE-2610",
+        "name": "优惠券发放-正常",
+        "title": "优惠券发放-正常",
+        "code": "TC-T002-10",
+        "module": "优惠券核心逻辑",
+        "path": "优惠券核心逻辑 / 系统测试",
+        "type": "func",
+        "priority": "P1",
+        "status": "review",
+        "statusText": "评审中",
+        "owner": "李工程师",
+        "ownerObj": {
+          "name": "李工程师",
+          "short": "李",
+          "color": "#2ba471"
+        },
+        "subtask": "sub-coupon-core",
+        "stage": "st",
+        "updated": "2026-04-13 10:30",
+        "execType": "func",
+        "ownerIdx": 1,
+        "execStatus": "pending",
+        "executed": false,
+        "execTime": "",
+        "duration": 0,
+        "bugs": 0,
+        "round": 1
+      },
+      {
+        "id": "CASE-2611",
+        "name": "优惠券核销-金额充足",
+        "title": "优惠券核销-金额充足",
+        "code": "TC-T002-11",
+        "module": "优惠券核心逻辑",
+        "path": "优惠券核心逻辑 / 系统测试",
+        "type": "func",
+        "priority": "P2",
+        "status": "approved",
+        "statusText": "已通过",
+        "owner": "王测试",
+        "ownerObj": {
+          "name": "王测试",
+          "short": "王",
+          "color": "#7b3fe4"
+        },
+        "subtask": "sub-coupon-core",
+        "stage": "st",
+        "updated": "2026-04-14 11:30",
+        "execType": "func",
+        "ownerIdx": 2,
+        "execStatus": "pending",
+        "executed": false,
+        "execTime": "",
+        "duration": 0,
+        "bugs": 0,
+        "round": 1
+      },
+      {
+        "id": "CASE-2612",
+        "name": "优惠券互斥校验",
+        "title": "优惠券互斥校验",
+        "code": "TC-T002-12",
+        "module": "优惠券核心逻辑",
+        "path": "优惠券核心逻辑 / 系统测试",
+        "type": "func",
+        "priority": "P3",
+        "status": "deprecated",
+        "statusText": "已废弃",
+        "owner": "赵架构师",
+        "ownerObj": {
+          "name": "赵架构师",
+          "short": "赵",
+          "color": "#e37318"
+        },
+        "subtask": "sub-coupon-core",
+        "stage": "st",
+        "updated": "2026-04-15 12:30",
+        "execType": "func",
+        "ownerIdx": 3,
+        "execStatus": "pending",
+        "executed": false,
+        "execTime": "",
+        "duration": 0,
+        "bugs": 0,
+        "round": 1
+      },
+      {
+        "id": "CASE-2620",
+        "name": "优惠券发放-正常",
+        "title": "优惠券发放-正常",
+        "code": "TC-T002-20",
+        "module": "优惠券核心逻辑",
+        "path": "优惠券核心逻辑 / 回归",
+        "type": "func",
+        "priority": "P2",
+        "status": "approved",
+        "statusText": "已通过",
+        "owner": "王测试",
+        "ownerObj": {
+          "name": "王测试",
+          "short": "王",
+          "color": "#7b3fe4"
+        },
+        "subtask": "sub-coupon-core",
+        "stage": "regression",
+        "updated": "2026-04-16 11:30",
+        "execType": "func",
+        "ownerIdx": 2,
+        "execStatus": "failed",
+        "executed": true,
+        "execTime": "2026-04-16 11:45",
+        "duration": 120,
+        "bugs": 1,
+        "round": 1
+      },
+      {
+        "id": "CASE-2621",
+        "name": "优惠券核销-金额充足",
+        "title": "优惠券核销-金额充足",
+        "code": "TC-T002-21",
+        "module": "优惠券核心逻辑",
+        "path": "优惠券核心逻辑 / 回归",
+        "type": "func",
+        "priority": "P3",
+        "status": "deprecated",
+        "statusText": "已废弃",
+        "owner": "赵架构师",
+        "ownerObj": {
+          "name": "赵架构师",
+          "short": "赵",
+          "color": "#e37318"
+        },
+        "subtask": "sub-coupon-core",
+        "stage": "regression",
+        "updated": "2026-04-17 12:30",
+        "execType": "func",
+        "ownerIdx": 3,
+        "execStatus": "blocked",
+        "executed": true,
+        "execTime": "2026-04-17 12:45",
+        "duration": 240,
+        "bugs": 0,
+        "round": 1
+      },
+      {
+        "id": "CASE-2622",
+        "name": "优惠券互斥校验",
+        "title": "优惠券互斥校验",
+        "code": "TC-T002-22",
+        "module": "优惠券核心逻辑",
+        "path": "优惠券核心逻辑 / 回归",
+        "type": "func",
+        "priority": "P0",
+        "status": "draft",
+        "statusText": "草稿",
+        "owner": "孙小红",
+        "ownerObj": {
+          "name": "孙小红",
+          "short": "孙",
+          "color": "#d64b8a"
+        },
+        "subtask": "sub-coupon-core",
+        "stage": "regression",
+        "updated": "2026-04-18 13:30",
+        "execType": "func",
+        "ownerIdx": 4,
+        "execStatus": "pending",
+        "executed": false,
+        "execTime": "",
+        "duration": 0,
+        "bugs": 0,
+        "round": 1
+      },
+      {
+        "id": "CASE-2630",
+        "name": "优惠券发放-正常",
+        "title": "优惠券发放-正常",
+        "code": "TC-T002-30",
+        "module": "优惠券核心逻辑",
+        "path": "优惠券核心逻辑 / UAT",
+        "type": "func",
+        "priority": "P3",
+        "status": "deprecated",
+        "statusText": "已废弃",
+        "owner": "赵架构师",
+        "ownerObj": {
+          "name": "赵架构师",
+          "short": "赵",
+          "color": "#e37318"
+        },
+        "subtask": "sub-coupon-core",
+        "stage": "uat",
+        "updated": "2026-04-19 12:30",
+        "execType": "func",
+        "ownerIdx": 3,
+        "execStatus": "passed",
+        "executed": true,
+        "execTime": "2026-04-19 12:45",
+        "duration": 120,
+        "bugs": 0,
+        "round": 1
+      },
+      {
+        "id": "CASE-2631",
+        "name": "优惠券核销-金额充足",
+        "title": "优惠券核销-金额充足",
+        "code": "TC-T002-31",
+        "module": "优惠券核心逻辑",
+        "path": "优惠券核心逻辑 / UAT",
+        "type": "func",
+        "priority": "P0",
+        "status": "draft",
+        "statusText": "草稿",
+        "owner": "孙小红",
+        "ownerObj": {
+          "name": "孙小红",
+          "short": "孙",
+          "color": "#d64b8a"
+        },
+        "subtask": "sub-coupon-core",
+        "stage": "uat",
+        "updated": "2026-04-20 13:30",
+        "execType": "func",
+        "ownerIdx": 4,
+        "execStatus": "passed",
+        "executed": true,
+        "execTime": "2026-04-20 13:45",
+        "duration": 240,
+        "bugs": 0,
+        "round": 1
+      },
+      {
+        "id": "CASE-2632",
+        "name": "优惠券互斥校验",
+        "title": "优惠券互斥校验",
+        "code": "TC-T002-32",
+        "module": "优惠券核心逻辑",
+        "path": "优惠券核心逻辑 / UAT",
+        "type": "func",
+        "priority": "P1",
+        "status": "review",
+        "statusText": "评审中",
+        "owner": "周小刚",
+        "ownerObj": {
+          "name": "周小刚",
+          "short": "周",
+          "color": "#1e9fff"
+        },
+        "subtask": "sub-coupon-core",
+        "stage": "uat",
+        "updated": "2026-04-21 14:30",
+        "execType": "func",
+        "ownerIdx": 5,
+        "execStatus": "failed",
+        "executed": true,
+        "execTime": "2026-04-21 14:45",
+        "duration": 360,
+        "bugs": 1,
+        "round": 1
+      },
+      {
+        "id": "CASE-2640",
+        "name": "领券页-首屏加载",
+        "title": "领券页-首屏加载",
+        "code": "TC-T002-40",
+        "module": "优惠券领取页面 H5",
+        "path": "优惠券领取页面 H5 / 冒烟",
+        "type": "func",
+        "priority": "P0",
+        "status": "draft",
+        "statusText": "草稿",
+        "owner": "孙小红",
+        "ownerObj": {
+          "name": "孙小红",
+          "short": "孙",
+          "color": "#d64b8a"
+        },
+        "subtask": "sub-coupon-ui",
+        "stage": "smoke",
+        "updated": "2026-04-22 13:30",
+        "execType": "func",
+        "ownerIdx": 4,
+        "execStatus": "pending",
+        "executed": false,
+        "execTime": "",
+        "duration": 0,
+        "bugs": 0,
+        "round": 1
+      },
+      {
+        "id": "CASE-2641",
+        "name": "领券页-已领取提示",
+        "title": "领券页-已领取提示",
+        "code": "TC-T002-41",
+        "module": "优惠券领取页面 H5",
+        "path": "优惠券领取页面 H5 / 冒烟",
+        "type": "func",
+        "priority": "P1",
+        "status": "review",
+        "statusText": "评审中",
+        "owner": "周小刚",
+        "ownerObj": {
+          "name": "周小刚",
+          "short": "周",
+          "color": "#1e9fff"
+        },
+        "subtask": "sub-coupon-ui",
+        "stage": "smoke",
+        "updated": "2026-04-23 14:30",
+        "execType": "func",
+        "ownerIdx": 5,
+        "execStatus": "pending",
+        "executed": false,
+        "execTime": "",
+        "duration": 0,
+        "bugs": 0,
+        "round": 1
+      },
+      {
+        "id": "CASE-2642",
+        "name": "领券-移动端兼容",
+        "title": "领券-移动端兼容",
+        "code": "TC-T002-42",
+        "module": "优惠券领取页面 H5",
+        "path": "优惠券领取页面 H5 / 冒烟",
+        "type": "func",
+        "priority": "P2",
+        "status": "approved",
+        "statusText": "已通过",
+        "owner": "张小明",
+        "ownerObj": {
+          "name": "张小明",
+          "short": "张",
+          "color": "#0052d9"
+        },
+        "subtask": "sub-coupon-ui",
+        "stage": "smoke",
+        "updated": "2026-04-24 15:30",
+        "execType": "func",
+        "ownerIdx": 0,
+        "execStatus": "passed",
+        "executed": true,
+        "execTime": "2026-04-24 15:45",
+        "duration": 360,
+        "bugs": 0,
+        "round": 1
+      },
+      {
+        "id": "CASE-2650",
+        "name": "领券页-首屏加载",
+        "title": "领券页-首屏加载",
+        "code": "TC-T002-50",
+        "module": "优惠券领取页面 H5",
+        "path": "优惠券领取页面 H5 / 系统测试",
+        "type": "func",
+        "priority": "P1",
+        "status": "review",
+        "statusText": "评审中",
+        "owner": "周小刚",
+        "ownerObj": {
+          "name": "周小刚",
+          "short": "周",
+          "color": "#1e9fff"
+        },
+        "subtask": "sub-coupon-ui",
+        "stage": "st",
+        "updated": "2026-04-10 14:30",
+        "execType": "func",
+        "ownerIdx": 5,
+        "execStatus": "blocked",
+        "executed": true,
+        "execTime": "2026-04-10 14:45",
+        "duration": 120,
+        "bugs": 0,
+        "round": 1
+      },
+      {
+        "id": "CASE-2651",
+        "name": "领券页-已领取提示",
+        "title": "领券页-已领取提示",
+        "code": "TC-T002-51",
+        "module": "优惠券领取页面 H5",
+        "path": "优惠券领取页面 H5 / 系统测试",
+        "type": "func",
+        "priority": "P2",
+        "status": "approved",
+        "statusText": "已通过",
+        "owner": "张小明",
+        "ownerObj": {
+          "name": "张小明",
+          "short": "张",
+          "color": "#0052d9"
+        },
+        "subtask": "sub-coupon-ui",
+        "stage": "st",
+        "updated": "2026-04-11 15:30",
+        "execType": "func",
+        "ownerIdx": 0,
+        "execStatus": "pending",
+        "executed": false,
+        "execTime": "",
+        "duration": 0,
+        "bugs": 0,
+        "round": 1
+      },
+      {
+        "id": "CASE-2652",
+        "name": "领券-移动端兼容",
+        "title": "领券-移动端兼容",
+        "code": "TC-T002-52",
+        "module": "优惠券领取页面 H5",
+        "path": "优惠券领取页面 H5 / 系统测试",
+        "type": "func",
+        "priority": "P3",
+        "status": "deprecated",
+        "statusText": "已废弃",
+        "owner": "李工程师",
+        "ownerObj": {
+          "name": "李工程师",
+          "short": "李",
+          "color": "#2ba471"
+        },
+        "subtask": "sub-coupon-ui",
+        "stage": "st",
+        "updated": "2026-04-12 16:30",
+        "execType": "func",
+        "ownerIdx": 1,
+        "execStatus": "pending",
+        "executed": false,
+        "execTime": "",
+        "duration": 0,
+        "bugs": 0,
+        "round": 1
+      },
+      {
+        "id": "CASE-2660",
+        "name": "领券页-首屏加载",
+        "title": "领券页-首屏加载",
+        "code": "TC-T002-60",
+        "module": "优惠券领取页面 H5",
+        "path": "优惠券领取页面 H5 / UAT",
+        "type": "func",
+        "priority": "P2",
+        "status": "approved",
+        "statusText": "已通过",
+        "owner": "张小明",
+        "ownerObj": {
+          "name": "张小明",
+          "short": "张",
+          "color": "#0052d9"
+        },
+        "subtask": "sub-coupon-ui",
+        "stage": "uat",
+        "updated": "2026-04-13 15:30",
+        "execType": "func",
+        "ownerIdx": 0,
+        "execStatus": "passed",
+        "executed": true,
+        "execTime": "2026-04-13 15:45",
+        "duration": 120,
+        "bugs": 0,
+        "round": 1
+      },
+      {
+        "id": "CASE-2661",
+        "name": "领券页-已领取提示",
+        "title": "领券页-已领取提示",
+        "code": "TC-T002-61",
+        "module": "优惠券领取页面 H5",
+        "path": "优惠券领取页面 H5 / UAT",
+        "type": "func",
+        "priority": "P3",
+        "status": "deprecated",
+        "statusText": "已废弃",
+        "owner": "李工程师",
+        "ownerObj": {
+          "name": "李工程师",
+          "short": "李",
+          "color": "#2ba471"
+        },
+        "subtask": "sub-coupon-ui",
+        "stage": "uat",
+        "updated": "2026-04-14 16:30",
+        "execType": "func",
+        "ownerIdx": 1,
+        "execStatus": "failed",
+        "executed": true,
+        "execTime": "2026-04-14 16:45",
+        "duration": 240,
+        "bugs": 1,
+        "round": 1
+      },
+      {
+        "id": "CASE-2662",
+        "name": "领券-移动端兼容",
+        "title": "领券-移动端兼容",
+        "code": "TC-T002-62",
+        "module": "优惠券领取页面 H5",
+        "path": "优惠券领取页面 H5 / UAT",
+        "type": "func",
+        "priority": "P0",
+        "status": "draft",
+        "statusText": "草稿",
+        "owner": "王测试",
+        "ownerObj": {
+          "name": "王测试",
+          "short": "王",
+          "color": "#7b3fe4"
+        },
+        "subtask": "sub-coupon-ui",
+        "stage": "uat",
+        "updated": "2026-04-15 17:30",
+        "execType": "func",
+        "ownerIdx": 2,
+        "execStatus": "failed",
+        "executed": true,
+        "execTime": "2026-04-15 17:45",
+        "duration": 360,
+        "bugs": 1,
+        "round": 1
+      },
+      {
+        "id": "CASE-2670",
+        "name": "分享链路-微信",
+        "title": "分享链路-微信",
+        "code": "TC-T002-70",
+        "module": "优惠券分享与裂变",
+        "path": "优惠券分享与裂变 / 冒烟",
+        "type": "func",
+        "priority": "P3",
+        "status": "deprecated",
+        "statusText": "已废弃",
+        "owner": "李工程师",
+        "ownerObj": {
+          "name": "李工程师",
+          "short": "李",
+          "color": "#2ba471"
+        },
+        "subtask": "sub-coupon-share",
+        "stage": "smoke",
+        "updated": "2026-04-16 16:30",
+        "execType": "func",
+        "ownerIdx": 1,
+        "execStatus": "pending",
+        "executed": false,
+        "execTime": "",
+        "duration": 0,
+        "bugs": 0,
+        "round": 1
+      },
+      {
+        "id": "CASE-2671",
+        "name": "分享奖励-发放",
+        "title": "分享奖励-发放",
+        "code": "TC-T002-71",
+        "module": "优惠券分享与裂变",
+        "path": "优惠券分享与裂变 / 冒烟",
+        "type": "func",
+        "priority": "P0",
+        "status": "draft",
+        "statusText": "草稿",
+        "owner": "王测试",
+        "ownerObj": {
+          "name": "王测试",
+          "short": "王",
+          "color": "#7b3fe4"
+        },
+        "subtask": "sub-coupon-share",
+        "stage": "smoke",
+        "updated": "2026-04-17 17:30",
+        "execType": "func",
+        "ownerIdx": 2,
+        "execStatus": "passed",
+        "executed": true,
+        "execTime": "2026-04-17 17:45",
+        "duration": 240,
+        "bugs": 0,
+        "round": 1
+      },
+      {
+        "id": "CASE-2672",
+        "name": "裂变层级-上限校验",
+        "title": "裂变层级-上限校验",
+        "code": "TC-T002-72",
+        "module": "优惠券分享与裂变",
+        "path": "优惠券分享与裂变 / 冒烟",
+        "type": "func",
+        "priority": "P1",
+        "status": "review",
+        "statusText": "评审中",
+        "owner": "赵架构师",
+        "ownerObj": {
+          "name": "赵架构师",
+          "short": "赵",
+          "color": "#e37318"
+        },
+        "subtask": "sub-coupon-share",
+        "stage": "smoke",
+        "updated": "2026-04-18 9:30",
+        "execType": "func",
+        "ownerIdx": 3,
+        "execStatus": "passed",
+        "executed": true,
+        "execTime": "2026-04-18 9:45",
+        "duration": 360,
+        "bugs": 0,
+        "round": 1
+      },
+      {
+        "id": "CASE-2680",
+        "name": "分享链路-微信",
+        "title": "分享链路-微信",
+        "code": "TC-T002-80",
+        "module": "优惠券分享与裂变",
+        "path": "优惠券分享与裂变 / 系统测试",
+        "type": "func",
+        "priority": "P0",
+        "status": "draft",
+        "statusText": "草稿",
+        "owner": "王测试",
+        "ownerObj": {
+          "name": "王测试",
+          "short": "王",
+          "color": "#7b3fe4"
+        },
+        "subtask": "sub-coupon-share",
+        "stage": "st",
+        "updated": "2026-04-19 17:30",
+        "execType": "func",
+        "ownerIdx": 2,
+        "execStatus": "pending",
+        "executed": false,
+        "execTime": "",
+        "duration": 0,
+        "bugs": 0,
+        "round": 1
+      },
+      {
+        "id": "CASE-2681",
+        "name": "分享奖励-发放",
+        "title": "分享奖励-发放",
+        "code": "TC-T002-81",
+        "module": "优惠券分享与裂变",
+        "path": "优惠券分享与裂变 / 系统测试",
+        "type": "func",
+        "priority": "P1",
+        "status": "review",
+        "statusText": "评审中",
+        "owner": "赵架构师",
+        "ownerObj": {
+          "name": "赵架构师",
+          "short": "赵",
+          "color": "#e37318"
+        },
+        "subtask": "sub-coupon-share",
+        "stage": "st",
+        "updated": "2026-04-20 9:30",
+        "execType": "func",
+        "ownerIdx": 3,
+        "execStatus": "pending",
+        "executed": false,
+        "execTime": "",
+        "duration": 0,
+        "bugs": 0,
+        "round": 1
+      },
+      {
+        "id": "CASE-2682",
+        "name": "裂变层级-上限校验",
+        "title": "裂变层级-上限校验",
+        "code": "TC-T002-82",
+        "module": "优惠券分享与裂变",
+        "path": "优惠券分享与裂变 / 系统测试",
+        "type": "func",
+        "priority": "P2",
+        "status": "approved",
+        "statusText": "已通过",
+        "owner": "孙小红",
+        "ownerObj": {
+          "name": "孙小红",
+          "short": "孙",
+          "color": "#d64b8a"
+        },
+        "subtask": "sub-coupon-share",
+        "stage": "st",
+        "updated": "2026-04-21 10:30",
+        "execType": "func",
+        "ownerIdx": 4,
+        "execStatus": "pending",
+        "executed": false,
+        "execTime": "",
+        "duration": 0,
+        "bugs": 0,
+        "round": 1
+      },
+      {
+        "id": "CASE-2690",
+        "name": "分享链路-微信",
+        "title": "分享链路-微信",
+        "code": "TC-T002-90",
+        "module": "优惠券分享与裂变",
+        "path": "优惠券分享与裂变 / UAT",
+        "type": "func",
+        "priority": "P1",
+        "status": "review",
+        "statusText": "评审中",
+        "owner": "赵架构师",
+        "ownerObj": {
+          "name": "赵架构师",
+          "short": "赵",
+          "color": "#e37318"
+        },
+        "subtask": "sub-coupon-share",
+        "stage": "uat",
+        "updated": "2026-04-22 9:30",
+        "execType": "func",
+        "ownerIdx": 3,
+        "execStatus": "failed",
+        "executed": true,
+        "execTime": "2026-04-22 9:45",
+        "duration": 120,
+        "bugs": 1,
+        "round": 1
+      },
+      {
+        "id": "CASE-2691",
+        "name": "分享奖励-发放",
+        "title": "分享奖励-发放",
+        "code": "TC-T002-91",
+        "module": "优惠券分享与裂变",
+        "path": "优惠券分享与裂变 / UAT",
+        "type": "func",
+        "priority": "P2",
+        "status": "approved",
+        "statusText": "已通过",
+        "owner": "孙小红",
+        "ownerObj": {
+          "name": "孙小红",
+          "short": "孙",
+          "color": "#d64b8a"
+        },
+        "subtask": "sub-coupon-share",
+        "stage": "uat",
+        "updated": "2026-04-23 10:30",
+        "execType": "func",
+        "ownerIdx": 4,
+        "execStatus": "failed",
+        "executed": true,
+        "execTime": "2026-04-23 10:45",
+        "duration": 240,
+        "bugs": 1,
+        "round": 1
+      },
+      {
+        "id": "CASE-2692",
+        "name": "裂变层级-上限校验",
+        "title": "裂变层级-上限校验",
+        "code": "TC-T002-92",
+        "module": "优惠券分享与裂变",
+        "path": "优惠券分享与裂变 / UAT",
+        "type": "func",
+        "priority": "P3",
+        "status": "deprecated",
+        "statusText": "已废弃",
+        "owner": "周小刚",
+        "ownerObj": {
+          "name": "周小刚",
+          "short": "周",
+          "color": "#1e9fff"
+        },
+        "subtask": "sub-coupon-share",
+        "stage": "uat",
+        "updated": "2026-04-24 11:30",
+        "execType": "func",
+        "ownerIdx": 5,
+        "execStatus": "blocked",
+        "executed": true,
+        "execTime": "2026-04-24 11:45",
+        "duration": 360,
+        "bugs": 0,
+        "round": 1
+      }
+    ],
+    "T003": [
+      {
+        "id": "CASE-2600",
+        "name": "关键词召回-精准",
+        "title": "关键词召回-精准",
+        "code": "TC-T003-0",
+        "module": "搜索召回算法回归",
+        "path": "搜索召回算法回归 / 系统测试",
+        "type": "func",
+        "priority": "P0",
+        "status": "draft",
+        "statusText": "草稿",
+        "owner": "张小明",
+        "ownerObj": {
+          "name": "张小明",
+          "short": "张",
+          "color": "#0052d9"
+        },
+        "subtask": "sub-search-recall",
+        "stage": "st",
+        "updated": "2026-04-10 9:30",
+        "execType": "func",
+        "ownerIdx": 0,
+        "execStatus": "passed",
+        "executed": true,
+        "execTime": "2026-04-10 9:45",
+        "duration": 120,
+        "bugs": 0,
+        "round": 1
+      },
+      {
+        "id": "CASE-2601",
+        "name": "关键词召回-模糊",
+        "title": "关键词召回-模糊",
+        "code": "TC-T003-1",
+        "module": "搜索召回算法回归",
+        "path": "搜索召回算法回归 / 系统测试",
+        "type": "func",
+        "priority": "P1",
+        "status": "review",
+        "statusText": "评审中",
+        "owner": "李工程师",
+        "ownerObj": {
+          "name": "李工程师",
+          "short": "李",
+          "color": "#2ba471"
+        },
+        "subtask": "sub-search-recall",
+        "stage": "st",
+        "updated": "2026-04-11 10:30",
+        "execType": "func",
+        "ownerIdx": 1,
+        "execStatus": "passed",
+        "executed": true,
+        "execTime": "2026-04-11 10:45",
+        "duration": 240,
+        "bugs": 0,
+        "round": 1
+      },
+      {
+        "id": "CASE-2602",
+        "name": "同义词扩展召回",
+        "title": "同义词扩展召回",
+        "code": "TC-T003-2",
+        "module": "搜索召回算法回归",
+        "path": "搜索召回算法回归 / 系统测试",
+        "type": "func",
+        "priority": "P2",
+        "status": "approved",
+        "statusText": "已通过",
+        "owner": "王测试",
+        "ownerObj": {
+          "name": "王测试",
+          "short": "王",
+          "color": "#7b3fe4"
+        },
+        "subtask": "sub-search-recall",
+        "stage": "st",
+        "updated": "2026-04-12 11:30",
+        "execType": "func",
+        "ownerIdx": 2,
+        "execStatus": "passed",
+        "executed": true,
+        "execTime": "2026-04-12 11:45",
+        "duration": 360,
+        "bugs": 0,
+        "round": 1
+      },
+      {
+        "id": "CASE-2610",
+        "name": "关键词召回-精准",
+        "title": "关键词召回-精准",
+        "code": "TC-T003-10",
+        "module": "搜索召回算法回归",
+        "path": "搜索召回算法回归 / 回归",
+        "type": "func",
+        "priority": "P1",
+        "status": "review",
+        "statusText": "评审中",
+        "owner": "李工程师",
+        "ownerObj": {
+          "name": "李工程师",
+          "short": "李",
+          "color": "#2ba471"
+        },
+        "subtask": "sub-search-recall",
+        "stage": "regression",
+        "updated": "2026-04-13 10:30",
+        "execType": "func",
+        "ownerIdx": 1,
+        "execStatus": "pending",
+        "executed": false,
+        "execTime": "",
+        "duration": 0,
+        "bugs": 0,
+        "round": 1
+      },
+      {
+        "id": "CASE-2611",
+        "name": "关键词召回-模糊",
+        "title": "关键词召回-模糊",
+        "code": "TC-T003-11",
+        "module": "搜索召回算法回归",
+        "path": "搜索召回算法回归 / 回归",
+        "type": "func",
+        "priority": "P2",
+        "status": "approved",
+        "statusText": "已通过",
+        "owner": "王测试",
+        "ownerObj": {
+          "name": "王测试",
+          "short": "王",
+          "color": "#7b3fe4"
+        },
+        "subtask": "sub-search-recall",
+        "stage": "regression",
+        "updated": "2026-04-14 11:30",
+        "execType": "func",
+        "ownerIdx": 2,
+        "execStatus": "pending",
+        "executed": false,
+        "execTime": "",
+        "duration": 0,
+        "bugs": 0,
+        "round": 1
+      },
+      {
+        "id": "CASE-2612",
+        "name": "同义词扩展召回",
+        "title": "同义词扩展召回",
+        "code": "TC-T003-12",
+        "module": "搜索召回算法回归",
+        "path": "搜索召回算法回归 / 回归",
+        "type": "func",
+        "priority": "P3",
+        "status": "deprecated",
+        "statusText": "已废弃",
+        "owner": "赵架构师",
+        "ownerObj": {
+          "name": "赵架构师",
+          "short": "赵",
+          "color": "#e37318"
+        },
+        "subtask": "sub-search-recall",
+        "stage": "regression",
+        "updated": "2026-04-15 12:30",
+        "execType": "func",
+        "ownerIdx": 3,
+        "execStatus": "pending",
+        "executed": false,
+        "execTime": "",
+        "duration": 0,
+        "bugs": 0,
+        "round": 1
+      },
+      {
+        "id": "CASE-2620",
+        "name": "排序算法-热销优先",
+        "title": "排序算法-热销优先",
+        "code": "TC-T003-20",
+        "module": "搜索排序算法回归",
+        "path": "搜索排序算法回归 / 系统测试",
+        "type": "func",
+        "priority": "P2",
+        "status": "approved",
+        "statusText": "已通过",
+        "owner": "王测试",
+        "ownerObj": {
+          "name": "王测试",
+          "short": "王",
+          "color": "#7b3fe4"
+        },
+        "subtask": "sub-search-rank",
+        "stage": "st",
+        "updated": "2026-04-16 11:30",
+        "execType": "func",
+        "ownerIdx": 2,
+        "execStatus": "failed",
+        "executed": true,
+        "execTime": "2026-04-16 11:45",
+        "duration": 120,
+        "bugs": 1,
+        "round": 1
+      },
+      {
+        "id": "CASE-2621",
+        "name": "排序算法-相关度",
+        "title": "排序算法-相关度",
+        "code": "TC-T003-21",
+        "module": "搜索排序算法回归",
+        "path": "搜索排序算法回归 / 系统测试",
+        "type": "func",
+        "priority": "P3",
+        "status": "deprecated",
+        "statusText": "已废弃",
+        "owner": "赵架构师",
+        "ownerObj": {
+          "name": "赵架构师",
+          "short": "赵",
+          "color": "#e37318"
+        },
+        "subtask": "sub-search-rank",
+        "stage": "st",
+        "updated": "2026-04-17 12:30",
+        "execType": "func",
+        "ownerIdx": 3,
+        "execStatus": "blocked",
+        "executed": true,
+        "execTime": "2026-04-17 12:45",
+        "duration": 240,
+        "bugs": 0,
+        "round": 1
+      },
+      {
+        "id": "CASE-2622",
+        "name": "排序降级-默认策略",
+        "title": "排序降级-默认策略",
+        "code": "TC-T003-22",
+        "module": "搜索排序算法回归",
+        "path": "搜索排序算法回归 / 系统测试",
+        "type": "func",
+        "priority": "P0",
+        "status": "draft",
+        "statusText": "草稿",
+        "owner": "孙小红",
+        "ownerObj": {
+          "name": "孙小红",
+          "short": "孙",
+          "color": "#d64b8a"
+        },
+        "subtask": "sub-search-rank",
+        "stage": "st",
+        "updated": "2026-04-18 13:30",
+        "execType": "func",
+        "ownerIdx": 4,
+        "execStatus": "pending",
+        "executed": false,
+        "execTime": "",
+        "duration": 0,
+        "bugs": 0,
+        "round": 1
+      },
+      {
+        "id": "CASE-2630",
+        "name": "排序算法-热销优先",
+        "title": "排序算法-热销优先",
+        "code": "TC-T003-30",
+        "module": "搜索排序算法回归",
+        "path": "搜索排序算法回归 / 回归",
+        "type": "func",
+        "priority": "P3",
+        "status": "deprecated",
+        "statusText": "已废弃",
+        "owner": "赵架构师",
+        "ownerObj": {
+          "name": "赵架构师",
+          "short": "赵",
+          "color": "#e37318"
+        },
+        "subtask": "sub-search-rank",
+        "stage": "regression",
+        "updated": "2026-04-19 12:30",
+        "execType": "func",
+        "ownerIdx": 3,
+        "execStatus": "passed",
+        "executed": true,
+        "execTime": "2026-04-19 12:45",
+        "duration": 120,
+        "bugs": 0,
+        "round": 1
+      },
+      {
+        "id": "CASE-2631",
+        "name": "排序算法-相关度",
+        "title": "排序算法-相关度",
+        "code": "TC-T003-31",
+        "module": "搜索排序算法回归",
+        "path": "搜索排序算法回归 / 回归",
+        "type": "func",
+        "priority": "P0",
+        "status": "draft",
+        "statusText": "草稿",
+        "owner": "孙小红",
+        "ownerObj": {
+          "name": "孙小红",
+          "short": "孙",
+          "color": "#d64b8a"
+        },
+        "subtask": "sub-search-rank",
+        "stage": "regression",
+        "updated": "2026-04-20 13:30",
+        "execType": "func",
+        "ownerIdx": 4,
+        "execStatus": "passed",
+        "executed": true,
+        "execTime": "2026-04-20 13:45",
+        "duration": 240,
+        "bugs": 0,
+        "round": 1
+      },
+      {
+        "id": "CASE-2632",
+        "name": "排序降级-默认策略",
+        "title": "排序降级-默认策略",
+        "code": "TC-T003-32",
+        "module": "搜索排序算法回归",
+        "path": "搜索排序算法回归 / 回归",
+        "type": "func",
+        "priority": "P1",
+        "status": "review",
+        "statusText": "评审中",
+        "owner": "周小刚",
+        "ownerObj": {
+          "name": "周小刚",
+          "short": "周",
+          "color": "#1e9fff"
+        },
+        "subtask": "sub-search-rank",
+        "stage": "regression",
+        "updated": "2026-04-21 14:30",
+        "execType": "func",
+        "ownerIdx": 5,
+        "execStatus": "failed",
+        "executed": true,
+        "execTime": "2026-04-21 14:45",
+        "duration": 360,
+        "bugs": 1,
+        "round": 1
+      },
+      {
+        "id": "CASE-2640",
+        "name": "结果页-首屏",
+        "title": "结果页-首屏",
+        "code": "TC-T003-40",
+        "module": "搜索结果页面兼容",
+        "path": "搜索结果页面兼容 / 冒烟",
+        "type": "func",
+        "priority": "P0",
+        "status": "draft",
+        "statusText": "草稿",
+        "owner": "孙小红",
+        "ownerObj": {
+          "name": "孙小红",
+          "short": "孙",
+          "color": "#d64b8a"
+        },
+        "subtask": "sub-search-ui",
+        "stage": "smoke",
+        "updated": "2026-04-22 13:30",
+        "execType": "func",
+        "ownerIdx": 4,
+        "execStatus": "pending",
+        "executed": false,
+        "execTime": "",
+        "duration": 0,
+        "bugs": 0,
+        "round": 1
+      },
+      {
+        "id": "CASE-2641",
+        "name": "结果页-空结果兜底",
+        "title": "结果页-空结果兜底",
+        "code": "TC-T003-41",
+        "module": "搜索结果页面兼容",
+        "path": "搜索结果页面兼容 / 冒烟",
+        "type": "func",
+        "priority": "P1",
+        "status": "review",
+        "statusText": "评审中",
+        "owner": "周小刚",
+        "ownerObj": {
+          "name": "周小刚",
+          "short": "周",
+          "color": "#1e9fff"
+        },
+        "subtask": "sub-search-ui",
+        "stage": "smoke",
+        "updated": "2026-04-23 14:30",
+        "execType": "func",
+        "ownerIdx": 5,
+        "execStatus": "pending",
+        "executed": false,
+        "execTime": "",
+        "duration": 0,
+        "bugs": 0,
+        "round": 1
+      },
+      {
+        "id": "CASE-2642",
+        "name": "结果页-无限滚动",
+        "title": "结果页-无限滚动",
+        "code": "TC-T003-42",
+        "module": "搜索结果页面兼容",
+        "path": "搜索结果页面兼容 / 冒烟",
+        "type": "func",
+        "priority": "P2",
+        "status": "approved",
+        "statusText": "已通过",
+        "owner": "张小明",
+        "ownerObj": {
+          "name": "张小明",
+          "short": "张",
+          "color": "#0052d9"
+        },
+        "subtask": "sub-search-ui",
+        "stage": "smoke",
+        "updated": "2026-04-24 15:30",
+        "execType": "func",
+        "ownerIdx": 0,
+        "execStatus": "passed",
+        "executed": true,
+        "execTime": "2026-04-24 15:45",
+        "duration": 360,
+        "bugs": 0,
+        "round": 1
+      },
+      {
+        "id": "CASE-2650",
+        "name": "结果页-首屏",
+        "title": "结果页-首屏",
+        "code": "TC-T003-50",
+        "module": "搜索结果页面兼容",
+        "path": "搜索结果页面兼容 / 系统测试",
+        "type": "func",
+        "priority": "P1",
+        "status": "review",
+        "statusText": "评审中",
+        "owner": "周小刚",
+        "ownerObj": {
+          "name": "周小刚",
+          "short": "周",
+          "color": "#1e9fff"
+        },
+        "subtask": "sub-search-ui",
+        "stage": "st",
+        "updated": "2026-04-10 14:30",
+        "execType": "func",
+        "ownerIdx": 5,
+        "execStatus": "blocked",
+        "executed": true,
+        "execTime": "2026-04-10 14:45",
+        "duration": 120,
+        "bugs": 0,
+        "round": 1
+      },
+      {
+        "id": "CASE-2651",
+        "name": "结果页-空结果兜底",
+        "title": "结果页-空结果兜底",
+        "code": "TC-T003-51",
+        "module": "搜索结果页面兼容",
+        "path": "搜索结果页面兼容 / 系统测试",
+        "type": "func",
+        "priority": "P2",
+        "status": "approved",
+        "statusText": "已通过",
+        "owner": "张小明",
+        "ownerObj": {
+          "name": "张小明",
+          "short": "张",
+          "color": "#0052d9"
+        },
+        "subtask": "sub-search-ui",
+        "stage": "st",
+        "updated": "2026-04-11 15:30",
+        "execType": "func",
+        "ownerIdx": 0,
+        "execStatus": "pending",
+        "executed": false,
+        "execTime": "",
+        "duration": 0,
+        "bugs": 0,
+        "round": 1
+      },
+      {
+        "id": "CASE-2652",
+        "name": "结果页-无限滚动",
+        "title": "结果页-无限滚动",
+        "code": "TC-T003-52",
+        "module": "搜索结果页面兼容",
+        "path": "搜索结果页面兼容 / 系统测试",
+        "type": "func",
+        "priority": "P3",
+        "status": "deprecated",
+        "statusText": "已废弃",
+        "owner": "李工程师",
+        "ownerObj": {
+          "name": "李工程师",
+          "short": "李",
+          "color": "#2ba471"
+        },
+        "subtask": "sub-search-ui",
+        "stage": "st",
+        "updated": "2026-04-12 16:30",
+        "execType": "func",
+        "ownerIdx": 1,
+        "execStatus": "pending",
+        "executed": false,
+        "execTime": "",
+        "duration": 0,
+        "bugs": 0,
+        "round": 1
+      },
+      {
+        "id": "CASE-2660",
+        "name": "结果页-首屏",
+        "title": "结果页-首屏",
+        "code": "TC-T003-60",
+        "module": "搜索结果页面兼容",
+        "path": "搜索结果页面兼容 / 回归",
+        "type": "func",
+        "priority": "P2",
+        "status": "approved",
+        "statusText": "已通过",
+        "owner": "张小明",
+        "ownerObj": {
+          "name": "张小明",
+          "short": "张",
+          "color": "#0052d9"
+        },
+        "subtask": "sub-search-ui",
+        "stage": "regression",
+        "updated": "2026-04-13 15:30",
+        "execType": "func",
+        "ownerIdx": 0,
+        "execStatus": "passed",
+        "executed": true,
+        "execTime": "2026-04-13 15:45",
+        "duration": 120,
+        "bugs": 0,
+        "round": 1
+      },
+      {
+        "id": "CASE-2661",
+        "name": "结果页-空结果兜底",
+        "title": "结果页-空结果兜底",
+        "code": "TC-T003-61",
+        "module": "搜索结果页面兼容",
+        "path": "搜索结果页面兼容 / 回归",
+        "type": "func",
+        "priority": "P3",
+        "status": "deprecated",
+        "statusText": "已废弃",
+        "owner": "李工程师",
+        "ownerObj": {
+          "name": "李工程师",
+          "short": "李",
+          "color": "#2ba471"
+        },
+        "subtask": "sub-search-ui",
+        "stage": "regression",
+        "updated": "2026-04-14 16:30",
+        "execType": "func",
+        "ownerIdx": 1,
+        "execStatus": "failed",
+        "executed": true,
+        "execTime": "2026-04-14 16:45",
+        "duration": 240,
+        "bugs": 1,
+        "round": 1
+      },
+      {
+        "id": "CASE-2662",
+        "name": "结果页-无限滚动",
+        "title": "结果页-无限滚动",
+        "code": "TC-T003-62",
+        "module": "搜索结果页面兼容",
+        "path": "搜索结果页面兼容 / 回归",
+        "type": "func",
+        "priority": "P0",
+        "status": "draft",
+        "statusText": "草稿",
+        "owner": "王测试",
+        "ownerObj": {
+          "name": "王测试",
+          "short": "王",
+          "color": "#7b3fe4"
+        },
+        "subtask": "sub-search-ui",
+        "stage": "regression",
+        "updated": "2026-04-15 17:30",
+        "execType": "func",
+        "ownerIdx": 2,
+        "execStatus": "failed",
+        "executed": true,
+        "execTime": "2026-04-15 17:45",
+        "duration": 360,
+        "bugs": 1,
+        "round": 1
+      },
+      {
+        "id": "CASE-2670",
+        "name": "结果页-首屏",
+        "title": "结果页-首屏",
+        "code": "TC-T003-70",
+        "module": "搜索结果页面兼容",
+        "path": "搜索结果页面兼容 / UAT",
+        "type": "func",
+        "priority": "P3",
+        "status": "deprecated",
+        "statusText": "已废弃",
+        "owner": "李工程师",
+        "ownerObj": {
+          "name": "李工程师",
+          "short": "李",
+          "color": "#2ba471"
+        },
+        "subtask": "sub-search-ui",
+        "stage": "uat",
+        "updated": "2026-04-16 16:30",
+        "execType": "func",
+        "ownerIdx": 1,
+        "execStatus": "pending",
+        "executed": false,
+        "execTime": "",
+        "duration": 0,
+        "bugs": 0,
+        "round": 1
+      },
+      {
+        "id": "CASE-2671",
+        "name": "结果页-空结果兜底",
+        "title": "结果页-空结果兜底",
+        "code": "TC-T003-71",
+        "module": "搜索结果页面兼容",
+        "path": "搜索结果页面兼容 / UAT",
+        "type": "func",
+        "priority": "P0",
+        "status": "draft",
+        "statusText": "草稿",
+        "owner": "王测试",
+        "ownerObj": {
+          "name": "王测试",
+          "short": "王",
+          "color": "#7b3fe4"
+        },
+        "subtask": "sub-search-ui",
+        "stage": "uat",
+        "updated": "2026-04-17 17:30",
+        "execType": "func",
+        "ownerIdx": 2,
+        "execStatus": "passed",
+        "executed": true,
+        "execTime": "2026-04-17 17:45",
+        "duration": 240,
+        "bugs": 0,
+        "round": 1
+      },
+      {
+        "id": "CASE-2672",
+        "name": "结果页-无限滚动",
+        "title": "结果页-无限滚动",
+        "code": "TC-T003-72",
+        "module": "搜索结果页面兼容",
+        "path": "搜索结果页面兼容 / UAT",
+        "type": "func",
+        "priority": "P1",
+        "status": "review",
+        "statusText": "评审中",
+        "owner": "赵架构师",
+        "ownerObj": {
+          "name": "赵架构师",
+          "short": "赵",
+          "color": "#e37318"
+        },
+        "subtask": "sub-search-ui",
+        "stage": "uat",
+        "updated": "2026-04-18 9:30",
+        "execType": "func",
+        "ownerIdx": 3,
+        "execStatus": "passed",
+        "executed": true,
+        "execTime": "2026-04-18 9:45",
+        "duration": 360,
+        "bugs": 0,
+        "round": 1
+      }
+    ],
+    "T004": [
+      {
+        "id": "CASE-2600",
+        "name": "履约引擎-并发 500",
+        "title": "履约引擎-并发 500",
+        "code": "TC-T004-0",
+        "module": "履约引擎压测",
+        "path": "履约引擎压测 / 系统测试",
+        "type": "perf",
+        "priority": "P0",
+        "status": "draft",
+        "statusText": "草稿",
+        "owner": "张小明",
+        "ownerObj": {
+          "name": "张小明",
+          "short": "张",
+          "color": "#0052d9"
+        },
+        "subtask": "sub-fulfill-perf",
+        "stage": "st",
+        "updated": "2026-04-10 9:30",
+        "execType": "perf",
+        "ownerIdx": 0,
+        "execStatus": "passed",
+        "executed": true,
+        "execTime": "2026-04-10 9:45",
+        "duration": 120,
+        "bugs": 0,
+        "round": 1
+      },
+      {
+        "id": "CASE-2601",
+        "name": "履约引擎-并发 1000",
+        "title": "履约引擎-并发 1000",
+        "code": "TC-T004-1",
+        "module": "履约引擎压测",
+        "path": "履约引擎压测 / 系统测试",
+        "type": "perf",
+        "priority": "P1",
+        "status": "review",
+        "statusText": "评审中",
+        "owner": "李工程师",
+        "ownerObj": {
+          "name": "李工程师",
+          "short": "李",
+          "color": "#2ba471"
+        },
+        "subtask": "sub-fulfill-perf",
+        "stage": "st",
+        "updated": "2026-04-11 10:30",
+        "execType": "perf",
+        "ownerIdx": 1,
+        "execStatus": "passed",
+        "executed": true,
+        "execTime": "2026-04-11 10:45",
+        "duration": 240,
+        "bugs": 0,
+        "round": 1
+      },
+      {
+        "id": "CASE-2602",
+        "name": "履约引擎-持续 10min",
+        "title": "履约引擎-持续 10min",
+        "code": "TC-T004-2",
+        "module": "履约引擎压测",
+        "path": "履约引擎压测 / 系统测试",
+        "type": "func",
+        "priority": "P2",
+        "status": "approved",
+        "statusText": "已通过",
+        "owner": "王测试",
+        "ownerObj": {
+          "name": "王测试",
+          "short": "王",
+          "color": "#7b3fe4"
+        },
+        "subtask": "sub-fulfill-perf",
+        "stage": "st",
+        "updated": "2026-04-12 11:30",
+        "execType": "func",
+        "ownerIdx": 2,
+        "execStatus": "passed",
+        "executed": true,
+        "execTime": "2026-04-12 11:45",
+        "duration": 360,
+        "bugs": 0,
+        "round": 1
+      },
+      {
+        "id": "CASE-2610",
+        "name": "履约引擎-并发 500",
+        "title": "履约引擎-并发 500",
+        "code": "TC-T004-10",
+        "module": "履约引擎压测",
+        "path": "履约引擎压测 / 回归",
+        "type": "perf",
+        "priority": "P1",
+        "status": "review",
+        "statusText": "评审中",
+        "owner": "李工程师",
+        "ownerObj": {
+          "name": "李工程师",
+          "short": "李",
+          "color": "#2ba471"
+        },
+        "subtask": "sub-fulfill-perf",
+        "stage": "regression",
+        "updated": "2026-04-13 10:30",
+        "execType": "perf",
+        "ownerIdx": 1,
+        "execStatus": "pending",
+        "executed": false,
+        "execTime": "",
+        "duration": 0,
+        "bugs": 0,
+        "round": 1
+      },
+      {
+        "id": "CASE-2611",
+        "name": "履约引擎-并发 1000",
+        "title": "履约引擎-并发 1000",
+        "code": "TC-T004-11",
+        "module": "履约引擎压测",
+        "path": "履约引擎压测 / 回归",
+        "type": "perf",
+        "priority": "P2",
+        "status": "approved",
+        "statusText": "已通过",
+        "owner": "王测试",
+        "ownerObj": {
+          "name": "王测试",
+          "short": "王",
+          "color": "#7b3fe4"
+        },
+        "subtask": "sub-fulfill-perf",
+        "stage": "regression",
+        "updated": "2026-04-14 11:30",
+        "execType": "perf",
+        "ownerIdx": 2,
+        "execStatus": "pending",
+        "executed": false,
+        "execTime": "",
+        "duration": 0,
+        "bugs": 0,
+        "round": 1
+      },
+      {
+        "id": "CASE-2612",
+        "name": "履约引擎-持续 10min",
+        "title": "履约引擎-持续 10min",
+        "code": "TC-T004-12",
+        "module": "履约引擎压测",
+        "path": "履约引擎压测 / 回归",
+        "type": "func",
+        "priority": "P3",
+        "status": "deprecated",
+        "statusText": "已废弃",
+        "owner": "赵架构师",
+        "ownerObj": {
+          "name": "赵架构师",
+          "short": "赵",
+          "color": "#e37318"
+        },
+        "subtask": "sub-fulfill-perf",
+        "stage": "regression",
+        "updated": "2026-04-15 12:30",
+        "execType": "func",
+        "ownerIdx": 3,
+        "execStatus": "pending",
+        "executed": false,
+        "execTime": "",
+        "duration": 0,
+        "bugs": 0,
+        "round": 1
+      },
+      {
+        "id": "CASE-2620",
+        "name": "依赖库存断路",
+        "title": "依赖库存断路",
+        "code": "TC-T004-20",
+        "module": "履约系统断路测试",
+        "path": "履约系统断路测试 / 系统测试",
+        "type": "func",
+        "priority": "P2",
+        "status": "approved",
+        "statusText": "已通过",
+        "owner": "王测试",
+        "ownerObj": {
+          "name": "王测试",
+          "short": "王",
+          "color": "#7b3fe4"
+        },
+        "subtask": "sub-fulfill-break",
+        "stage": "st",
+        "updated": "2026-04-16 11:30",
+        "execType": "func",
+        "ownerIdx": 2,
+        "execStatus": "failed",
+        "executed": true,
+        "execTime": "2026-04-16 11:45",
+        "duration": 120,
+        "bugs": 1,
+        "round": 1
+      },
+      {
+        "id": "CASE-2621",
+        "name": "依赖WMS断路",
+        "title": "依赖WMS断路",
+        "code": "TC-T004-21",
+        "module": "履约系统断路测试",
+        "path": "履约系统断路测试 / 系统测试",
+        "type": "func",
+        "priority": "P3",
+        "status": "deprecated",
+        "statusText": "已废弃",
+        "owner": "赵架构师",
+        "ownerObj": {
+          "name": "赵架构师",
+          "short": "赵",
+          "color": "#e37318"
+        },
+        "subtask": "sub-fulfill-break",
+        "stage": "st",
+        "updated": "2026-04-17 12:30",
+        "execType": "func",
+        "ownerIdx": 3,
+        "execStatus": "blocked",
+        "executed": true,
+        "execTime": "2026-04-17 12:45",
+        "duration": 240,
+        "bugs": 0,
+        "round": 1
+      },
+      {
+        "id": "CASE-2622",
+        "name": "依赖物流断路",
+        "title": "依赖物流断路",
+        "code": "TC-T004-22",
+        "module": "履约系统断路测试",
+        "path": "履约系统断路测试 / 系统测试",
+        "type": "func",
+        "priority": "P0",
+        "status": "draft",
+        "statusText": "草稿",
+        "owner": "孙小红",
+        "ownerObj": {
+          "name": "孙小红",
+          "short": "孙",
+          "color": "#d64b8a"
+        },
+        "subtask": "sub-fulfill-break",
+        "stage": "st",
+        "updated": "2026-04-18 13:30",
+        "execType": "func",
+        "ownerIdx": 4,
+        "execStatus": "pending",
+        "executed": false,
+        "execTime": "",
+        "duration": 0,
+        "bugs": 0,
+        "round": 1
+      }
+    ],
+    "T005": [
+      {
+        "id": "CASE-2600",
+        "name": "网关-多语言头解析",
+        "title": "网关-多语言头解析",
+        "code": "TC-T005-0",
+        "module": "国际化网关测试",
+        "path": "国际化网关测试 / 冒烟",
+        "type": "func",
+        "priority": "P0",
+        "status": "draft",
+        "statusText": "草稿",
+        "owner": "张小明",
+        "ownerObj": {
+          "name": "张小明",
+          "short": "张",
+          "color": "#0052d9"
+        },
+        "subtask": "sub-i18n-gateway",
+        "stage": "smoke",
+        "updated": "2026-04-10 9:30",
+        "execType": "func",
+        "ownerIdx": 0,
+        "execStatus": "passed",
+        "executed": true,
+        "execTime": "2026-04-10 9:45",
+        "duration": 120,
+        "bugs": 0,
+        "round": 1
+      },
+      {
+        "id": "CASE-2601",
+        "name": "网关-时区转换",
+        "title": "网关-时区转换",
+        "code": "TC-T005-1",
+        "module": "国际化网关测试",
+        "path": "国际化网关测试 / 冒烟",
+        "type": "func",
+        "priority": "P1",
+        "status": "review",
+        "statusText": "评审中",
+        "owner": "李工程师",
+        "ownerObj": {
+          "name": "李工程师",
+          "short": "李",
+          "color": "#2ba471"
+        },
+        "subtask": "sub-i18n-gateway",
+        "stage": "smoke",
+        "updated": "2026-04-11 10:30",
+        "execType": "func",
+        "ownerIdx": 1,
+        "execStatus": "passed",
+        "executed": true,
+        "execTime": "2026-04-11 10:45",
+        "duration": 240,
+        "bugs": 0,
+        "round": 1
+      },
+      {
+        "id": "CASE-2602",
+        "name": "网关-语言回退策略",
+        "title": "网关-语言回退策略",
+        "code": "TC-T005-2",
+        "module": "国际化网关测试",
+        "path": "国际化网关测试 / 冒烟",
+        "type": "func",
+        "priority": "P2",
+        "status": "approved",
+        "statusText": "已通过",
+        "owner": "王测试",
+        "ownerObj": {
+          "name": "王测试",
+          "short": "王",
+          "color": "#7b3fe4"
+        },
+        "subtask": "sub-i18n-gateway",
+        "stage": "smoke",
+        "updated": "2026-04-12 11:30",
+        "execType": "func",
+        "ownerIdx": 2,
+        "execStatus": "passed",
+        "executed": true,
+        "execTime": "2026-04-12 11:45",
+        "duration": 360,
+        "bugs": 0,
+        "round": 1
+      },
+      {
+        "id": "CASE-2610",
+        "name": "网关-多语言头解析",
+        "title": "网关-多语言头解析",
+        "code": "TC-T005-10",
+        "module": "国际化网关测试",
+        "path": "国际化网关测试 / 系统测试",
+        "type": "func",
+        "priority": "P1",
+        "status": "review",
+        "statusText": "评审中",
+        "owner": "李工程师",
+        "ownerObj": {
+          "name": "李工程师",
+          "short": "李",
+          "color": "#2ba471"
+        },
+        "subtask": "sub-i18n-gateway",
+        "stage": "st",
+        "updated": "2026-04-13 10:30",
+        "execType": "func",
+        "ownerIdx": 1,
+        "execStatus": "pending",
+        "executed": false,
+        "execTime": "",
+        "duration": 0,
+        "bugs": 0,
+        "round": 1
+      },
+      {
+        "id": "CASE-2611",
+        "name": "网关-时区转换",
+        "title": "网关-时区转换",
+        "code": "TC-T005-11",
+        "module": "国际化网关测试",
+        "path": "国际化网关测试 / 系统测试",
+        "type": "func",
+        "priority": "P2",
+        "status": "approved",
+        "statusText": "已通过",
+        "owner": "王测试",
+        "ownerObj": {
+          "name": "王测试",
+          "short": "王",
+          "color": "#7b3fe4"
+        },
+        "subtask": "sub-i18n-gateway",
+        "stage": "st",
+        "updated": "2026-04-14 11:30",
+        "execType": "func",
+        "ownerIdx": 2,
+        "execStatus": "pending",
+        "executed": false,
+        "execTime": "",
+        "duration": 0,
+        "bugs": 0,
+        "round": 1
+      },
+      {
+        "id": "CASE-2612",
+        "name": "网关-语言回退策略",
+        "title": "网关-语言回退策略",
+        "code": "TC-T005-12",
+        "module": "国际化网关测试",
+        "path": "国际化网关测试 / 系统测试",
+        "type": "func",
+        "priority": "P3",
+        "status": "deprecated",
+        "statusText": "已废弃",
+        "owner": "赵架构师",
+        "ownerObj": {
+          "name": "赵架构师",
+          "short": "赵",
+          "color": "#e37318"
+        },
+        "subtask": "sub-i18n-gateway",
+        "stage": "st",
+        "updated": "2026-04-15 12:30",
+        "execType": "func",
+        "ownerIdx": 3,
+        "execStatus": "pending",
+        "executed": false,
+        "execTime": "",
+        "duration": 0,
+        "bugs": 0,
+        "round": 1
+      },
+      {
+        "id": "CASE-2620",
+        "name": "网关-多语言头解析",
+        "title": "网关-多语言头解析",
+        "code": "TC-T005-20",
+        "module": "国际化网关测试",
+        "path": "国际化网关测试 / 回归",
+        "type": "func",
+        "priority": "P2",
+        "status": "approved",
+        "statusText": "已通过",
+        "owner": "王测试",
+        "ownerObj": {
+          "name": "王测试",
+          "short": "王",
+          "color": "#7b3fe4"
+        },
+        "subtask": "sub-i18n-gateway",
+        "stage": "regression",
+        "updated": "2026-04-16 11:30",
+        "execType": "func",
+        "ownerIdx": 2,
+        "execStatus": "failed",
+        "executed": true,
+        "execTime": "2026-04-16 11:45",
+        "duration": 120,
+        "bugs": 1,
+        "round": 1
+      },
+      {
+        "id": "CASE-2621",
+        "name": "网关-时区转换",
+        "title": "网关-时区转换",
+        "code": "TC-T005-21",
+        "module": "国际化网关测试",
+        "path": "国际化网关测试 / 回归",
+        "type": "func",
+        "priority": "P3",
+        "status": "deprecated",
+        "statusText": "已废弃",
+        "owner": "赵架构师",
+        "ownerObj": {
+          "name": "赵架构师",
+          "short": "赵",
+          "color": "#e37318"
+        },
+        "subtask": "sub-i18n-gateway",
+        "stage": "regression",
+        "updated": "2026-04-17 12:30",
+        "execType": "func",
+        "ownerIdx": 3,
+        "execStatus": "blocked",
+        "executed": true,
+        "execTime": "2026-04-17 12:45",
+        "duration": 240,
+        "bugs": 0,
+        "round": 1
+      },
+      {
+        "id": "CASE-2622",
+        "name": "网关-语言回退策略",
+        "title": "网关-语言回退策略",
+        "code": "TC-T005-22",
+        "module": "国际化网关测试",
+        "path": "国际化网关测试 / 回归",
+        "type": "func",
+        "priority": "P0",
+        "status": "draft",
+        "statusText": "草稿",
+        "owner": "孙小红",
+        "ownerObj": {
+          "name": "孙小红",
+          "short": "孙",
+          "color": "#d64b8a"
+        },
+        "subtask": "sub-i18n-gateway",
+        "stage": "regression",
+        "updated": "2026-04-18 13:30",
+        "execType": "func",
+        "ownerIdx": 4,
+        "execStatus": "pending",
+        "executed": false,
+        "execTime": "",
+        "duration": 0,
+        "bugs": 0,
+        "round": 1
+      },
+      {
+        "id": "CASE-2630",
+        "name": "网关-多语言头解析",
+        "title": "网关-多语言头解析",
+        "code": "TC-T005-30",
+        "module": "国际化网关测试",
+        "path": "国际化网关测试 / UAT",
+        "type": "func",
+        "priority": "P3",
+        "status": "deprecated",
+        "statusText": "已废弃",
+        "owner": "赵架构师",
+        "ownerObj": {
+          "name": "赵架构师",
+          "short": "赵",
+          "color": "#e37318"
+        },
+        "subtask": "sub-i18n-gateway",
+        "stage": "uat",
+        "updated": "2026-04-19 12:30",
+        "execType": "func",
+        "ownerIdx": 3,
+        "execStatus": "passed",
+        "executed": true,
+        "execTime": "2026-04-19 12:45",
+        "duration": 120,
+        "bugs": 0,
+        "round": 1
+      },
+      {
+        "id": "CASE-2631",
+        "name": "网关-时区转换",
+        "title": "网关-时区转换",
+        "code": "TC-T005-31",
+        "module": "国际化网关测试",
+        "path": "国际化网关测试 / UAT",
+        "type": "func",
+        "priority": "P0",
+        "status": "draft",
+        "statusText": "草稿",
+        "owner": "孙小红",
+        "ownerObj": {
+          "name": "孙小红",
+          "short": "孙",
+          "color": "#d64b8a"
+        },
+        "subtask": "sub-i18n-gateway",
+        "stage": "uat",
+        "updated": "2026-04-20 13:30",
+        "execType": "func",
+        "ownerIdx": 4,
+        "execStatus": "passed",
+        "executed": true,
+        "execTime": "2026-04-20 13:45",
+        "duration": 240,
+        "bugs": 0,
+        "round": 1
+      },
+      {
+        "id": "CASE-2632",
+        "name": "网关-语言回退策略",
+        "title": "网关-语言回退策略",
+        "code": "TC-T005-32",
+        "module": "国际化网关测试",
+        "path": "国际化网关测试 / UAT",
+        "type": "func",
+        "priority": "P1",
+        "status": "review",
+        "statusText": "评审中",
+        "owner": "周小刚",
+        "ownerObj": {
+          "name": "周小刚",
+          "short": "周",
+          "color": "#1e9fff"
+        },
+        "subtask": "sub-i18n-gateway",
+        "stage": "uat",
+        "updated": "2026-04-21 14:30",
+        "execType": "func",
+        "ownerIdx": 5,
+        "execStatus": "failed",
+        "executed": true,
+        "execTime": "2026-04-21 14:45",
+        "duration": 360,
+        "bugs": 1,
+        "round": 1
+      },
+      {
+        "id": "CASE-2640",
+        "name": "模板-中英切换",
+        "title": "模板-中英切换",
+        "code": "TC-T005-40",
+        "module": "多语言模板渲染",
+        "path": "多语言模板渲染 / 冒烟",
+        "type": "func",
+        "priority": "P0",
+        "status": "draft",
+        "statusText": "草稿",
+        "owner": "孙小红",
+        "ownerObj": {
+          "name": "孙小红",
+          "short": "孙",
+          "color": "#d64b8a"
+        },
+        "subtask": "sub-i18n-template",
+        "stage": "smoke",
+        "updated": "2026-04-22 13:30",
+        "execType": "func",
+        "ownerIdx": 4,
+        "execStatus": "pending",
+        "executed": false,
+        "execTime": "",
+        "duration": 0,
+        "bugs": 0,
+        "round": 1
+      },
+      {
+        "id": "CASE-2641",
+        "name": "模板-阿拉伯语 RTL",
+        "title": "模板-阿拉伯语 RTL",
+        "code": "TC-T005-41",
+        "module": "多语言模板渲染",
+        "path": "多语言模板渲染 / 冒烟",
+        "type": "func",
+        "priority": "P1",
+        "status": "review",
+        "statusText": "评审中",
+        "owner": "周小刚",
+        "ownerObj": {
+          "name": "周小刚",
+          "short": "周",
+          "color": "#1e9fff"
+        },
+        "subtask": "sub-i18n-template",
+        "stage": "smoke",
+        "updated": "2026-04-23 14:30",
+        "execType": "func",
+        "ownerIdx": 5,
+        "execStatus": "pending",
+        "executed": false,
+        "execTime": "",
+        "duration": 0,
+        "bugs": 0,
+        "round": 1
+      },
+      {
+        "id": "CASE-2642",
+        "name": "模板-缺失回退默认",
+        "title": "模板-缺失回退默认",
+        "code": "TC-T005-42",
+        "module": "多语言模板渲染",
+        "path": "多语言模板渲染 / 冒烟",
+        "type": "func",
+        "priority": "P2",
+        "status": "approved",
+        "statusText": "已通过",
+        "owner": "张小明",
+        "ownerObj": {
+          "name": "张小明",
+          "short": "张",
+          "color": "#0052d9"
+        },
+        "subtask": "sub-i18n-template",
+        "stage": "smoke",
+        "updated": "2026-04-24 15:30",
+        "execType": "func",
+        "ownerIdx": 0,
+        "execStatus": "passed",
+        "executed": true,
+        "execTime": "2026-04-24 15:45",
+        "duration": 360,
+        "bugs": 0,
+        "round": 1
+      },
+      {
+        "id": "CASE-2650",
+        "name": "模板-中英切换",
+        "title": "模板-中英切换",
+        "code": "TC-T005-50",
+        "module": "多语言模板渲染",
+        "path": "多语言模板渲染 / 系统测试",
+        "type": "func",
+        "priority": "P1",
+        "status": "review",
+        "statusText": "评审中",
+        "owner": "周小刚",
+        "ownerObj": {
+          "name": "周小刚",
+          "short": "周",
+          "color": "#1e9fff"
+        },
+        "subtask": "sub-i18n-template",
+        "stage": "st",
+        "updated": "2026-04-10 14:30",
+        "execType": "func",
+        "ownerIdx": 5,
+        "execStatus": "blocked",
+        "executed": true,
+        "execTime": "2026-04-10 14:45",
+        "duration": 120,
+        "bugs": 0,
+        "round": 1
+      },
+      {
+        "id": "CASE-2651",
+        "name": "模板-阿拉伯语 RTL",
+        "title": "模板-阿拉伯语 RTL",
+        "code": "TC-T005-51",
+        "module": "多语言模板渲染",
+        "path": "多语言模板渲染 / 系统测试",
+        "type": "func",
+        "priority": "P2",
+        "status": "approved",
+        "statusText": "已通过",
+        "owner": "张小明",
+        "ownerObj": {
+          "name": "张小明",
+          "short": "张",
+          "color": "#0052d9"
+        },
+        "subtask": "sub-i18n-template",
+        "stage": "st",
+        "updated": "2026-04-11 15:30",
+        "execType": "func",
+        "ownerIdx": 0,
+        "execStatus": "pending",
+        "executed": false,
+        "execTime": "",
+        "duration": 0,
+        "bugs": 0,
+        "round": 1
+      },
+      {
+        "id": "CASE-2652",
+        "name": "模板-缺失回退默认",
+        "title": "模板-缺失回退默认",
+        "code": "TC-T005-52",
+        "module": "多语言模板渲染",
+        "path": "多语言模板渲染 / 系统测试",
+        "type": "func",
+        "priority": "P3",
+        "status": "deprecated",
+        "statusText": "已废弃",
+        "owner": "李工程师",
+        "ownerObj": {
+          "name": "李工程师",
+          "short": "李",
+          "color": "#2ba471"
+        },
+        "subtask": "sub-i18n-template",
+        "stage": "st",
+        "updated": "2026-04-12 16:30",
+        "execType": "func",
+        "ownerIdx": 1,
+        "execStatus": "pending",
+        "executed": false,
+        "execTime": "",
+        "duration": 0,
+        "bugs": 0,
+        "round": 1
+      },
+      {
+        "id": "CASE-2660",
+        "name": "模板-中英切换",
+        "title": "模板-中英切换",
+        "code": "TC-T005-60",
+        "module": "多语言模板渲染",
+        "path": "多语言模板渲染 / UAT",
+        "type": "func",
+        "priority": "P2",
+        "status": "approved",
+        "statusText": "已通过",
+        "owner": "张小明",
+        "ownerObj": {
+          "name": "张小明",
+          "short": "张",
+          "color": "#0052d9"
+        },
+        "subtask": "sub-i18n-template",
+        "stage": "uat",
+        "updated": "2026-04-13 15:30",
+        "execType": "func",
+        "ownerIdx": 0,
+        "execStatus": "passed",
+        "executed": true,
+        "execTime": "2026-04-13 15:45",
+        "duration": 120,
+        "bugs": 0,
+        "round": 1
+      },
+      {
+        "id": "CASE-2661",
+        "name": "模板-阿拉伯语 RTL",
+        "title": "模板-阿拉伯语 RTL",
+        "code": "TC-T005-61",
+        "module": "多语言模板渲染",
+        "path": "多语言模板渲染 / UAT",
+        "type": "func",
+        "priority": "P3",
+        "status": "deprecated",
+        "statusText": "已废弃",
+        "owner": "李工程师",
+        "ownerObj": {
+          "name": "李工程师",
+          "short": "李",
+          "color": "#2ba471"
+        },
+        "subtask": "sub-i18n-template",
+        "stage": "uat",
+        "updated": "2026-04-14 16:30",
+        "execType": "func",
+        "ownerIdx": 1,
+        "execStatus": "failed",
+        "executed": true,
+        "execTime": "2026-04-14 16:45",
+        "duration": 240,
+        "bugs": 1,
+        "round": 1
+      },
+      {
+        "id": "CASE-2662",
+        "name": "模板-缺失回退默认",
+        "title": "模板-缺失回退默认",
+        "code": "TC-T005-62",
+        "module": "多语言模板渲染",
+        "path": "多语言模板渲染 / UAT",
+        "type": "func",
+        "priority": "P0",
+        "status": "draft",
+        "statusText": "草稿",
+        "owner": "王测试",
+        "ownerObj": {
+          "name": "王测试",
+          "short": "王",
+          "color": "#7b3fe4"
+        },
+        "subtask": "sub-i18n-template",
+        "stage": "uat",
+        "updated": "2026-04-15 17:30",
+        "execType": "func",
+        "ownerIdx": 2,
+        "execStatus": "failed",
+        "executed": true,
+        "execTime": "2026-04-15 17:45",
+        "duration": 360,
+        "bugs": 1,
+        "round": 1
+      }
+    ],
+    "T006": [
+      {
+        "id": "CASE-2600",
+        "name": "短信验证码-登录成功",
+        "title": "短信验证码-登录成功",
+        "code": "TC-T006-0",
+        "module": "MFA 多因素认证流程",
+        "path": "MFA 多因素认证流程 / 冒烟",
+        "type": "func",
+        "priority": "P0",
+        "status": "draft",
+        "statusText": "草稿",
+        "owner": "张小明",
+        "ownerObj": {
+          "name": "张小明",
+          "short": "张",
+          "color": "#0052d9"
+        },
+        "subtask": "sub-login-mfa",
+        "stage": "smoke",
+        "updated": "2026-04-10 9:30",
+        "execType": "func",
+        "ownerIdx": 0,
+        "execStatus": "passed",
+        "executed": true,
+        "execTime": "2026-04-10 9:45",
+        "duration": 120,
+        "bugs": 0,
+        "round": 1
+      },
+      {
+        "id": "CASE-2601",
+        "name": "TOTP-登录成功",
+        "title": "TOTP-登录成功",
+        "code": "TC-T006-1",
+        "module": "MFA 多因素认证流程",
+        "path": "MFA 多因素认证流程 / 冒烟",
+        "type": "func",
+        "priority": "P1",
+        "status": "review",
+        "statusText": "评审中",
+        "owner": "李工程师",
+        "ownerObj": {
+          "name": "李工程师",
+          "short": "李",
+          "color": "#2ba471"
+        },
+        "subtask": "sub-login-mfa",
+        "stage": "smoke",
+        "updated": "2026-04-11 10:30",
+        "execType": "func",
+        "ownerIdx": 1,
+        "execStatus": "passed",
+        "executed": true,
+        "execTime": "2026-04-11 10:45",
+        "duration": 240,
+        "bugs": 0,
+        "round": 1
+      },
+      {
+        "id": "CASE-2602",
+        "name": "备用码-登录",
+        "title": "备用码-登录",
+        "code": "TC-T006-2",
+        "module": "MFA 多因素认证流程",
+        "path": "MFA 多因素认证流程 / 冒烟",
+        "type": "func",
+        "priority": "P2",
+        "status": "approved",
+        "statusText": "已通过",
+        "owner": "王测试",
+        "ownerObj": {
+          "name": "王测试",
+          "short": "王",
+          "color": "#7b3fe4"
+        },
+        "subtask": "sub-login-mfa",
+        "stage": "smoke",
+        "updated": "2026-04-12 11:30",
+        "execType": "func",
+        "ownerIdx": 2,
+        "execStatus": "passed",
+        "executed": true,
+        "execTime": "2026-04-12 11:45",
+        "duration": 360,
+        "bugs": 0,
+        "round": 1
+      },
+      {
+        "id": "CASE-2610",
+        "name": "短信验证码-登录成功",
+        "title": "短信验证码-登录成功",
+        "code": "TC-T006-10",
+        "module": "MFA 多因素认证流程",
+        "path": "MFA 多因素认证流程 / 系统测试",
+        "type": "func",
+        "priority": "P1",
+        "status": "review",
+        "statusText": "评审中",
+        "owner": "李工程师",
+        "ownerObj": {
+          "name": "李工程师",
+          "short": "李",
+          "color": "#2ba471"
+        },
+        "subtask": "sub-login-mfa",
+        "stage": "st",
+        "updated": "2026-04-13 10:30",
+        "execType": "func",
+        "ownerIdx": 1,
+        "execStatus": "pending",
+        "executed": false,
+        "execTime": "",
+        "duration": 0,
+        "bugs": 0,
+        "round": 1
+      },
+      {
+        "id": "CASE-2611",
+        "name": "TOTP-登录成功",
+        "title": "TOTP-登录成功",
+        "code": "TC-T006-11",
+        "module": "MFA 多因素认证流程",
+        "path": "MFA 多因素认证流程 / 系统测试",
+        "type": "func",
+        "priority": "P2",
+        "status": "approved",
+        "statusText": "已通过",
+        "owner": "王测试",
+        "ownerObj": {
+          "name": "王测试",
+          "short": "王",
+          "color": "#7b3fe4"
+        },
+        "subtask": "sub-login-mfa",
+        "stage": "st",
+        "updated": "2026-04-14 11:30",
+        "execType": "func",
+        "ownerIdx": 2,
+        "execStatus": "pending",
+        "executed": false,
+        "execTime": "",
+        "duration": 0,
+        "bugs": 0,
+        "round": 1
+      },
+      {
+        "id": "CASE-2612",
+        "name": "备用码-登录",
+        "title": "备用码-登录",
+        "code": "TC-T006-12",
+        "module": "MFA 多因素认证流程",
+        "path": "MFA 多因素认证流程 / 系统测试",
+        "type": "func",
+        "priority": "P3",
+        "status": "deprecated",
+        "statusText": "已废弃",
+        "owner": "赵架构师",
+        "ownerObj": {
+          "name": "赵架构师",
+          "short": "赵",
+          "color": "#e37318"
+        },
+        "subtask": "sub-login-mfa",
+        "stage": "st",
+        "updated": "2026-04-15 12:30",
+        "execType": "func",
+        "ownerIdx": 3,
+        "execStatus": "pending",
+        "executed": false,
+        "execTime": "",
+        "duration": 0,
+        "bugs": 0,
+        "round": 1
+      },
+      {
+        "id": "CASE-2620",
+        "name": "短信验证码-登录成功",
+        "title": "短信验证码-登录成功",
+        "code": "TC-T006-20",
+        "module": "MFA 多因素认证流程",
+        "path": "MFA 多因素认证流程 / UAT",
+        "type": "func",
+        "priority": "P2",
+        "status": "approved",
+        "statusText": "已通过",
+        "owner": "王测试",
+        "ownerObj": {
+          "name": "王测试",
+          "short": "王",
+          "color": "#7b3fe4"
+        },
+        "subtask": "sub-login-mfa",
+        "stage": "uat",
+        "updated": "2026-04-16 11:30",
+        "execType": "func",
+        "ownerIdx": 2,
+        "execStatus": "failed",
+        "executed": true,
+        "execTime": "2026-04-16 11:45",
+        "duration": 120,
+        "bugs": 1,
+        "round": 1
+      },
+      {
+        "id": "CASE-2621",
+        "name": "TOTP-登录成功",
+        "title": "TOTP-登录成功",
+        "code": "TC-T006-21",
+        "module": "MFA 多因素认证流程",
+        "path": "MFA 多因素认证流程 / UAT",
+        "type": "func",
+        "priority": "P3",
+        "status": "deprecated",
+        "statusText": "已废弃",
+        "owner": "赵架构师",
+        "ownerObj": {
+          "name": "赵架构师",
+          "short": "赵",
+          "color": "#e37318"
+        },
+        "subtask": "sub-login-mfa",
+        "stage": "uat",
+        "updated": "2026-04-17 12:30",
+        "execType": "func",
+        "ownerIdx": 3,
+        "execStatus": "blocked",
+        "executed": true,
+        "execTime": "2026-04-17 12:45",
+        "duration": 240,
+        "bugs": 0,
+        "round": 1
+      },
+      {
+        "id": "CASE-2622",
+        "name": "备用码-登录",
+        "title": "备用码-登录",
+        "code": "TC-T006-22",
+        "module": "MFA 多因素认证流程",
+        "path": "MFA 多因素认证流程 / UAT",
+        "type": "func",
+        "priority": "P0",
+        "status": "draft",
+        "statusText": "草稿",
+        "owner": "孙小红",
+        "ownerObj": {
+          "name": "孙小红",
+          "short": "孙",
+          "color": "#d64b8a"
+        },
+        "subtask": "sub-login-mfa",
+        "stage": "uat",
+        "updated": "2026-04-18 13:30",
+        "execType": "func",
+        "ownerIdx": 4,
+        "execStatus": "pending",
+        "executed": false,
+        "execTime": "",
+        "duration": 0,
+        "bugs": 0,
+        "round": 1
+      },
+      {
+        "id": "CASE-2630",
+        "name": "异地登录-拦截",
+        "title": "异地登录-拦截",
+        "code": "TC-T006-30",
+        "module": "登录风控拦截",
+        "path": "登录风控拦截 / 系统测试",
+        "type": "func",
+        "priority": "P3",
+        "status": "deprecated",
+        "statusText": "已废弃",
+        "owner": "赵架构师",
+        "ownerObj": {
+          "name": "赵架构师",
+          "short": "赵",
+          "color": "#e37318"
+        },
+        "subtask": "sub-login-risk",
+        "stage": "st",
+        "updated": "2026-04-19 12:30",
+        "execType": "func",
+        "ownerIdx": 3,
+        "execStatus": "passed",
+        "executed": true,
+        "execTime": "2026-04-19 12:45",
+        "duration": 120,
+        "bugs": 0,
+        "round": 1
+      },
+      {
+        "id": "CASE-2631",
+        "name": "设备指纹-拦截",
+        "title": "设备指纹-拦截",
+        "code": "TC-T006-31",
+        "module": "登录风控拦截",
+        "path": "登录风控拦截 / 系统测试",
+        "type": "func",
+        "priority": "P0",
+        "status": "draft",
+        "statusText": "草稿",
+        "owner": "孙小红",
+        "ownerObj": {
+          "name": "孙小红",
+          "short": "孙",
+          "color": "#d64b8a"
+        },
+        "subtask": "sub-login-risk",
+        "stage": "st",
+        "updated": "2026-04-20 13:30",
+        "execType": "func",
+        "ownerIdx": 4,
+        "execStatus": "passed",
+        "executed": true,
+        "execTime": "2026-04-20 13:45",
+        "duration": 240,
+        "bugs": 0,
+        "round": 1
+      },
+      {
+        "id": "CASE-2632",
+        "name": "登录频控-拦截",
+        "title": "登录频控-拦截",
+        "code": "TC-T006-32",
+        "module": "登录风控拦截",
+        "path": "登录风控拦截 / 系统测试",
+        "type": "func",
+        "priority": "P1",
+        "status": "review",
+        "statusText": "评审中",
+        "owner": "周小刚",
+        "ownerObj": {
+          "name": "周小刚",
+          "short": "周",
+          "color": "#1e9fff"
+        },
+        "subtask": "sub-login-risk",
+        "stage": "st",
+        "updated": "2026-04-21 14:30",
+        "execType": "func",
+        "ownerIdx": 5,
+        "execStatus": "failed",
+        "executed": true,
+        "execTime": "2026-04-21 14:45",
+        "duration": 360,
+        "bugs": 1,
+        "round": 1
+      },
+      {
+        "id": "CASE-2640",
+        "name": "异地登录-拦截",
+        "title": "异地登录-拦截",
+        "code": "TC-T006-40",
+        "module": "登录风控拦截",
+        "path": "登录风控拦截 / 回归",
+        "type": "func",
+        "priority": "P0",
+        "status": "draft",
+        "statusText": "草稿",
+        "owner": "孙小红",
+        "ownerObj": {
+          "name": "孙小红",
+          "short": "孙",
+          "color": "#d64b8a"
+        },
+        "subtask": "sub-login-risk",
+        "stage": "regression",
+        "updated": "2026-04-22 13:30",
+        "execType": "func",
+        "ownerIdx": 4,
+        "execStatus": "pending",
+        "executed": false,
+        "execTime": "",
+        "duration": 0,
+        "bugs": 0,
+        "round": 1
+      },
+      {
+        "id": "CASE-2641",
+        "name": "设备指纹-拦截",
+        "title": "设备指纹-拦截",
+        "code": "TC-T006-41",
+        "module": "登录风控拦截",
+        "path": "登录风控拦截 / 回归",
+        "type": "func",
+        "priority": "P1",
+        "status": "review",
+        "statusText": "评审中",
+        "owner": "周小刚",
+        "ownerObj": {
+          "name": "周小刚",
+          "short": "周",
+          "color": "#1e9fff"
+        },
+        "subtask": "sub-login-risk",
+        "stage": "regression",
+        "updated": "2026-04-23 14:30",
+        "execType": "func",
+        "ownerIdx": 5,
+        "execStatus": "pending",
+        "executed": false,
+        "execTime": "",
+        "duration": 0,
+        "bugs": 0,
+        "round": 1
+      },
+      {
+        "id": "CASE-2642",
+        "name": "登录频控-拦截",
+        "title": "登录频控-拦截",
+        "code": "TC-T006-42",
+        "module": "登录风控拦截",
+        "path": "登录风控拦截 / 回归",
+        "type": "func",
+        "priority": "P2",
+        "status": "approved",
+        "statusText": "已通过",
+        "owner": "张小明",
+        "ownerObj": {
+          "name": "张小明",
+          "short": "张",
+          "color": "#0052d9"
+        },
+        "subtask": "sub-login-risk",
+        "stage": "regression",
+        "updated": "2026-04-24 15:30",
+        "execType": "func",
+        "ownerIdx": 0,
+        "execStatus": "passed",
+        "executed": true,
+        "execTime": "2026-04-24 15:45",
+        "duration": 360,
+        "bugs": 0,
+        "round": 1
+      }
+    ]
+  },
+  "DEFECTS": {
+    "T001": [
+      {
+        "id": "BUG-T001-000",
+        "code": "BUG-T001-000",
+        "title": "[支付核心 API 重构] 缺陷 1 - 功能",
+        "severity": "S0",
+        "priority": "P0",
+        "type": "功能",
+        "status": "open",
+        "module": "支付核心 API 重构",
+        "stage": "smoke",
+        "assignee": "张小明",
+        "reporter": "王测试",
+        "assigneeObj": {
+          "name": "张小明",
+          "short": "张",
+          "color": "#0052d9"
+        },
+        "reporterObj": {
+          "name": "王测试",
+          "short": "王",
+          "color": "#7b3fe4"
+        },
+        "subtask": "sub-pay-api",
+        "created": "2026-04-05",
+        "owner": "张小明"
+      },
+      {
+        "id": "BUG-T001-001",
+        "code": "BUG-T001-001",
+        "title": "[收银台前端改版] 缺陷 2 - UI",
+        "severity": "S1",
+        "priority": "P1",
+        "type": "UI",
+        "status": "in_progress",
+        "module": "收银台前端改版",
+        "stage": "st",
+        "assignee": "李工程师",
+        "reporter": "赵架构师",
+        "assigneeObj": {
+          "name": "李工程师",
+          "short": "李",
+          "color": "#2ba471"
+        },
+        "reporterObj": {
+          "name": "赵架构师",
+          "short": "赵",
+          "color": "#e37318"
+        },
+        "subtask": "sub-cashier",
+        "created": "2026-04-06",
+        "owner": "李工程师"
+      },
+      {
+        "id": "BUG-T001-002",
+        "code": "BUG-T001-002",
+        "title": "[风控规则引擎接入] 缺陷 3 - 性能",
+        "severity": "S2",
+        "priority": "P2",
+        "type": "性能",
+        "status": "fixed",
+        "module": "风控规则引擎接入",
+        "stage": "st",
+        "assignee": "王测试",
+        "reporter": "孙小红",
+        "assigneeObj": {
+          "name": "王测试",
+          "short": "王",
+          "color": "#7b3fe4"
+        },
+        "reporterObj": {
+          "name": "孙小红",
+          "short": "孙",
+          "color": "#d64b8a"
+        },
+        "subtask": "sub-risk",
+        "created": "2026-04-07",
+        "owner": "王测试"
+      },
+      {
+        "id": "BUG-T001-003",
+        "code": "BUG-T001-003",
+        "title": "[第三方渠道对接（银联/支付宝）] 缺陷 4 - 安全",
+        "severity": "S3",
+        "priority": "P3",
+        "type": "安全",
+        "status": "verifying",
+        "module": "第三方渠道对接（银联/支付宝）",
+        "stage": "smoke",
+        "assignee": "赵架构师",
+        "reporter": "周小刚",
+        "assigneeObj": {
+          "name": "赵架构师",
+          "short": "赵",
+          "color": "#e37318"
+        },
+        "reporterObj": {
+          "name": "周小刚",
+          "short": "周",
+          "color": "#1e9fff"
+        },
+        "subtask": "sub-channel",
+        "created": "2026-04-08",
+        "owner": "赵架构师"
+      },
+      {
+        "id": "BUG-T001-004",
+        "code": "BUG-T001-004",
+        "title": "[支付核心 API 重构] 缺陷 5 - 兼容",
+        "severity": "S0",
+        "priority": "P0",
+        "type": "兼容",
+        "status": "closed",
+        "module": "支付核心 API 重构",
+        "stage": "smoke",
+        "assignee": "孙小红",
+        "reporter": "张小明",
+        "assigneeObj": {
+          "name": "孙小红",
+          "short": "孙",
+          "color": "#d64b8a"
+        },
+        "reporterObj": {
+          "name": "张小明",
+          "short": "张",
+          "color": "#0052d9"
+        },
+        "subtask": "sub-pay-api",
+        "created": "2026-04-09",
+        "owner": "孙小红"
+      },
+      {
+        "id": "BUG-T001-005",
+        "code": "BUG-T001-005",
+        "title": "[收银台前端改版] 缺陷 6 - 接口",
+        "severity": "S1",
+        "priority": "P1",
+        "type": "接口",
+        "status": "reopen",
+        "module": "收银台前端改版",
+        "stage": "uat",
+        "assignee": "周小刚",
+        "reporter": "李工程师",
+        "assigneeObj": {
+          "name": "周小刚",
+          "short": "周",
+          "color": "#1e9fff"
+        },
+        "reporterObj": {
+          "name": "李工程师",
+          "short": "李",
+          "color": "#2ba471"
+        },
+        "subtask": "sub-cashier",
+        "created": "2026-04-10",
+        "owner": "周小刚"
+      },
+      {
+        "id": "BUG-T001-006",
+        "code": "BUG-T001-006",
+        "title": "[风控规则引擎接入] 缺陷 7 - 功能",
+        "severity": "S2",
+        "priority": "P2",
+        "type": "功能",
+        "status": "rejected",
+        "module": "风控规则引擎接入",
+        "stage": "st",
+        "assignee": "张小明",
+        "reporter": "王测试",
+        "assigneeObj": {
+          "name": "张小明",
+          "short": "张",
+          "color": "#0052d9"
+        },
+        "reporterObj": {
+          "name": "王测试",
+          "short": "王",
+          "color": "#7b3fe4"
+        },
+        "subtask": "sub-risk",
+        "created": "2026-04-11",
+        "owner": "张小明"
+      },
+      {
+        "id": "BUG-T001-007",
+        "code": "BUG-T001-007",
+        "title": "[第三方渠道对接（银联/支付宝）] 缺陷 8 - UI",
+        "severity": "S3",
+        "priority": "P3",
+        "type": "UI",
+        "status": "open",
+        "module": "第三方渠道对接（银联/支付宝）",
+        "stage": "st",
+        "assignee": "李工程师",
+        "reporter": "赵架构师",
+        "assigneeObj": {
+          "name": "李工程师",
+          "short": "李",
+          "color": "#2ba471"
+        },
+        "reporterObj": {
+          "name": "赵架构师",
+          "short": "赵",
+          "color": "#e37318"
+        },
+        "subtask": "sub-channel",
+        "created": "2026-04-12",
+        "owner": "李工程师"
+      },
+      {
+        "id": "BUG-T001-008",
+        "code": "BUG-T001-008",
+        "title": "[支付核心 API 重构] 缺陷 9 - 性能",
+        "severity": "S0",
+        "priority": "P0",
+        "type": "性能",
+        "status": "in_progress",
+        "module": "支付核心 API 重构",
+        "stage": "smoke",
+        "assignee": "王测试",
+        "reporter": "孙小红",
+        "assigneeObj": {
+          "name": "王测试",
+          "short": "王",
+          "color": "#7b3fe4"
+        },
+        "reporterObj": {
+          "name": "孙小红",
+          "short": "孙",
+          "color": "#d64b8a"
+        },
+        "subtask": "sub-pay-api",
+        "created": "2026-04-13",
+        "owner": "王测试"
+      },
+      {
+        "id": "BUG-T001-009",
+        "code": "BUG-T001-009",
+        "title": "[收银台前端改版] 缺陷 10 - 安全",
+        "severity": "S1",
+        "priority": "P1",
+        "type": "安全",
+        "status": "fixed",
+        "module": "收银台前端改版",
+        "stage": "smoke",
+        "assignee": "赵架构师",
+        "reporter": "周小刚",
+        "assigneeObj": {
+          "name": "赵架构师",
+          "short": "赵",
+          "color": "#e37318"
+        },
+        "reporterObj": {
+          "name": "周小刚",
+          "short": "周",
+          "color": "#1e9fff"
+        },
+        "subtask": "sub-cashier",
+        "created": "2026-04-14",
+        "owner": "赵架构师"
+      },
+      {
+        "id": "BUG-T001-010",
+        "code": "BUG-T001-010",
+        "title": "[风控规则引擎接入] 缺陷 11 - 兼容",
+        "severity": "S2",
+        "priority": "P2",
+        "type": "兼容",
+        "status": "verifying",
+        "module": "风控规则引擎接入",
+        "stage": "st",
+        "assignee": "孙小红",
+        "reporter": "张小明",
+        "assigneeObj": {
+          "name": "孙小红",
+          "short": "孙",
+          "color": "#d64b8a"
+        },
+        "reporterObj": {
+          "name": "张小明",
+          "short": "张",
+          "color": "#0052d9"
+        },
+        "subtask": "sub-risk",
+        "created": "2026-04-15",
+        "owner": "孙小红"
+      },
+      {
+        "id": "BUG-T001-011",
+        "code": "BUG-T001-011",
+        "title": "[第三方渠道对接（银联/支付宝）] 缺陷 12 - 接口",
+        "severity": "S3",
+        "priority": "P3",
+        "type": "接口",
+        "status": "closed",
+        "module": "第三方渠道对接（银联/支付宝）",
+        "stage": "uat",
+        "assignee": "周小刚",
+        "reporter": "李工程师",
+        "assigneeObj": {
+          "name": "周小刚",
+          "short": "周",
+          "color": "#1e9fff"
+        },
+        "reporterObj": {
+          "name": "李工程师",
+          "short": "李",
+          "color": "#2ba471"
+        },
+        "subtask": "sub-channel",
+        "created": "2026-04-16",
+        "owner": "周小刚"
+      },
+      {
+        "id": "BUG-T001-012",
+        "code": "BUG-T001-012",
+        "title": "[支付核心 API 重构] 缺陷 13 - 功能",
+        "severity": "S0",
+        "priority": "P0",
+        "type": "功能",
+        "status": "reopen",
+        "module": "支付核心 API 重构",
+        "stage": "smoke",
+        "assignee": "张小明",
+        "reporter": "王测试",
+        "assigneeObj": {
+          "name": "张小明",
+          "short": "张",
+          "color": "#0052d9"
+        },
+        "reporterObj": {
+          "name": "王测试",
+          "short": "王",
+          "color": "#7b3fe4"
+        },
+        "subtask": "sub-pay-api",
+        "created": "2026-04-17",
+        "owner": "张小明"
+      },
+      {
+        "id": "BUG-T001-013",
+        "code": "BUG-T001-013",
+        "title": "[收银台前端改版] 缺陷 14 - UI",
+        "severity": "S1",
+        "priority": "P1",
+        "type": "UI",
+        "status": "rejected",
+        "module": "收银台前端改版",
+        "stage": "st",
+        "assignee": "李工程师",
+        "reporter": "赵架构师",
+        "assigneeObj": {
+          "name": "李工程师",
+          "short": "李",
+          "color": "#2ba471"
+        },
+        "reporterObj": {
+          "name": "赵架构师",
+          "short": "赵",
+          "color": "#e37318"
+        },
+        "subtask": "sub-cashier",
+        "created": "2026-04-18",
+        "owner": "李工程师"
+      }
+    ],
+    "T002": [
+      {
+        "id": "BUG-T002-000",
+        "code": "BUG-T002-000",
+        "title": "[优惠券核心逻辑] 缺陷 1 - 功能",
+        "severity": "S0",
+        "priority": "P0",
+        "type": "功能",
+        "status": "open",
+        "module": "优惠券核心逻辑",
+        "stage": "smoke",
+        "assignee": "张小明",
+        "reporter": "王测试",
+        "assigneeObj": {
+          "name": "张小明",
+          "short": "张",
+          "color": "#0052d9"
+        },
+        "reporterObj": {
+          "name": "王测试",
+          "short": "王",
+          "color": "#7b3fe4"
+        },
+        "subtask": "sub-coupon-core",
+        "created": "2026-04-05",
+        "owner": "张小明"
+      },
+      {
+        "id": "BUG-T002-001",
+        "code": "BUG-T002-001",
+        "title": "[优惠券领取页面 H5] 缺陷 2 - UI",
+        "severity": "S1",
+        "priority": "P1",
+        "type": "UI",
+        "status": "in_progress",
+        "module": "优惠券领取页面 H5",
+        "stage": "st",
+        "assignee": "李工程师",
+        "reporter": "赵架构师",
+        "assigneeObj": {
+          "name": "李工程师",
+          "short": "李",
+          "color": "#2ba471"
+        },
+        "reporterObj": {
+          "name": "赵架构师",
+          "short": "赵",
+          "color": "#e37318"
+        },
+        "subtask": "sub-coupon-ui",
+        "created": "2026-04-06",
+        "owner": "李工程师"
+      },
+      {
+        "id": "BUG-T002-002",
+        "code": "BUG-T002-002",
+        "title": "[优惠券分享与裂变] 缺陷 3 - 性能",
+        "severity": "S2",
+        "priority": "P2",
+        "type": "性能",
+        "status": "fixed",
+        "module": "优惠券分享与裂变",
+        "stage": "uat",
+        "assignee": "王测试",
+        "reporter": "孙小红",
+        "assigneeObj": {
+          "name": "王测试",
+          "short": "王",
+          "color": "#7b3fe4"
+        },
+        "reporterObj": {
+          "name": "孙小红",
+          "short": "孙",
+          "color": "#d64b8a"
+        },
+        "subtask": "sub-coupon-share",
+        "created": "2026-04-07",
+        "owner": "王测试"
+      }
+    ],
+    "T003": [
+      {
+        "id": "BUG-T003-000",
+        "code": "BUG-T003-000",
+        "title": "[搜索召回算法回归] 缺陷 1 - 功能",
+        "severity": "S0",
+        "priority": "P0",
+        "type": "功能",
+        "status": "open",
+        "module": "搜索召回算法回归",
+        "stage": "st",
+        "assignee": "张小明",
+        "reporter": "王测试",
+        "assigneeObj": {
+          "name": "张小明",
+          "short": "张",
+          "color": "#0052d9"
+        },
+        "reporterObj": {
+          "name": "王测试",
+          "short": "王",
+          "color": "#7b3fe4"
+        },
+        "subtask": "sub-search-recall",
+        "created": "2026-04-05",
+        "owner": "张小明"
+      },
+      {
+        "id": "BUG-T003-001",
+        "code": "BUG-T003-001",
+        "title": "[搜索排序算法回归] 缺陷 2 - UI",
+        "severity": "S1",
+        "priority": "P1",
+        "type": "UI",
+        "status": "in_progress",
+        "module": "搜索排序算法回归",
+        "stage": "regression",
+        "assignee": "李工程师",
+        "reporter": "赵架构师",
+        "assigneeObj": {
+          "name": "李工程师",
+          "short": "李",
+          "color": "#2ba471"
+        },
+        "reporterObj": {
+          "name": "赵架构师",
+          "short": "赵",
+          "color": "#e37318"
+        },
+        "subtask": "sub-search-rank",
+        "created": "2026-04-06",
+        "owner": "李工程师"
+      },
+      {
+        "id": "BUG-T003-002",
+        "code": "BUG-T003-002",
+        "title": "[搜索结果页面兼容] 缺陷 3 - 性能",
+        "severity": "S2",
+        "priority": "P2",
+        "type": "性能",
+        "status": "fixed",
+        "module": "搜索结果页面兼容",
+        "stage": "regression",
+        "assignee": "王测试",
+        "reporter": "孙小红",
+        "assigneeObj": {
+          "name": "王测试",
+          "short": "王",
+          "color": "#7b3fe4"
+        },
+        "reporterObj": {
+          "name": "孙小红",
+          "short": "孙",
+          "color": "#d64b8a"
+        },
+        "subtask": "sub-search-ui",
+        "created": "2026-04-07",
+        "owner": "王测试"
+      },
+      {
+        "id": "BUG-T003-003",
+        "code": "BUG-T003-003",
+        "title": "[搜索召回算法回归] 缺陷 4 - 安全",
+        "severity": "S3",
+        "priority": "P3",
+        "type": "安全",
+        "status": "verifying",
+        "module": "搜索召回算法回归",
+        "stage": "regression",
+        "assignee": "赵架构师",
+        "reporter": "周小刚",
+        "assigneeObj": {
+          "name": "赵架构师",
+          "short": "赵",
+          "color": "#e37318"
+        },
+        "reporterObj": {
+          "name": "周小刚",
+          "short": "周",
+          "color": "#1e9fff"
+        },
+        "subtask": "sub-search-recall",
+        "created": "2026-04-08",
+        "owner": "赵架构师"
+      },
+      {
+        "id": "BUG-T003-004",
+        "code": "BUG-T003-004",
+        "title": "[搜索排序算法回归] 缺陷 5 - 兼容",
+        "severity": "S0",
+        "priority": "P0",
+        "type": "兼容",
+        "status": "closed",
+        "module": "搜索排序算法回归",
+        "stage": "st",
+        "assignee": "孙小红",
+        "reporter": "张小明",
+        "assigneeObj": {
+          "name": "孙小红",
+          "short": "孙",
+          "color": "#d64b8a"
+        },
+        "reporterObj": {
+          "name": "张小明",
+          "short": "张",
+          "color": "#0052d9"
+        },
+        "subtask": "sub-search-rank",
+        "created": "2026-04-09",
+        "owner": "孙小红"
+      },
+      {
+        "id": "BUG-T003-005",
+        "code": "BUG-T003-005",
+        "title": "[搜索结果页面兼容] 缺陷 6 - 接口",
+        "severity": "S1",
+        "priority": "P1",
+        "type": "接口",
+        "status": "reopen",
+        "module": "搜索结果页面兼容",
+        "stage": "st",
+        "assignee": "周小刚",
+        "reporter": "李工程师",
+        "assigneeObj": {
+          "name": "周小刚",
+          "short": "周",
+          "color": "#1e9fff"
+        },
+        "reporterObj": {
+          "name": "李工程师",
+          "short": "李",
+          "color": "#2ba471"
+        },
+        "subtask": "sub-search-ui",
+        "created": "2026-04-10",
+        "owner": "周小刚"
+      },
+      {
+        "id": "BUG-T003-006",
+        "code": "BUG-T003-006",
+        "title": "[搜索召回算法回归] 缺陷 7 - 功能",
+        "severity": "S2",
+        "priority": "P2",
+        "type": "功能",
+        "status": "rejected",
+        "module": "搜索召回算法回归",
+        "stage": "st",
+        "assignee": "张小明",
+        "reporter": "王测试",
+        "assigneeObj": {
+          "name": "张小明",
+          "short": "张",
+          "color": "#0052d9"
+        },
+        "reporterObj": {
+          "name": "王测试",
+          "short": "王",
+          "color": "#7b3fe4"
+        },
+        "subtask": "sub-search-recall",
+        "created": "2026-04-11",
+        "owner": "张小明"
+      },
+      {
+        "id": "BUG-T003-007",
+        "code": "BUG-T003-007",
+        "title": "[搜索排序算法回归] 缺陷 8 - UI",
+        "severity": "S3",
+        "priority": "P3",
+        "type": "UI",
+        "status": "open",
+        "module": "搜索排序算法回归",
+        "stage": "regression",
+        "assignee": "李工程师",
+        "reporter": "赵架构师",
+        "assigneeObj": {
+          "name": "李工程师",
+          "short": "李",
+          "color": "#2ba471"
+        },
+        "reporterObj": {
+          "name": "赵架构师",
+          "short": "赵",
+          "color": "#e37318"
+        },
+        "subtask": "sub-search-rank",
+        "created": "2026-04-12",
+        "owner": "李工程师"
+      },
+      {
+        "id": "BUG-T003-008",
+        "code": "BUG-T003-008",
+        "title": "[搜索结果页面兼容] 缺陷 9 - 性能",
+        "severity": "S0",
+        "priority": "P0",
+        "type": "性能",
+        "status": "in_progress",
+        "module": "搜索结果页面兼容",
+        "stage": "smoke",
+        "assignee": "王测试",
+        "reporter": "孙小红",
+        "assigneeObj": {
+          "name": "王测试",
+          "short": "王",
+          "color": "#7b3fe4"
+        },
+        "reporterObj": {
+          "name": "孙小红",
+          "short": "孙",
+          "color": "#d64b8a"
+        },
+        "subtask": "sub-search-ui",
+        "created": "2026-04-13",
+        "owner": "王测试"
+      },
+      {
+        "id": "BUG-T003-009",
+        "code": "BUG-T003-009",
+        "title": "[搜索召回算法回归] 缺陷 10 - 安全",
+        "severity": "S1",
+        "priority": "P1",
+        "type": "安全",
+        "status": "fixed",
+        "module": "搜索召回算法回归",
+        "stage": "regression",
+        "assignee": "赵架构师",
+        "reporter": "周小刚",
+        "assigneeObj": {
+          "name": "赵架构师",
+          "short": "赵",
+          "color": "#e37318"
+        },
+        "reporterObj": {
+          "name": "周小刚",
+          "short": "周",
+          "color": "#1e9fff"
+        },
+        "subtask": "sub-search-recall",
+        "created": "2026-04-14",
+        "owner": "赵架构师"
+      }
+    ],
+    "T004": [
+      {
+        "id": "BUG-T004-000",
+        "code": "BUG-T004-000",
+        "title": "[履约引擎压测] 缺陷 1 - 功能",
+        "severity": "S0",
+        "priority": "P0",
+        "type": "功能",
+        "status": "open",
+        "module": "履约引擎压测",
+        "stage": "st",
+        "assignee": "张小明",
+        "reporter": "王测试",
+        "assigneeObj": {
+          "name": "张小明",
+          "short": "张",
+          "color": "#0052d9"
+        },
+        "reporterObj": {
+          "name": "王测试",
+          "short": "王",
+          "color": "#7b3fe4"
+        },
+        "subtask": "sub-fulfill-perf",
+        "created": "2026-04-05",
+        "owner": "张小明"
+      },
+      {
+        "id": "BUG-T004-001",
+        "code": "BUG-T004-001",
+        "title": "[履约系统断路测试] 缺陷 2 - UI",
+        "severity": "S1",
+        "priority": "P1",
+        "type": "UI",
+        "status": "in_progress",
+        "module": "履约系统断路测试",
+        "stage": "st",
+        "assignee": "李工程师",
+        "reporter": "赵架构师",
+        "assigneeObj": {
+          "name": "李工程师",
+          "short": "李",
+          "color": "#2ba471"
+        },
+        "reporterObj": {
+          "name": "赵架构师",
+          "short": "赵",
+          "color": "#e37318"
+        },
+        "subtask": "sub-fulfill-break",
+        "created": "2026-04-06",
+        "owner": "李工程师"
+      },
+      {
+        "id": "BUG-T004-002",
+        "code": "BUG-T004-002",
+        "title": "[履约引擎压测] 缺陷 3 - 性能",
+        "severity": "S2",
+        "priority": "P2",
+        "type": "性能",
+        "status": "fixed",
+        "module": "履约引擎压测",
+        "stage": "st",
+        "assignee": "王测试",
+        "reporter": "孙小红",
+        "assigneeObj": {
+          "name": "王测试",
+          "short": "王",
+          "color": "#7b3fe4"
+        },
+        "reporterObj": {
+          "name": "孙小红",
+          "short": "孙",
+          "color": "#d64b8a"
+        },
+        "subtask": "sub-fulfill-perf",
+        "created": "2026-04-07",
+        "owner": "王测试"
+      },
+      {
+        "id": "BUG-T004-003",
+        "code": "BUG-T004-003",
+        "title": "[履约系统断路测试] 缺陷 4 - 安全",
+        "severity": "S3",
+        "priority": "P3",
+        "type": "安全",
+        "status": "verifying",
+        "module": "履约系统断路测试",
+        "stage": "st",
+        "assignee": "赵架构师",
+        "reporter": "周小刚",
+        "assigneeObj": {
+          "name": "赵架构师",
+          "short": "赵",
+          "color": "#e37318"
+        },
+        "reporterObj": {
+          "name": "周小刚",
+          "short": "周",
+          "color": "#1e9fff"
+        },
+        "subtask": "sub-fulfill-break",
+        "created": "2026-04-08",
+        "owner": "赵架构师"
+      },
+      {
+        "id": "BUG-T004-004",
+        "code": "BUG-T004-004",
+        "title": "[履约引擎压测] 缺陷 5 - 兼容",
+        "severity": "S0",
+        "priority": "P0",
+        "type": "兼容",
+        "status": "closed",
+        "module": "履约引擎压测",
+        "stage": "st",
+        "assignee": "孙小红",
+        "reporter": "张小明",
+        "assigneeObj": {
+          "name": "孙小红",
+          "short": "孙",
+          "color": "#d64b8a"
+        },
+        "reporterObj": {
+          "name": "张小明",
+          "short": "张",
+          "color": "#0052d9"
+        },
+        "subtask": "sub-fulfill-perf",
+        "created": "2026-04-09",
+        "owner": "孙小红"
+      }
+    ],
+    "T005": [
+      {
+        "id": "BUG-T005-000",
+        "code": "BUG-T005-000",
+        "title": "[国际化网关测试] 缺陷 1 - 功能",
+        "severity": "S0",
+        "priority": "P0",
+        "type": "功能",
+        "status": "open",
+        "module": "国际化网关测试",
+        "stage": "smoke",
+        "assignee": "张小明",
+        "reporter": "王测试",
+        "assigneeObj": {
+          "name": "张小明",
+          "short": "张",
+          "color": "#0052d9"
+        },
+        "reporterObj": {
+          "name": "王测试",
+          "short": "王",
+          "color": "#7b3fe4"
+        },
+        "subtask": "sub-i18n-gateway",
+        "created": "2026-04-05",
+        "owner": "张小明"
+      },
+      {
+        "id": "BUG-T005-001",
+        "code": "BUG-T005-001",
+        "title": "[多语言模板渲染] 缺陷 2 - UI",
+        "severity": "S1",
+        "priority": "P1",
+        "type": "UI",
+        "status": "in_progress",
+        "module": "多语言模板渲染",
+        "stage": "st",
+        "assignee": "李工程师",
+        "reporter": "赵架构师",
+        "assigneeObj": {
+          "name": "李工程师",
+          "short": "李",
+          "color": "#2ba471"
+        },
+        "reporterObj": {
+          "name": "赵架构师",
+          "short": "赵",
+          "color": "#e37318"
+        },
+        "subtask": "sub-i18n-template",
+        "created": "2026-04-06",
+        "owner": "李工程师"
+      },
+      {
+        "id": "BUG-T005-002",
+        "code": "BUG-T005-002",
+        "title": "[国际化网关测试] 缺陷 3 - 性能",
+        "severity": "S2",
+        "priority": "P2",
+        "type": "性能",
+        "status": "fixed",
+        "module": "国际化网关测试",
+        "stage": "regression",
+        "assignee": "王测试",
+        "reporter": "孙小红",
+        "assigneeObj": {
+          "name": "王测试",
+          "short": "王",
+          "color": "#7b3fe4"
+        },
+        "reporterObj": {
+          "name": "孙小红",
+          "short": "孙",
+          "color": "#d64b8a"
+        },
+        "subtask": "sub-i18n-gateway",
+        "created": "2026-04-07",
+        "owner": "王测试"
+      },
+      {
+        "id": "BUG-T005-003",
+        "code": "BUG-T005-003",
+        "title": "[多语言模板渲染] 缺陷 4 - 安全",
+        "severity": "S3",
+        "priority": "P3",
+        "type": "安全",
+        "status": "verifying",
+        "module": "多语言模板渲染",
+        "stage": "smoke",
+        "assignee": "赵架构师",
+        "reporter": "周小刚",
+        "assigneeObj": {
+          "name": "赵架构师",
+          "short": "赵",
+          "color": "#e37318"
+        },
+        "reporterObj": {
+          "name": "周小刚",
+          "short": "周",
+          "color": "#1e9fff"
+        },
+        "subtask": "sub-i18n-template",
+        "created": "2026-04-08",
+        "owner": "赵架构师"
+      },
+      {
+        "id": "BUG-T005-004",
+        "code": "BUG-T005-004",
+        "title": "[国际化网关测试] 缺陷 5 - 兼容",
+        "severity": "S0",
+        "priority": "P0",
+        "type": "兼容",
+        "status": "closed",
+        "module": "国际化网关测试",
+        "stage": "smoke",
+        "assignee": "孙小红",
+        "reporter": "张小明",
+        "assigneeObj": {
+          "name": "孙小红",
+          "short": "孙",
+          "color": "#d64b8a"
+        },
+        "reporterObj": {
+          "name": "张小明",
+          "short": "张",
+          "color": "#0052d9"
+        },
+        "subtask": "sub-i18n-gateway",
+        "created": "2026-04-09",
+        "owner": "孙小红"
+      },
+      {
+        "id": "BUG-T005-005",
+        "code": "BUG-T005-005",
+        "title": "[多语言模板渲染] 缺陷 6 - 接口",
+        "severity": "S1",
+        "priority": "P1",
+        "type": "接口",
+        "status": "reopen",
+        "module": "多语言模板渲染",
+        "stage": "uat",
+        "assignee": "周小刚",
+        "reporter": "李工程师",
+        "assigneeObj": {
+          "name": "周小刚",
+          "short": "周",
+          "color": "#1e9fff"
+        },
+        "reporterObj": {
+          "name": "李工程师",
+          "short": "李",
+          "color": "#2ba471"
+        },
+        "subtask": "sub-i18n-template",
+        "created": "2026-04-10",
+        "owner": "周小刚"
+      },
+      {
+        "id": "BUG-T005-006",
+        "code": "BUG-T005-006",
+        "title": "[国际化网关测试] 缺陷 7 - 功能",
+        "severity": "S2",
+        "priority": "P2",
+        "type": "功能",
+        "status": "rejected",
+        "module": "国际化网关测试",
+        "stage": "regression",
+        "assignee": "张小明",
+        "reporter": "王测试",
+        "assigneeObj": {
+          "name": "张小明",
+          "short": "张",
+          "color": "#0052d9"
+        },
+        "reporterObj": {
+          "name": "王测试",
+          "short": "王",
+          "color": "#7b3fe4"
+        },
+        "subtask": "sub-i18n-gateway",
+        "created": "2026-04-11",
+        "owner": "张小明"
+      }
+    ],
+    "T006": [
+      {
+        "id": "BUG-T006-000",
+        "code": "BUG-T006-000",
+        "title": "[MFA 多因素认证流程] 缺陷 1 - 功能",
+        "severity": "S0",
+        "priority": "P0",
+        "type": "功能",
+        "status": "open",
+        "module": "MFA 多因素认证流程",
+        "stage": "smoke",
+        "assignee": "张小明",
+        "reporter": "王测试",
+        "assigneeObj": {
+          "name": "张小明",
+          "short": "张",
+          "color": "#0052d9"
+        },
+        "reporterObj": {
+          "name": "王测试",
+          "short": "王",
+          "color": "#7b3fe4"
+        },
+        "subtask": "sub-login-mfa",
+        "created": "2026-04-05",
+        "owner": "张小明"
+      },
+      {
+        "id": "BUG-T006-001",
+        "code": "BUG-T006-001",
+        "title": "[登录风控拦截] 缺陷 2 - UI",
+        "severity": "S1",
+        "priority": "P1",
+        "type": "UI",
+        "status": "in_progress",
+        "module": "登录风控拦截",
+        "stage": "regression",
+        "assignee": "李工程师",
+        "reporter": "赵架构师",
+        "assigneeObj": {
+          "name": "李工程师",
+          "short": "李",
+          "color": "#2ba471"
+        },
+        "reporterObj": {
+          "name": "赵架构师",
+          "short": "赵",
+          "color": "#e37318"
+        },
+        "subtask": "sub-login-risk",
+        "created": "2026-04-06",
+        "owner": "李工程师"
+      },
+      {
+        "id": "BUG-T006-002",
+        "code": "BUG-T006-002",
+        "title": "[MFA 多因素认证流程] 缺陷 3 - 性能",
+        "severity": "S2",
+        "priority": "P2",
+        "type": "性能",
+        "status": "fixed",
+        "module": "MFA 多因素认证流程",
+        "stage": "uat",
+        "assignee": "王测试",
+        "reporter": "孙小红",
+        "assigneeObj": {
+          "name": "王测试",
+          "short": "王",
+          "color": "#7b3fe4"
+        },
+        "reporterObj": {
+          "name": "孙小红",
+          "short": "孙",
+          "color": "#d64b8a"
+        },
+        "subtask": "sub-login-mfa",
+        "created": "2026-04-07",
+        "owner": "王测试"
+      },
+      {
+        "id": "BUG-T006-003",
+        "code": "BUG-T006-003",
+        "title": "[登录风控拦截] 缺陷 4 - 安全",
+        "severity": "S3",
+        "priority": "P3",
+        "type": "安全",
+        "status": "verifying",
+        "module": "登录风控拦截",
+        "stage": "regression",
+        "assignee": "赵架构师",
+        "reporter": "周小刚",
+        "assigneeObj": {
+          "name": "赵架构师",
+          "short": "赵",
+          "color": "#e37318"
+        },
+        "reporterObj": {
+          "name": "周小刚",
+          "short": "周",
+          "color": "#1e9fff"
+        },
+        "subtask": "sub-login-risk",
+        "created": "2026-04-08",
+        "owner": "赵架构师"
+      }
+    ]
+  },
+  "REPORTS": {
+    "T001": [
+      {
+        "id": "R001",
+        "code": "RPT-2026-001",
+        "title": "支付中心重构-阶段一测试报告",
+        "round": "第1轮",
+        "status": "published",
+        "owner": "张小明",
+        "created": "2026-04-01"
+      },
+      {
+        "id": "R002",
+        "code": "RPT-2026-002",
+        "title": "支付中心重构-阶段二测试报告",
+        "round": "第2轮",
+        "status": "draft",
+        "owner": "张小明",
+        "created": "2026-04-20"
+      }
+    ],
+    "T002": [],
+    "T003": [
+      {
+        "id": "R301",
+        "code": "RPT-2026-003",
+        "title": "商品搜索回归测试报告",
+        "round": "第1轮",
+        "status": "published",
+        "owner": "王测试",
+        "created": "2026-04-18"
+      }
+    ],
+    "T004": [],
+    "T005": [],
+    "T006": [
+      {
+        "id": "R601",
+        "code": "RPT-2026-004",
+        "title": "用户登录安全增强-验收报告",
+        "round": "终版",
+        "status": "published",
+        "owner": "周小刚",
+        "created": "2026-03-22"
+      }
+    ]
+  },
+  "REVIEWS": {
+    "T001": [
+      {
+        "id": "RV-T001-000",
+        "title": "[支付核心 API 重构] 测试计划评审",
+        "type": "plan",
+        "way": "email",
+        "subtask": "sub-pay-api",
+        "owner": 0,
+        "members": [
+          0,
+          1,
+          3
+        ],
+        "ownerObj": {
+          "name": "张小明",
+          "short": "张",
+          "color": "#0052d9"
+        },
+        "memberObjs": [
+          {
+            "name": "张小明",
+            "short": "张",
+            "color": "#0052d9"
+          },
+          {
+            "name": "李工程师",
+            "short": "李",
+            "color": "#2ba471"
+          },
+          {
+            "name": "赵架构师",
+            "short": "赵",
+            "color": "#e37318"
+          }
+        ],
+        "time": "2026-04-10 9:30",
+        "status": "pending",
+        "pass": 0,
+        "total": 3
+      },
+      {
+        "id": "RV-T001-001",
+        "title": "[收银台前端改版] 测试设计评审",
+        "type": "design",
+        "way": "meeting",
+        "subtask": "sub-cashier",
+        "owner": 1,
+        "members": [
+          1,
+          2,
+          4
+        ],
+        "ownerObj": {
+          "name": "李工程师",
+          "short": "李",
+          "color": "#2ba471"
+        },
+        "memberObjs": [
+          {
+            "name": "李工程师",
+            "short": "李",
+            "color": "#2ba471"
+          },
+          {
+            "name": "王测试",
+            "short": "王",
+            "color": "#7b3fe4"
+          },
+          {
+            "name": "孙小红",
+            "short": "孙",
+            "color": "#d64b8a"
+          }
+        ],
+        "time": "2026-04-11 10:30",
+        "status": "reviewing",
+        "pass": 1,
+        "total": 3
+      },
+      {
+        "id": "RV-T001-002",
+        "title": "[风控规则引擎接入] 测试总结评审",
+        "type": "summary",
+        "way": "email",
+        "subtask": "sub-risk",
+        "owner": 2,
+        "members": [
+          2,
+          3,
+          5
+        ],
+        "ownerObj": {
+          "name": "王测试",
+          "short": "王",
+          "color": "#7b3fe4"
+        },
+        "memberObjs": [
+          {
+            "name": "王测试",
+            "short": "王",
+            "color": "#7b3fe4"
+          },
+          {
+            "name": "赵架构师",
+            "short": "赵",
+            "color": "#e37318"
+          },
+          {
+            "name": "周小刚",
+            "short": "周",
+            "color": "#1e9fff"
+          }
+        ],
+        "time": "2026-04-12 11:30",
+        "status": "passed",
+        "pass": 3,
+        "total": 3
+      },
+      {
+        "id": "RV-T001-003",
+        "title": "[第三方渠道对接（银联/支付宝）] 测试计划评审",
+        "type": "plan",
+        "way": "meeting",
+        "subtask": "sub-channel",
+        "owner": 3,
+        "members": [
+          3,
+          4,
+          0
+        ],
+        "ownerObj": {
+          "name": "赵架构师",
+          "short": "赵",
+          "color": "#e37318"
+        },
+        "memberObjs": [
+          {
+            "name": "赵架构师",
+            "short": "赵",
+            "color": "#e37318"
+          },
+          {
+            "name": "孙小红",
+            "short": "孙",
+            "color": "#d64b8a"
+          },
+          {
+            "name": "张小明",
+            "short": "张",
+            "color": "#0052d9"
+          }
+        ],
+        "time": "2026-04-13 12:30",
+        "status": "failed",
+        "pass": 0,
+        "total": 3
+      },
+      {
+        "id": "RV-T001-004",
+        "title": "[支付核心 API 重构] 测试设计评审",
+        "type": "design",
+        "way": "email",
+        "subtask": "sub-pay-api",
+        "owner": 4,
+        "members": [
+          4,
+          5,
+          1
+        ],
+        "ownerObj": {
+          "name": "孙小红",
+          "short": "孙",
+          "color": "#d64b8a"
+        },
+        "memberObjs": [
+          {
+            "name": "孙小红",
+            "short": "孙",
+            "color": "#d64b8a"
+          },
+          {
+            "name": "周小刚",
+            "short": "周",
+            "color": "#1e9fff"
+          },
+          {
+            "name": "李工程师",
+            "short": "李",
+            "color": "#2ba471"
+          }
+        ],
+        "time": "2026-04-14 13:30",
+        "status": "canceled",
+        "pass": 0,
+        "total": 3
+      },
+      {
+        "id": "RV-T001-005",
+        "title": "[收银台前端改版] 测试总结评审",
+        "type": "summary",
+        "way": "meeting",
+        "subtask": "sub-cashier",
+        "owner": 5,
+        "members": [
+          5,
+          0,
+          2
+        ],
+        "ownerObj": {
+          "name": "周小刚",
+          "short": "周",
+          "color": "#1e9fff"
+        },
+        "memberObjs": [
+          {
+            "name": "周小刚",
+            "short": "周",
+            "color": "#1e9fff"
+          },
+          {
+            "name": "张小明",
+            "short": "张",
+            "color": "#0052d9"
+          },
+          {
+            "name": "王测试",
+            "short": "王",
+            "color": "#7b3fe4"
+          }
+        ],
+        "time": "2026-04-15 14:30",
+        "status": "pending",
+        "pass": 0,
+        "total": 3
+      },
+      {
+        "id": "RV-T001-006",
+        "title": "[风控规则引擎接入] 测试计划评审",
+        "type": "plan",
+        "way": "email",
+        "subtask": "sub-risk",
+        "owner": 0,
+        "members": [
+          0,
+          1,
+          3
+        ],
+        "ownerObj": {
+          "name": "张小明",
+          "short": "张",
+          "color": "#0052d9"
+        },
+        "memberObjs": [
+          {
+            "name": "张小明",
+            "short": "张",
+            "color": "#0052d9"
+          },
+          {
+            "name": "李工程师",
+            "short": "李",
+            "color": "#2ba471"
+          },
+          {
+            "name": "赵架构师",
+            "short": "赵",
+            "color": "#e37318"
+          }
+        ],
+        "time": "2026-04-16 15:30",
+        "status": "reviewing",
+        "pass": 1,
+        "total": 3
+      },
+      {
+        "id": "RV-T001-007",
+        "title": "[第三方渠道对接（银联/支付宝）] 测试设计评审",
+        "type": "design",
+        "way": "meeting",
+        "subtask": "sub-channel",
+        "owner": 1,
+        "members": [
+          1,
+          2,
+          4
+        ],
+        "ownerObj": {
+          "name": "李工程师",
+          "short": "李",
+          "color": "#2ba471"
+        },
+        "memberObjs": [
+          {
+            "name": "李工程师",
+            "short": "李",
+            "color": "#2ba471"
+          },
+          {
+            "name": "王测试",
+            "short": "王",
+            "color": "#7b3fe4"
+          },
+          {
+            "name": "孙小红",
+            "short": "孙",
+            "color": "#d64b8a"
+          }
+        ],
+        "time": "2026-04-17 16:30",
+        "status": "passed",
+        "pass": 3,
+        "total": 3
+      }
+    ],
+    "T002": [
+      {
+        "id": "RV-T002-000",
+        "title": "[优惠券核心逻辑] 测试计划评审",
+        "type": "plan",
+        "way": "email",
+        "subtask": "sub-coupon-core",
+        "owner": 0,
+        "members": [
+          0,
+          1,
+          3
+        ],
+        "ownerObj": {
+          "name": "张小明",
+          "short": "张",
+          "color": "#0052d9"
+        },
+        "memberObjs": [
+          {
+            "name": "张小明",
+            "short": "张",
+            "color": "#0052d9"
+          },
+          {
+            "name": "李工程师",
+            "short": "李",
+            "color": "#2ba471"
+          },
+          {
+            "name": "赵架构师",
+            "short": "赵",
+            "color": "#e37318"
+          }
+        ],
+        "time": "2026-04-10 9:30",
+        "status": "pending",
+        "pass": 0,
+        "total": 3
+      },
+      {
+        "id": "RV-T002-001",
+        "title": "[优惠券领取页面 H5] 测试设计评审",
+        "type": "design",
+        "way": "meeting",
+        "subtask": "sub-coupon-ui",
+        "owner": 1,
+        "members": [
+          1,
+          2,
+          4
+        ],
+        "ownerObj": {
+          "name": "李工程师",
+          "short": "李",
+          "color": "#2ba471"
+        },
+        "memberObjs": [
+          {
+            "name": "李工程师",
+            "short": "李",
+            "color": "#2ba471"
+          },
+          {
+            "name": "王测试",
+            "short": "王",
+            "color": "#7b3fe4"
+          },
+          {
+            "name": "孙小红",
+            "short": "孙",
+            "color": "#d64b8a"
+          }
+        ],
+        "time": "2026-04-11 10:30",
+        "status": "reviewing",
+        "pass": 1,
+        "total": 3
+      },
+      {
+        "id": "RV-T002-002",
+        "title": "[优惠券分享与裂变] 测试总结评审",
+        "type": "summary",
+        "way": "email",
+        "subtask": "sub-coupon-share",
+        "owner": 2,
+        "members": [
+          2,
+          3,
+          5
+        ],
+        "ownerObj": {
+          "name": "王测试",
+          "short": "王",
+          "color": "#7b3fe4"
+        },
+        "memberObjs": [
+          {
+            "name": "王测试",
+            "short": "王",
+            "color": "#7b3fe4"
+          },
+          {
+            "name": "赵架构师",
+            "short": "赵",
+            "color": "#e37318"
+          },
+          {
+            "name": "周小刚",
+            "short": "周",
+            "color": "#1e9fff"
+          }
+        ],
+        "time": "2026-04-12 11:30",
+        "status": "passed",
+        "pass": 3,
+        "total": 3
+      }
+    ],
+    "T003": [
+      {
+        "id": "RV-T003-000",
+        "title": "[搜索召回算法回归] 测试计划评审",
+        "type": "plan",
+        "way": "email",
+        "subtask": "sub-search-recall",
+        "owner": 0,
+        "members": [
+          0,
+          1,
+          3
+        ],
+        "ownerObj": {
+          "name": "张小明",
+          "short": "张",
+          "color": "#0052d9"
+        },
+        "memberObjs": [
+          {
+            "name": "张小明",
+            "short": "张",
+            "color": "#0052d9"
+          },
+          {
+            "name": "李工程师",
+            "short": "李",
+            "color": "#2ba471"
+          },
+          {
+            "name": "赵架构师",
+            "short": "赵",
+            "color": "#e37318"
+          }
+        ],
+        "time": "2026-04-10 9:30",
+        "status": "pending",
+        "pass": 0,
+        "total": 3
+      },
+      {
+        "id": "RV-T003-001",
+        "title": "[搜索排序算法回归] 测试设计评审",
+        "type": "design",
+        "way": "meeting",
+        "subtask": "sub-search-rank",
+        "owner": 1,
+        "members": [
+          1,
+          2,
+          4
+        ],
+        "ownerObj": {
+          "name": "李工程师",
+          "short": "李",
+          "color": "#2ba471"
+        },
+        "memberObjs": [
+          {
+            "name": "李工程师",
+            "short": "李",
+            "color": "#2ba471"
+          },
+          {
+            "name": "王测试",
+            "short": "王",
+            "color": "#7b3fe4"
+          },
+          {
+            "name": "孙小红",
+            "short": "孙",
+            "color": "#d64b8a"
+          }
+        ],
+        "time": "2026-04-11 10:30",
+        "status": "reviewing",
+        "pass": 1,
+        "total": 3
+      },
+      {
+        "id": "RV-T003-002",
+        "title": "[搜索结果页面兼容] 测试总结评审",
+        "type": "summary",
+        "way": "email",
+        "subtask": "sub-search-ui",
+        "owner": 2,
+        "members": [
+          2,
+          3,
+          5
+        ],
+        "ownerObj": {
+          "name": "王测试",
+          "short": "王",
+          "color": "#7b3fe4"
+        },
+        "memberObjs": [
+          {
+            "name": "王测试",
+            "short": "王",
+            "color": "#7b3fe4"
+          },
+          {
+            "name": "赵架构师",
+            "short": "赵",
+            "color": "#e37318"
+          },
+          {
+            "name": "周小刚",
+            "short": "周",
+            "color": "#1e9fff"
+          }
+        ],
+        "time": "2026-04-12 11:30",
+        "status": "passed",
+        "pass": 3,
+        "total": 3
+      },
+      {
+        "id": "RV-T003-003",
+        "title": "[搜索召回算法回归] 测试计划评审",
+        "type": "plan",
+        "way": "meeting",
+        "subtask": "sub-search-recall",
+        "owner": 3,
+        "members": [
+          3,
+          4,
+          0
+        ],
+        "ownerObj": {
+          "name": "赵架构师",
+          "short": "赵",
+          "color": "#e37318"
+        },
+        "memberObjs": [
+          {
+            "name": "赵架构师",
+            "short": "赵",
+            "color": "#e37318"
+          },
+          {
+            "name": "孙小红",
+            "short": "孙",
+            "color": "#d64b8a"
+          },
+          {
+            "name": "张小明",
+            "short": "张",
+            "color": "#0052d9"
+          }
+        ],
+        "time": "2026-04-13 12:30",
+        "status": "failed",
+        "pass": 0,
+        "total": 3
+      },
+      {
+        "id": "RV-T003-004",
+        "title": "[搜索排序算法回归] 测试设计评审",
+        "type": "design",
+        "way": "email",
+        "subtask": "sub-search-rank",
+        "owner": 4,
+        "members": [
+          4,
+          5,
+          1
+        ],
+        "ownerObj": {
+          "name": "孙小红",
+          "short": "孙",
+          "color": "#d64b8a"
+        },
+        "memberObjs": [
+          {
+            "name": "孙小红",
+            "short": "孙",
+            "color": "#d64b8a"
+          },
+          {
+            "name": "周小刚",
+            "short": "周",
+            "color": "#1e9fff"
+          },
+          {
+            "name": "李工程师",
+            "short": "李",
+            "color": "#2ba471"
+          }
+        ],
+        "time": "2026-04-14 13:30",
+        "status": "canceled",
+        "pass": 0,
+        "total": 3
+      },
+      {
+        "id": "RV-T003-005",
+        "title": "[搜索结果页面兼容] 测试总结评审",
+        "type": "summary",
+        "way": "meeting",
+        "subtask": "sub-search-ui",
+        "owner": 5,
+        "members": [
+          5,
+          0,
+          2
+        ],
+        "ownerObj": {
+          "name": "周小刚",
+          "short": "周",
+          "color": "#1e9fff"
+        },
+        "memberObjs": [
+          {
+            "name": "周小刚",
+            "short": "周",
+            "color": "#1e9fff"
+          },
+          {
+            "name": "张小明",
+            "short": "张",
+            "color": "#0052d9"
+          },
+          {
+            "name": "王测试",
+            "short": "王",
+            "color": "#7b3fe4"
+          }
+        ],
+        "time": "2026-04-15 14:30",
+        "status": "pending",
+        "pass": 0,
+        "total": 3
+      }
+    ],
+    "T004": [
+      {
+        "id": "RV-T004-000",
+        "title": "[履约引擎压测] 测试计划评审",
+        "type": "plan",
+        "way": "email",
+        "subtask": "sub-fulfill-perf",
+        "owner": 0,
+        "members": [
+          0,
+          1,
+          3
+        ],
+        "ownerObj": {
+          "name": "张小明",
+          "short": "张",
+          "color": "#0052d9"
+        },
+        "memberObjs": [
+          {
+            "name": "张小明",
+            "short": "张",
+            "color": "#0052d9"
+          },
+          {
+            "name": "李工程师",
+            "short": "李",
+            "color": "#2ba471"
+          },
+          {
+            "name": "赵架构师",
+            "short": "赵",
+            "color": "#e37318"
+          }
+        ],
+        "time": "2026-04-10 9:30",
+        "status": "pending",
+        "pass": 0,
+        "total": 3
+      },
+      {
+        "id": "RV-T004-001",
+        "title": "[履约系统断路测试] 测试设计评审",
+        "type": "design",
+        "way": "meeting",
+        "subtask": "sub-fulfill-break",
+        "owner": 1,
+        "members": [
+          1,
+          2,
+          4
+        ],
+        "ownerObj": {
+          "name": "李工程师",
+          "short": "李",
+          "color": "#2ba471"
+        },
+        "memberObjs": [
+          {
+            "name": "李工程师",
+            "short": "李",
+            "color": "#2ba471"
+          },
+          {
+            "name": "王测试",
+            "short": "王",
+            "color": "#7b3fe4"
+          },
+          {
+            "name": "孙小红",
+            "short": "孙",
+            "color": "#d64b8a"
+          }
+        ],
+        "time": "2026-04-11 10:30",
+        "status": "reviewing",
+        "pass": 1,
+        "total": 3
+      },
+      {
+        "id": "RV-T004-002",
+        "title": "[履约引擎压测] 测试总结评审",
+        "type": "summary",
+        "way": "email",
+        "subtask": "sub-fulfill-perf",
+        "owner": 2,
+        "members": [
+          2,
+          3,
+          5
+        ],
+        "ownerObj": {
+          "name": "王测试",
+          "short": "王",
+          "color": "#7b3fe4"
+        },
+        "memberObjs": [
+          {
+            "name": "王测试",
+            "short": "王",
+            "color": "#7b3fe4"
+          },
+          {
+            "name": "赵架构师",
+            "short": "赵",
+            "color": "#e37318"
+          },
+          {
+            "name": "周小刚",
+            "short": "周",
+            "color": "#1e9fff"
+          }
+        ],
+        "time": "2026-04-12 11:30",
+        "status": "passed",
+        "pass": 3,
+        "total": 3
+      }
+    ],
+    "T005": [
+      {
+        "id": "RV-T005-000",
+        "title": "[国际化网关测试] 测试计划评审",
+        "type": "plan",
+        "way": "email",
+        "subtask": "sub-i18n-gateway",
+        "owner": 0,
+        "members": [
+          0,
+          1,
+          3
+        ],
+        "ownerObj": {
+          "name": "张小明",
+          "short": "张",
+          "color": "#0052d9"
+        },
+        "memberObjs": [
+          {
+            "name": "张小明",
+            "short": "张",
+            "color": "#0052d9"
+          },
+          {
+            "name": "李工程师",
+            "short": "李",
+            "color": "#2ba471"
+          },
+          {
+            "name": "赵架构师",
+            "short": "赵",
+            "color": "#e37318"
+          }
+        ],
+        "time": "2026-04-10 9:30",
+        "status": "pending",
+        "pass": 0,
+        "total": 3
+      },
+      {
+        "id": "RV-T005-001",
+        "title": "[多语言模板渲染] 测试设计评审",
+        "type": "design",
+        "way": "meeting",
+        "subtask": "sub-i18n-template",
+        "owner": 1,
+        "members": [
+          1,
+          2,
+          4
+        ],
+        "ownerObj": {
+          "name": "李工程师",
+          "short": "李",
+          "color": "#2ba471"
+        },
+        "memberObjs": [
+          {
+            "name": "李工程师",
+            "short": "李",
+            "color": "#2ba471"
+          },
+          {
+            "name": "王测试",
+            "short": "王",
+            "color": "#7b3fe4"
+          },
+          {
+            "name": "孙小红",
+            "short": "孙",
+            "color": "#d64b8a"
+          }
+        ],
+        "time": "2026-04-11 10:30",
+        "status": "reviewing",
+        "pass": 1,
+        "total": 3
+      },
+      {
+        "id": "RV-T005-002",
+        "title": "[国际化网关测试] 测试总结评审",
+        "type": "summary",
+        "way": "email",
+        "subtask": "sub-i18n-gateway",
+        "owner": 2,
+        "members": [
+          2,
+          3,
+          5
+        ],
+        "ownerObj": {
+          "name": "王测试",
+          "short": "王",
+          "color": "#7b3fe4"
+        },
+        "memberObjs": [
+          {
+            "name": "王测试",
+            "short": "王",
+            "color": "#7b3fe4"
+          },
+          {
+            "name": "赵架构师",
+            "short": "赵",
+            "color": "#e37318"
+          },
+          {
+            "name": "周小刚",
+            "short": "周",
+            "color": "#1e9fff"
+          }
+        ],
+        "time": "2026-04-12 11:30",
+        "status": "passed",
+        "pass": 3,
+        "total": 3
+      },
+      {
+        "id": "RV-T005-003",
+        "title": "[多语言模板渲染] 测试计划评审",
+        "type": "plan",
+        "way": "meeting",
+        "subtask": "sub-i18n-template",
+        "owner": 3,
+        "members": [
+          3,
+          4,
+          0
+        ],
+        "ownerObj": {
+          "name": "赵架构师",
+          "short": "赵",
+          "color": "#e37318"
+        },
+        "memberObjs": [
+          {
+            "name": "赵架构师",
+            "short": "赵",
+            "color": "#e37318"
+          },
+          {
+            "name": "孙小红",
+            "short": "孙",
+            "color": "#d64b8a"
+          },
+          {
+            "name": "张小明",
+            "short": "张",
+            "color": "#0052d9"
+          }
+        ],
+        "time": "2026-04-13 12:30",
+        "status": "failed",
+        "pass": 0,
+        "total": 3
+      }
+    ],
+    "T006": [
+      {
+        "id": "RV-T006-000",
+        "title": "[MFA 多因素认证流程] 测试计划评审",
+        "type": "plan",
+        "way": "email",
+        "subtask": "sub-login-mfa",
+        "owner": 0,
+        "members": [
+          0,
+          1,
+          3
+        ],
+        "ownerObj": {
+          "name": "张小明",
+          "short": "张",
+          "color": "#0052d9"
+        },
+        "memberObjs": [
+          {
+            "name": "张小明",
+            "short": "张",
+            "color": "#0052d9"
+          },
+          {
+            "name": "李工程师",
+            "short": "李",
+            "color": "#2ba471"
+          },
+          {
+            "name": "赵架构师",
+            "short": "赵",
+            "color": "#e37318"
+          }
+        ],
+        "time": "2026-04-10 9:30",
+        "status": "pending",
+        "pass": 0,
+        "total": 3
+      },
+      {
+        "id": "RV-T006-001",
+        "title": "[登录风控拦截] 测试设计评审",
+        "type": "design",
+        "way": "meeting",
+        "subtask": "sub-login-risk",
+        "owner": 1,
+        "members": [
+          1,
+          2,
+          4
+        ],
+        "ownerObj": {
+          "name": "李工程师",
+          "short": "李",
+          "color": "#2ba471"
+        },
+        "memberObjs": [
+          {
+            "name": "李工程师",
+            "short": "李",
+            "color": "#2ba471"
+          },
+          {
+            "name": "王测试",
+            "short": "王",
+            "color": "#7b3fe4"
+          },
+          {
+            "name": "孙小红",
+            "short": "孙",
+            "color": "#d64b8a"
+          }
+        ],
+        "time": "2026-04-11 10:30",
+        "status": "reviewing",
+        "pass": 1,
+        "total": 3
+      }
+    ]
+  },
+  "STAGE_EXT": {
+    "T001": {}
+  }
+}

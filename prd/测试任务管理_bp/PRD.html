@@ -1,0 +1,1003 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<title>TMS 测试任务管理平台 PRD</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:-apple-system,BlinkMacSystemFont,"PingFang SC","Microsoft YaHei",sans-serif;background:#f8f9fb;color:#333;line-height:1.7}
+
+/* 顶部导航 */
+.doc-nav{position:fixed;top:0;left:0;right:0;height:52px;background:linear-gradient(135deg,#0052d9,#003cab);display:flex;align-items:center;padding:0 32px;z-index:1000;box-shadow:0 2px 12px rgba(0,82,217,.2)}
+.doc-nav .logo{color:#fff;font-size:16px;font-weight:700}
+.doc-nav .logo span{opacity:.65;font-weight:400;font-size:13px;margin-left:10px}
+
+/* 左侧目录 */
+.sidebar{position:fixed;top:52px;left:0;bottom:0;width:230px;background:#fff;border-right:1px solid #e5e9ef;overflow-y:auto;padding:16px 0;z-index:900}
+.sidebar::-webkit-scrollbar{width:3px}
+.sidebar::-webkit-scrollbar-thumb{background:#ddd;border-radius:2px}
+.sidebar .toc-title{font-size:10px;font-weight:600;color:#aaa;text-transform:uppercase;letter-spacing:1px;padding:0 16px;margin-bottom:10px}
+.sidebar a{display:block;padding:6px 16px;font-size:12.5px;color:#555;text-decoration:none;border-left:3px solid transparent;transition:all .15s}
+.sidebar a:hover{background:#f0f5ff;color:#0052d9}
+.sidebar a.indent{padding-left:30px;font-size:12px;color:#888}
+.sidebar .toc-divider{height:1px;background:#eee;margin:10px 16px}
+
+/* 主内容区 */
+.main{margin-left:230px;margin-top:52px;padding:28px 36px 80px;max-width:1120px}
+
+/* 文档头 */
+.doc-header{margin-bottom:36px;padding-bottom:20px;border-bottom:2px solid #e5e9ef}
+.doc-header h1{font-size:26px;font-weight:700;color:#000;margin-bottom:6px}
+.doc-header .meta{display:flex;gap:18px;flex-wrap:wrap;margin-top:8px}
+.doc-header .meta-item{font-size:12px;color:#888}
+.doc-header .meta-item strong{color:#333}
+.status-badge{display:inline-block;padding:2px 10px;background:#e8f3ff;color:#0052d9;font-size:11px;font-weight:500;border-radius:10px}
+
+/* 章节 */
+.section{margin-bottom:44px;scroll-margin-top:72px}
+.section h2{font-size:20px;font-weight:700;color:#000;margin-bottom:14px;padding-bottom:8px;border-bottom:1px solid #e5e9ef}
+.section h3{font-size:16px;font-weight:600;color:#1a1a1a;margin:22px 0 10px;scroll-margin-top:72px}
+.section h4{font-size:14px;font-weight:600;color:#333;margin:16px 0 6px}
+.section h5{font-size:13px;font-weight:600;color:#444;margin:10px 0 4px}
+.section p{margin-bottom:10px;font-size:13.5px;color:#444}
+.section ul,.section ol{padding-left:18px;margin-bottom:10px}
+.section li{font-size:13.5px;color:#444;margin-bottom:5px}
+
+/* 规格表 */
+.doc-table{width:100%;border-collapse:collapse;margin:10px 0 18px;font-size:12.5px}
+.doc-table th{background:#f5f7fa;padding:8px 12px;text-align:left;font-weight:600;color:#333;border:1px solid #e5e9ef;white-space:nowrap}
+.doc-table td{padding:8px 12px;border:1px solid #e5e9ef;color:#444;vertical-align:top}
+.doc-table tr:hover td{background:#fafbfc}
+
+.danger{color:#e34d59;font-weight:500}
+.warning{color:#e37318;font-weight:500}
+.success{color:#2ba471;font-weight:500}
+
+code{background:#f0f2f5;padding:1px 5px;border-radius:3px;font-size:12px;font-family:"SF Mono","Fira Code",monospace;color:#0052d9}
+
+/* 原型嵌入 */
+.proto-embed{margin:18px -36px 24px;border:1px solid #e5e9ef;border-radius:6px;overflow:hidden;background:#fff;box-shadow:0 2px 8px rgba(0,0,0,.04);width:calc(100% + 72px)}
+.proto-embed-header{background:#f5f7fa;padding:8px 14px;border-bottom:1px solid #e5e9ef;display:flex;align-items:center;justify-content:space-between}
+.proto-label{color:#555;font-size:12.5px;font-weight:500}
+.proto-open{color:#0052d9;font-size:12px;text-decoration:none}
+.proto-open:hover{text-decoration:underline}
+.proto-embed-body{position:relative;overflow:hidden}
+.proto-embed-body iframe{border:none;display:block;width:1400px;transform-origin:top left}
+
+/* 提示框 */
+.callout{padding:12px 16px;border-radius:6px;margin:10px 0 18px;font-size:12.5px;line-height:1.7}
+.callout-info{background:#f0f6ff;border-left:4px solid #0052d9;color:#333}
+.callout-warning{background:#fff8e0;border-left:4px solid #e37318;color:#6b4000}
+.callout-danger{background:#fef0f0;border-left:4px solid #e34d59;color:#6b1a1a}
+.callout-success{background:#e8f8f0;border-left:4px solid #2ba471;color:#1a5c3a}
+.callout strong{font-weight:600}
+
+/* 价值卡片 */
+.value-cards{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin:14px 0 20px}
+.value-card{background:#fff;border:1px solid #e5e9ef;border-radius:8px;padding:14px 18px}
+.value-card .vc-title{font-size:13px;font-weight:600;color:#000;margin-bottom:3px}
+.value-card .vc-desc{font-size:12.5px;color:#666}
+
+/* 分隔线 */
+.section-divider{height:1px;background:linear-gradient(to right,#e5e9ef,transparent);margin:44px 0}
+
+/* 标签 */
+.tag{display:inline-block;padding:2px 7px;font-size:11px;font-weight:500;border-radius:3px;margin-right:3px}
+.tag-blue{background:#e8f3ff;color:#0052d9}
+.tag-green{background:#e8f8f0;color:#2ba471}
+.tag-orange{background:#fff3e0;color:#e37318}
+.tag-red{background:#fef0f0;color:#e34d59}
+.tag-purple{background:#f3e8ff;color:#7b3fe4}
+.tag-gray{background:#f0f2f5;color:#666}
+
+/* 菜单树 */
+.menu-tree{background:#1e1e2e;color:#a6e3a1;padding:14px 18px;border-radius:8px;font-family:"SF Mono","Fira Code",monospace;font-size:12.5px;line-height:1.8;margin:10px 0 18px;white-space:pre;overflow-x:auto}
+.menu-tree .hl{color:#f9e2af;font-weight:600}
+.menu-tree .arr{color:#89b4fa}
+
+/* 流程图 */
+.flow-diagram{background:#fff;border:1px solid #e5e9ef;border-radius:8px;padding:20px;margin:14px 0 20px;text-align:center}
+.flow-steps{display:flex;align-items:center;justify-content:center;gap:0;flex-wrap:wrap}
+.flow-step{background:#f0f6ff;border:1px solid #bbd4ff;border-radius:8px;padding:10px 16px;font-size:12.5px;color:#003cab;font-weight:500;min-width:110px}
+.flow-step.success-step{background:#e8f8f0;border-color:#b5e3cc;color:#1a5c38}
+.flow-step.warning-step{background:#fff8e0;border-color:#ffe4a3;color:#6b4000}
+.flow-step.danger-step{background:#fef0f0;border-color:#f5b8bc;color:#a8171f}
+.flow-arrow{font-size:18px;color:#bbb;padding:0 8px}
+
+/* 阶段时间线 */
+.phase-timeline{display:flex;gap:0;margin:14px 0 20px}
+.phase-item{flex:1;position:relative;padding:14px 16px 14px 20px;background:#fff;border:1px solid #e5e9ef}
+.phase-item:first-child{border-radius:8px 0 0 8px}
+.phase-item:last-child{border-radius:0 8px 8px 0}
+.phase-item .phase-num{font-size:10px;font-weight:700;color:#0052d9;margin-bottom:4px}
+.phase-item .phase-title{font-size:13px;font-weight:600;color:#000;margin-bottom:4px}
+.phase-item .phase-duration{font-size:11px;color:#888;margin-bottom:6px}
+.phase-item .phase-desc{font-size:11.5px;color:#666;line-height:1.5}
+.phase-item.active{background:#f0f6ff;border-color:#bad4ff}
+
+/* 字段卡网格 */
+.field-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin:10px 0 16px}
+.field-card{background:#fff;border:1px solid #e5e9ef;border-radius:6px;padding:10px 12px;font-size:12.5px}
+.field-card .fc-name{font-weight:600;color:#1a1a1a;margin-bottom:3px}
+.field-card .fc-type{color:#0052d9;font-size:11px;font-family:"SF Mono",monospace}
+.field-card .fc-desc{color:#666;margin-top:3px;font-size:12px}
+
+@media(max-width:900px){.sidebar{display:none}.main{margin-left:0;padding:20px 16px 60px}.proto-embed{margin:18px -16px 24px;width:calc(100% + 32px)}}
+</style>
+</head>
+<body>
+
+<div class="doc-nav">
+  <div class="logo">TMS — 测试任务管理平台 PRD <span>v2.0 · 2026-04-25</span></div>
+</div>
+
+<div class="sidebar">
+  <div class="toc-title">目录</div>
+  <a href="#sec-overview">1. 需求概述</a>
+  <a href="#sec-bg" class="indent">1.1 需求背景</a>
+  <a href="#sec-goal" class="indent">1.2 目标与价值</a>
+  <a href="#sec-scope" class="indent">1.3 功能范围与菜单结构</a>
+  <a href="#sec-roles" class="indent">1.4 角色与权限</a>
+  <div class="toc-divider"></div>
+  <a href="#sec-content">2. 需求内容</a>
+  <a href="#sec-global" class="indent">2.1 全局框架与上下文</a>
+  <a href="#sec-workbench" class="indent">2.2 工作台（含原型）</a>
+  <a href="#sec-task" class="indent">2.3 测试任务（含原型）</a>
+  <a href="#sec-design" class="indent">2.4 设计管理（含原型）</a>
+  <a href="#sec-exec" class="indent">2.5 执行管理（含原型）</a>
+  <a href="#sec-bug" class="indent">2.6 缺陷管理（含原型）</a>
+  <a href="#sec-report" class="indent">2.7 测试报告（含原型）</a>
+  <a href="#sec-review" class="indent">2.8 评审管理（含原型）</a>
+  <div class="toc-divider"></div>
+  <a href="#sec-nfr">3. 非功能需求</a>
+  <a href="#sec-appendix">4. 附录</a>
+  <a href="#sec-roadmap" class="indent">4.1 实施路线图</a>
+  <a href="#sec-risk" class="indent">4.2 风险与应对</a>
+  <a href="#sec-metric" class="indent">4.3 成功指标</a>
+  <a href="#sec-glossary" class="indent">4.4 术语表</a>
+  <a href="#sec-track" class="indent">4.5 埋点建议</a>
+</div>
+
+<div class="main">
+  <div class="doc-header">
+    <h1>TMS 测试任务管理平台 产品需求文档</h1>
+    <div class="meta">
+      <div class="meta-item"><strong>版本</strong> v2.0</div>
+      <div class="meta-item"><strong>日期</strong> 2026-04-25</div>
+      <div class="meta-item"><strong>作者</strong> 产品组</div>
+      <div class="meta-item"><strong>状态</strong> <span class="status-badge">评审稿</span></div>
+    </div>
+  </div>
+
+  <!-- ===================== 第 1 章 需求概述 ===================== -->
+  <div class="section" id="sec-overview">
+    <h2>1. 需求概述</h2>
+
+    <h3 id="sec-bg">1.1 需求背景</h3>
+    <p>随着业务版本迭代加速，测试团队面临多任务并行、跨角色协同、信息分散等问题：</p>
+    <ul>
+      <li><strong>任务散落</strong>：案例、执行记录、缺陷、评审分散在 Excel、禅道、飞书文档等多个系统中，无法形成闭环视图。</li>
+      <li><strong>切换成本高</strong>：测试工程师通常同时参与 3~5 个并行任务，系统缺少统一的"任务上下文"入口，每次切换都需要多次跳转。</li>
+      <li><strong>进度不透明</strong>：管理者难以快速掌握各任务的设计 / 执行 / 评审进度，无法及时识别风险。</li>
+      <li><strong>协作低效</strong>：评审、审批、缺陷指派等流程依赖线下沟通，缺少统一待办入口。</li>
+      <li><strong>报告手工化</strong>：测试报告多由测试负责人手动撰写 Word/PPT，指标口径不统一，归档与追溯困难。</li>
+    </ul>
+    <p>本次需求构建统一的测试任务管理平台（TMS），将测试生命周期内的所有工作聚合到"一个任务 + 一个上下文"下，提升测试团队的协同效率与过程透明度。</p>
+
+    <h3 id="sec-goal">1.2 目标与价值</h3>
+    <p><strong>核心思路：</strong>以"测试任务"为核心对象，以"测试子任务 / 测试阶段 / 测试轮次"为全局测试范围上下文，一站式串联<strong>设计、执行、缺陷、报告、评审</strong>五大环节。</p>
+    <div class="value-cards">
+      <div class="value-card">
+        <div class="vc-title">一个上下文，全页贯通</div>
+        <div class="vc-desc">左上任务切换器 + 顶部"测试子任务 / 阶段 / 轮次"下拉；切换一次，设计 / 执行 / 缺陷 / 报告 / 评审五个菜单同步生效。</div>
+      </div>
+      <div class="value-card">
+        <div class="vc-title">一个工作台，三秒进入状态</div>
+        <div class="vc-desc">首页卡片化展示"我的任务 + 我的待办 + 团队动态 + 公告"，统计卡与下方面板双向联动。</div>
+      </div>
+      <div class="value-card">
+        <div class="vc-title">全链路闭环</div>
+        <div class="vc-desc">设计 → 执行 → 缺陷 → 报告 → 评审 模块数据打通；执行失败一键提 Bug，报告一键发起评审，评审结果回写任务状态。</div>
+      </div>
+      <div class="value-card">
+        <div class="vc-title">过程可度量</div>
+        <div class="vc-desc">任务进度、案例覆盖、缺陷分布、通过率、评审通过率等关键指标实时可视。</div>
+      </div>
+    </div>
+
+    <h3 id="sec-scope">1.3 功能范围与菜单结构</h3>
+    <p>平台采用"顶栏 + 左侧菜单 + 主内容区"三段式经典布局，共 <strong>7 个一级菜单</strong>。顶栏左上角是全局任务切换器（与菜单同宽），右侧放置"测试子任务 / 测试阶段 / 测试轮次"等测试范围下拉。</p>
+
+    <div class="menu-tree">TMS 测试任务管理平台
+├── <span class="hl">[顶栏左侧]</span> 任务切换器（宽 200px，与菜单同宽；tooltip 显示完整任务名）
+├── <span class="hl">[顶栏中部]</span> 页面标题（工作台 / 测试任务 / 设计管理 / 执行管理 / 缺陷管理 / 测试报告 / 评审管理）
+├── <span class="hl">[顶栏右侧]</span> 全局测试范围切换（测试子任务 · 测试阶段 · 测试轮次）
+│
+├── ◈ 工作台           <span class="arr">// 默认首页：卡片聚合任务 + 待办</span>
+├── ◎ 测试任务         <span class="arr">// 任务列表（表格 + 统计 + 搜索）</span>
+├── ◇ 设计管理         <span class="arr">// 案例管理（表格）+ 测试大纲（XMind）</span>
+├── ▷ 执行管理         <span class="arr">// 执行概览 + 案例执行列表</span>
+├── ◆ 缺陷管理         <span class="arr">// 缺陷概览 + 缺陷列表（表格 + 搜索）</span>
+├── ◫ 测试报告         <span class="arr">// 阶段 / 子任务 / 任务总报告 + 指标可视化</span>
+└── ◐ 评审管理         <span class="arr">// 评审概览 + 评审列表（表格 + 搜索）</span></div>
+
+    <table class="doc-table">
+      <thead><tr><th style="width:110px">菜单</th><th>核心定位</th><th>主要页面 / 区块</th></tr></thead>
+      <tbody>
+        <tr><td>工作台</td><td>个人聚合首页（跨任务）</td><td>数据总览（可点击联动）、我的测试任务（2×4 网格+更多）、快捷入口（6 项）、我的待办（分类 Tab）、团队动态、公告</td></tr>
+        <tr><td>测试任务</td><td>任务生命周期管理</td><td>状态统计条、筛选区、任务表格（任务编号 / 名称 / 状态 / ST 双列 / UAT 双列 / 截止日期 / 操作）</td></tr>
+        <tr><td>设计管理</td><td>案例设计与复用</td><td>子任务+阶段联动、案例管理（表格 + 搜索）、测试大纲（XMind）</td></tr>
+        <tr><td>执行管理</td><td>测试执行过程管理</td><td>子任务+阶段+轮次联动、执行概览 6 卡、进度条、案例执行列表</td></tr>
+        <tr><td>缺陷管理</td><td>缺陷全生命周期</td><td>子任务+阶段联动、缺陷概览 6 卡、缺陷列表（表格 + 搜索）</td></tr>
+        <tr><td>测试报告</td><td>测试结果交付与归档</td><td>报告头信息、核心 KPI、用例分布环形图、缺陷多维度分布、阶段通过率、团队负荷、风险遗留、结论与签署</td></tr>
+        <tr><td>评审管理</td><td>评审与审批</td><td>子任务联动、评审概览 6 卡、评审列表（类型 / 方式 / 状态 / 结果）</td></tr>
+      </tbody>
+    </table>
+
+    <h3 id="sec-roles">1.4 角色与权限</h3>
+    <table class="doc-table">
+      <thead><tr><th>角色</th><th>主要使用场景</th><th>关键权限</th></tr></thead>
+      <tbody>
+        <tr><td>测试工程师</td><td>案例设计、执行、缺陷提报</td><td>参与任务的设计 / 执行 / 评审 / 提 Bug</td></tr>
+        <tr><td>ST 负责人 / UAT 负责人</td><td>承担系统测试 / 用户验收两个阶段的执行</td><td>任务 ST / UAT 负责人在任务列表单独列出，状态独立流转</td></tr>
+        <tr><td>测试负责人</td><td>任务创建、进度跟踪、发起评审、生成报告</td><td>创建任务、指派人员、归档、发起 / 主持评审、生成并签署测试报告</td></tr>
+        <tr><td>开发工程师</td><td>处理缺陷</td><td>查看被指派的缺陷、修复与回归确认；报告签署区进行开发负责人签署</td></tr>
+        <tr><td>产品经理</td><td>需求与报告确认</td><td>参与评审、报告签署区进行产品负责人签署</td></tr>
+        <tr><td>测试经理</td><td>宏观进度与风险把控</td><td>所有任务只读 + 统计报表 + 审批 + 归档报告</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="section-divider"></div>
+
+  <!-- ===================== 第 2 章 需求内容 ===================== -->
+  <div class="section" id="sec-content">
+    <h2>2. 需求内容</h2>
+
+    <!-- 2.1 全局框架 -->
+    <h3 id="sec-global">2.1 全局框架与上下文</h3>
+    <p>平台的所有业务页面共用统一的顶栏与左侧菜单。顶栏承担两类核心上下文入口：<strong>当前测试任务</strong> 与 <strong>当前测试范围</strong>（子任务 / 阶段 / 轮次）。</p>
+
+    <h4>2.1.1 顶栏区域结构</h4>
+    <table class="doc-table">
+      <thead><tr><th style="width:160px">区域</th><th style="width:110px">尺寸</th><th>说明</th></tr></thead>
+      <tbody>
+        <tr><td>左侧：任务切换器</td><td>宽 200px · 高 52px</td><td>与左侧菜单同宽；显示当前任务名称（不再显示 LOGO 与产品名）；悬浮在右侧浮出 tooltip 完整展示任务名。点击展开下拉：搜索框 + 最近访问（TOP5）+ 我参与的 + 新建任务（置底）。</td></tr>
+        <tr><td>中部：页面标题</td><td>—</td><td>显示当前菜单名，左侧细竖分隔线，不展示面包屑。</td></tr>
+        <tr><td>右侧：测试范围下拉</td><td>自适应</td><td>设计 / 缺陷 显示"测试子任务 + 测试阶段"；执行 额外显示"测试轮次"；报告 显示"测试子任务 + 测试阶段（仅阶段报告模式启用）"；评审 仅显示"测试子任务"。字段前红色星标表示必选。</td></tr>
+        <tr><td>右上角</td><td>—</td><td><span class="danger">不显示</span>消息、搜索、帮助、用户等图标。</td></tr>
+      </tbody>
+    </table>
+
+    <h4>2.1.2 左侧菜单</h4>
+    <ul>
+      <li>宽 200px，深色背景（<code>#1e2736</code>），<strong>7 个菜单项</strong>：工作台 / 测试任务 / 设计管理 / 执行管理 / 缺陷管理 / 测试报告 / 评审管理。</li>
+      <li><strong>菜单项不显示待办数角标</strong>，也不显示分组标题，保持极简。</li>
+      <li>菜单激活态：背景加深 + 左侧 3px 蓝色竖条（<code>#0052d9</code>）。</li>
+      <li>图标采用 Unicode 几何符号（<code>◈ ◎ ◇ ▷ ◆ ◫ ◐</code>），保证跨平台一致。</li>
+    </ul>
+
+    <h4>2.1.3 全局任务切换（TMSGlobal）</h4>
+    <ul>
+      <li>全局对外 API：<code>TMSGlobal.mount / getCurrentId / setCurrent / upsertTask / onChange</code>。</li>
+      <li>任务池以 <code>localStorage</code> 保存，支持跨 Tab 同步；切换任务后所有已挂载页面通过 <code>onChange</code> 统一刷新。</li>
+      <li>切换成功后在页面顶部弹出 Toast："已切换到 XXX"（1.8s 自动消失）。</li>
+      <li>工作台任务卡片点击可触发 <code>setCurrent</code>；任务列表"任务编号"列点击也可触发切换，当前任务行左侧有蓝色竖条 + "● 当前"徽标。</li>
+      <li>下拉面板分组：<strong>最近访问</strong>（TOP5）/ <strong>我参与的</strong>（全部）/ <strong>搜索结果</strong> / <strong>＋ 新建任务</strong>（置底）。</li>
+    </ul>
+
+    <h4>2.1.4 全局测试范围切换（TMSScope）</h4>
+    <ul>
+      <li>范围维度：<strong>测试子任务 · 测试阶段（冒烟 / 系统测试 ST / 回归 / 用户验收 UAT）· 测试轮次</strong>。</li>
+      <li>通过 <code>localStorage</code> 以<strong>可见名称</strong>持久化，跨页 / 跨 Tab 共享。</li>
+      <li>各页面下拉通过 <code>TMSScope.pickMatch</code> 按名称匹配（忽略大小写 / 空格），匹配不到时回落到该页默认值并回写全局。</li>
+      <li><strong>切换主任务时</strong>：子任务 / 阶段 / 轮次自动清空，由各页按其任务的默认子任务重建下拉。</li>
+      <li><strong>评审管理</strong>选择"全部子任务"时<strong>不回写</strong>全局，避免覆盖其他页面的精确选择。</li>
+    </ul>
+
+    <div class="callout callout-info">
+      <strong>设计要点：</strong>任务切换器是"主上下文中枢"，测试子任务 / 阶段 / 轮次是"细粒度上下文"。两者分别解决"换任务"与"换测试范围"的问题，在任意菜单页都保持联动。<strong>工作台除外</strong>（展示跨任务的个人聚合视图）。
+    </div>
+
+    <!-- ============ 2.2 工作台 ============ -->
+    <h3 id="sec-workbench">2.2 工作台</h3>
+    <p>工作台是登录后的默认落地页，定位为"个人聚合视图"，<strong>跨任务展示</strong>当前用户关联的所有信息。顶部仅展示副标题"欢迎回来，XXX · 今天是 YYYY 年 M 月 D 日 周 X"。</p>
+
+    <h4>2.2.1 页面结构</h4>
+    <div class="menu-tree">工作台
+├─ 副标题（欢迎语 + 日期）
+├─ <span class="hl">数据总览（4 张统计卡，可点击联动）</span>
+├─ 左右主栏（grid: 1fr 380px）
+│   ├─ 左列
+│   │   ├─ 我的测试任务（2 行 × 4 列 + 更多）
+│   │   ├─ 快捷入口（6 项）
+│   │   └─ 团队动态（时间线）
+│   └─ 右列
+│       ├─ 我的待办（全部 / 逾期 / 今日 Tab）
+│       └─ 公告 & 消息</div>
+
+    <h4>2.2.2 数据总览（4 张可点击统计卡）</h4>
+    <table class="doc-table">
+      <thead><tr><th>卡片</th><th>指标口径</th><th>点击联动</th><th style="width:70px">配色</th></tr></thead>
+      <tbody>
+        <tr><td>进行中任务</td><td>当前用户参与、状态 ∈ {设计中 / 执行中 / 评审中} 的任务数</td><td>滚动并高亮"我的测试任务"面板，自动切到"执行中" Tab</td><td><span class="tag tag-blue">蓝</span></td></tr>
+        <tr><td>待办事项</td><td>"我的待办"全部未完成项总数</td><td>滚动并高亮"我的待办"面板，切到"全部" Tab</td><td><span class="tag tag-orange">橙</span></td></tr>
+        <tr><td>待处理缺陷</td><td>指派给我 &amp; 状态 ∈ {待处理 / 重开}</td><td>跳转缺陷管理，预置"处理人=我 + 状态=待处理/重开"</td><td><span class="tag tag-red">红</span></td></tr>
+        <tr><td>本月已完成</td><td>本月完成执行的案例数 + 关闭的缺陷数</td><td>跳转团队动态，按"我的 + 本月"筛选</td><td><span class="tag tag-green">绿</span></td></tr>
+      </tbody>
+    </table>
+    <ul>
+      <li>主数值 26px · 600 字重；悬浮变 <code>#0052d9</code>。</li>
+      <li>副文案格式："较上周 ↑12%" / "其中致命+严重 5"。</li>
+      <li>悬浮：左侧浮出 3px 竖条（对应卡片色系），边框变蓝，阴影 <code>0 2px 8px rgba(0,82,217,.08)</code>。</li>
+      <li>点击：下方对应面板闪烁一次高亮边框（<code>panelFlash</code> 1.2s 动画）。</li>
+    </ul>
+
+    <h4>2.2.3 我的测试任务（2 行 × 4 列 + 更多）</h4>
+    <ul>
+      <li><strong>布局</strong>：4 列固定，默认显示 2 行最多 8 张卡；超过 8 条时显示「<strong>更多 (剩余 N)</strong>」按钮，点击一次展开下一批 8 条（4×2），逐批懒加载，<strong>无上限</strong>。</li>
+      <li><strong>Tab 筛选</strong>：全部 / 设计中 / 执行中 / 评审中 / 已完成；每 Tab 带数量角标。</li>
+      <li><strong>空态</strong>："暂无任务，点击左上角切换或 + 新建"。</li>
+    </ul>
+    <table class="doc-table">
+      <thead><tr><th style="width:110px">字段</th><th>展示样式</th><th>说明</th></tr></thead>
+      <tbody>
+        <tr><td>任务名称</td><td>13.5px · 600 字重，<strong>单行省略 + Tooltip</strong></td><td>点击卡片：切换为当前任务（<code>TMSGlobal.setCurrent</code>），所有菜单页上下文同步；当前任务卡左侧 3px 蓝条 + 右上角"● 当前任务"徽标。</td></tr>
+        <tr><td>子任务总数</td><td>12px 灰色副文案</td><td>"共 N 个子任务"，取当前任务的子任务配置计数。</td></tr>
+      </tbody>
+    </table>
+    <div class="callout callout-info">卡片不展示进度条、ST/UAT 状态徽标等详细信息，保持极简；详细信息在"测试任务"菜单展开。</div>
+
+    <h4>2.2.4 快捷入口（6 项）</h4>
+    <table class="doc-table">
+      <thead><tr><th style="width:50px">图标</th><th style="width:110px">名称</th><th>目标</th><th>用途</th></tr></thead>
+      <tbody>
+        <tr><td><code>+</code></td><td>新建任务</td><td>proto-task-list.html（打开新建弹窗）</td><td>高频创建</td></tr>
+        <tr><td><code>✎</code></td><td>设计案例</td><td>proto-design.html</td><td>高频创建</td></tr>
+        <tr><td><code>▷</code></td><td>执行测试</td><td>proto-execution.html</td><td>核心流转</td></tr>
+        <tr><td><code>◐</code></td><td>发起评审</td><td>proto-review.html（打开发起弹窗）</td><td>核心流转</td></tr>
+        <tr><td><code>◆</code></td><td>缺陷管理</td><td>proto-defect.html</td><td>核心流转</td></tr>
+        <tr><td><code>▤</code></td><td>测试报告</td><td>proto-report.html</td><td>核心流转</td></tr>
+      </tbody>
+    </table>
+    <ul>
+      <li>3×2 网格；每项 <code>padding:14px 8px</code>；悬浮背景变 <code>#f0f6ff</code>、图标反白。</li>
+      <li>所有入口默认携带当前任务上下文；未选择任务时入口跳转后提示"请先选择测试任务"。</li>
+    </ul>
+
+    <h4>2.2.5 我的待办（分类 Tab + 默认 10 条 + 更多）</h4>
+    <p><strong>Tab</strong>：全部 / 逾期 / 今日；每 Tab 带计数。</p>
+    <table class="doc-table">
+      <thead><tr><th style="width:60px">类型</th><th style="width:110px">图标底色</th><th>来源</th><th>处理跳转</th></tr></thead>
+      <tbody>
+        <tr><td>缺陷</td><td><span class="tag tag-red">红</span></td><td>指派给我 &amp; 状态 ∈ {待处理,重开}</td><td>缺陷管理详情页</td></tr>
+        <tr><td>评审</td><td><span class="tag tag-purple">紫</span></td><td>作为参与人 &amp; 评审 ∈ {待评审,评审中}</td><td>评审管理详情页</td></tr>
+        <tr><td>审批</td><td><span class="tag tag-orange">橙</span></td><td>任务变更 / 案例评审等待审批</td><td>审批弹层</td></tr>
+        <tr><td>执行</td><td><span class="tag tag-blue">蓝</span></td><td>案例执行状态=待执行 &amp; 执行人=我</td><td>执行管理对应轮次</td></tr>
+      </tbody>
+    </table>
+    <ul>
+      <li>列表项一行：类型图标 + 标题（单行省略） + 副信息（<code>来源任务名 · 子任务 · 截止时间</code>） + 右侧"处理/评审/审批/执行"按钮。</li>
+      <li>左 3px 竖条表示优先级：红（高）/ 橙（中）/ 灰（低）。</li>
+      <li><strong>排序</strong>：已逾期 > 今日到期 > 本周到期 > 其他；同级按创建时间倒序。</li>
+      <li><strong>默认 10 条 + 更多</strong>：超过 10 条在底部显示「更多 (剩余 N)」，每次追加 10 条。</li>
+      <li><strong>跳转携带上下文</strong>：待办 → 读取来源任务 ID → <code>TMSGlobal.setCurrent</code> → 跳对应菜单 → 读取子任务/阶段/轮次 → <code>TMSScope.set</code> → 定位到具体记录。若任务已归档/不可访问，Toast 提示并阻止跳转。</li>
+    </ul>
+
+    <h4>2.2.6 团队动态 / 公告</h4>
+    <ul>
+      <li>团队动态：时间线样式，含头像 + 姓名 + 动作 + 对象 + 时间；动作类型含：提交案例 / 关闭缺陷 / 完成执行 / 创建任务 / 发起评审 / 归档报告；默认 10 条。</li>
+      <li>公告：每条含 tag：<span class="tag tag-red">置顶</span> / <span class="tag tag-blue">系统</span> / <span class="tag tag-green">规范</span>；默认 5 条，置顶项固定在顶部。</li>
+    </ul>
+
+    <div class="proto-embed">
+      <div class="proto-embed-header"><span class="proto-label">🎨 原型 — 工作台</span><a class="proto-open" href="proto-workbench.html" target="_blank">新窗口打开 ↗</a></div>
+      <div class="proto-embed-body" style="height:700px"><iframe src="proto-workbench.html" style="height:1400px;transform:scale(.5)"></iframe></div>
+    </div>
+
+    <!-- ============ 2.3 测试任务 ============ -->
+    <h3 id="sec-task">2.3 测试任务</h3>
+    <p>测试任务菜单提供任务的生命周期管理。主视图为"表格"，支持搜索、筛选、排序、分页。</p>
+
+    <h4>2.3.1 页面结构</h4>
+    <table class="doc-table">
+      <thead><tr><th style="width:120px">区域</th><th>内容</th></tr></thead>
+      <tbody>
+        <tr><td>顶部操作栏</td><td>导出 / 模板管理 / + 新建测试任务</td></tr>
+        <tr><td>状态统计条</td><td>5 个统计块：全部任务 / 设计中 / 执行中 / 评审中 / 已完成，点击可联动筛选</td></tr>
+        <tr><td>筛选区</td><td>关键字（任务编号 / 名称 / 负责人）、任务状态、ST 状态、UAT 状态、负责人范围（我负责 / 我参与）、查询 / 重置</td></tr>
+        <tr><td>任务表格</td><td>全选、任务编号（可点击切换任务）、任务名称、任务状态、ST 负责人、ST 状态、UAT 负责人、UAT 状态、截止日期（可排序）、操作</td></tr>
+        <tr><td>表格操作</td><td>批量归档、字段设置；行内：查看 / 编辑 / 评审 / 归档 / ⋯</td></tr>
+        <tr><td>分页</td><td>共 N 条 + 页码 + 页大小（10/20/50）+ 跳至第 X 页</td></tr>
+      </tbody>
+    </table>
+    <div class="callout callout-info"><strong>进行中任务数</strong>口径：状态 ∈ {设计中 / 执行中 / 评审中}；数字实时随筛选变化；点击统计块等价于在筛选区设置对应状态。</div>
+
+    <h4>2.3.2 任务与环境状态字典</h4>
+    <table class="doc-table">
+      <thead><tr><th>维度</th><th>取值</th></tr></thead>
+      <tbody>
+        <tr><td>任务状态</td><td><span class="tag tag-gray">草稿</span><span class="tag tag-blue">设计中</span><span class="tag tag-orange">执行中</span><span class="tag tag-purple">评审中</span><span class="tag tag-green">已完成</span></td></tr>
+        <tr><td>ST 状态</td><td><span class="tag tag-gray">未开始</span><span class="tag tag-blue">进行中</span><span class="tag tag-orange">阻塞</span><span class="tag tag-green">已通过</span><span class="tag tag-red">未通过</span></td></tr>
+        <tr><td>UAT 状态</td><td><span class="tag tag-gray">未开始</span><span class="tag tag-blue">进行中</span><span class="tag tag-orange">阻塞</span><span class="tag tag-green">已通过</span><span class="tag tag-red">未通过</span><span class="tag tag-gray">跳过</span></td></tr>
+      </tbody>
+    </table>
+
+    <h4>2.3.3 任务状态流转</h4>
+    <div class="flow-diagram">
+      <div class="flow-steps">
+        <div class="flow-step">草稿</div><span class="flow-arrow">→</span>
+        <div class="flow-step">设计中</div><span class="flow-arrow">→</span>
+        <div class="flow-step warning-step">执行中</div><span class="flow-arrow">→</span>
+        <div class="flow-step">评审中</div><span class="flow-arrow">→</span>
+        <div class="flow-step success-step">已完成</div><span class="flow-arrow">→</span>
+        <div class="flow-step">已归档（30天后）</div>
+      </div>
+    </div>
+
+    <h4>2.3.4 表格列详细规格</h4>
+    <table class="doc-table">
+      <thead><tr><th>列</th><th style="width:70px">宽度</th><th>说明</th></tr></thead>
+      <tbody>
+        <tr><td>全选</td><td>40</td><td>全选当前页；批量操作启用</td></tr>
+        <tr><td>任务编号</td><td>120</td><td>可点击链接 = 切换当前任务；当前任务行左侧 3px 蓝条 + "● 当前"徽标</td></tr>
+        <tr><td>任务名称</td><td>自适应</td><td>关键字搜索命中时黄色 <code>&lt;mark&gt;</code>；单行省略 + Tooltip</td></tr>
+        <tr><td>任务状态</td><td>90</td><td>5 色字典</td></tr>
+        <tr><td>ST 负责人</td><td>110</td><td>头像 + 姓名，悬浮显示完整姓名 + 工号</td></tr>
+        <tr><td>ST 状态</td><td>90</td><td>5 色字典</td></tr>
+        <tr><td>UAT 负责人</td><td>110</td><td>同 ST 负责人</td></tr>
+        <tr><td>UAT 状态</td><td>90</td><td>6 色字典（含跳过）</td></tr>
+        <tr><td>截止日期</td><td>110</td><td>可升/降序切换；空值排末尾；逾期显示红色</td></tr>
+        <tr><td>操作</td><td>200</td><td>查看 / 编辑 / 评审 / 归档 / ⋯（更多：复制、模板另存、删除）</td></tr>
+      </tbody>
+    </table>
+
+    <h4>2.3.5 搜索与高亮</h4>
+    <ul>
+      <li>关键字 200ms 防抖触发搜索；命中关键字在表格中用黄色 <code>&lt;mark&gt;</code> 高亮。</li>
+      <li>"截止日期"列支持升序 / 降序切换，空值排末尾。</li>
+      <li>重置按钮：清空所有筛选条件并回到第 1 页，同时清除关键字高亮。</li>
+    </ul>
+
+    <h4>2.3.6 新建任务表单</h4>
+    <ul>
+      <li><strong>必填</strong>：任务编号（系统自动生成，可改）、任务名称、所属业务线、测试负责人、ST 负责人、UAT 负责人、截止日期、子任务配置（≥1）。</li>
+      <li><strong>子任务配置</strong>：子任务名称 + 涉及阶段多选（冒烟 / ST / 回归 / UAT）+ 子任务负责人。</li>
+      <li><strong>模板</strong>：右上角"模板管理"可保存常用任务模板，新建时从模板一键带出。</li>
+    </ul>
+
+    <div class="proto-embed">
+      <div class="proto-embed-header"><span class="proto-label">🎨 原型 — 测试任务</span><a class="proto-open" href="proto-task-list.html" target="_blank">新窗口打开 ↗</a></div>
+      <div class="proto-embed-body" style="height:700px"><iframe src="proto-task-list.html" style="height:1400px;transform:scale(.5)"></iframe></div>
+    </div>
+
+    <!-- ============ 2.4 设计管理 ============ -->
+    <h3 id="sec-design">2.4 设计管理</h3>
+    <p>基于"当前任务 + 当前子任务 + 当前阶段"三级上下文的案例设计工作区。主视图提供两个 Tab：<strong>案例管理</strong>（表格）和 <strong>测试大纲</strong>（XMind 思维导图）。</p>
+
+    <h4>2.4.1 顶栏范围筛选</h4>
+    <ul>
+      <li><strong>测试子任务</strong>（必选）：由当前任务的"子任务配置"决定。</li>
+      <li><strong>测试阶段</strong>（必选）：由所选子任务的阶段配置决定。支持冒烟 / 系统测试（ST）/ 回归 / 用户验收（UAT）中的子集。</li>
+      <li>范围切换后：案例管理的表格与测试大纲节点数量都实时刷新，<code>.scope-bar</code> 展示"当前范围共 X 个案例，Y 个大纲节点"。</li>
+    </ul>
+
+    <h4>2.4.2 Tab ① 案例管理</h4>
+    <table class="doc-table">
+      <thead><tr><th style="width:120px">区域</th><th>内容</th></tr></thead>
+      <tbody>
+        <tr><td>工具栏</td><td>搜索框（编号 / 名称 / 负责人）、优先级（高 / 中 / 低）、类型（功能 / 接口 / 性能 / 兼容 / 安全）、状态（草稿 / 评审中 / 已通过 / 已废弃）、重置</td></tr>
+        <tr><td>右上操作</td><td>导入 / 导出 / + 新建案例</td></tr>
+        <tr><td>表头</td><td>全选、<strong>编号</strong>、<strong>名称</strong>（含路径：子任务 / 阶段）、优先级、类型、状态、设计人、更新时间、操作</td></tr>
+        <tr><td>分页</td><td>10 / 20 / 50 条每页</td></tr>
+      </tbody>
+    </table>
+    <ul>
+      <li><strong>字段口径</strong>：表头使用"编号 / 名称"而非"案例编号 / 案例名称"。</li>
+      <li><strong>优先级</strong>：高（<span class="danger">红</span>）· 中（<span class="warning">橙</span>）· 低（灰）。</li>
+      <li><strong>操作列</strong>：查看 / 编辑 / 评审 / 克隆 / 删除。</li>
+      <li><strong>批量</strong>：批量发起评审 / 批量指派设计人 / 批量删除。</li>
+    </ul>
+
+    <h4>2.4.3 Tab ② 测试大纲（XMind）</h4>
+    <ul>
+      <li>根节点"子任务 + 阶段"开始，向右展开"一级：测试模块"、"二级：测试案例"。</li>
+      <li>工具条：全部展开 / 全部折叠 / + 新建节点 / 导出 XMind。</li>
+      <li>节点悬浮显示编号与状态；案例节点左侧带优先级彩标。</li>
+      <li>同一范围内的案例自动按案例名第一段（以"-"分隔）聚合成模块。</li>
+      <li>节点右键菜单：新增子节点 / 编辑 / 转为案例 / 删除。</li>
+    </ul>
+
+    <h4>2.4.4 案例 → 评审 联动</h4>
+    <ul>
+      <li>案例"草稿" → 发起评审 → 变"评审中"；</li>
+      <li>评审通过 → 变"已通过"，可以进入执行管理；</li>
+      <li>评审未通过 → 回"草稿"，附上评审意见。</li>
+    </ul>
+
+    <div class="proto-embed">
+      <div class="proto-embed-header"><span class="proto-label">🎨 原型 — 设计管理</span><a class="proto-open" href="proto-design.html" target="_blank">新窗口打开 ↗</a></div>
+      <div class="proto-embed-body" style="height:700px"><iframe src="proto-design.html" style="height:1400px;transform:scale(.5)"></iframe></div>
+    </div>
+
+    <!-- ============ 2.5 执行管理 ============ -->
+    <h3 id="sec-exec">2.5 执行管理</h3>
+    <p>基于"当前任务 + 子任务 + 阶段 + 轮次"四级上下文的案例执行视图。相比设计管理多一个"测试轮次"维度。</p>
+
+    <h4>2.5.1 顶栏范围筛选</h4>
+    <ul>
+      <li>测试子任务（必选）、测试阶段（必选）、测试轮次（必选）；三者通过 <code>TMSScope</code> 与设计 / 缺陷 / 评审共享。</li>
+      <li>轮次切换：<code>.scope-meta</code> 显示"当前轮次 R2 · 进行中 · 共 85 个案例"。</li>
+      <li>轮次管理：右上角"+ 新建轮次"，填写轮次名、开始 / 结束日期、执行人组。</li>
+    </ul>
+
+    <h4>2.5.2 执行概览（6 张卡片）</h4>
+    <table class="doc-table">
+      <thead><tr><th>卡片</th><th>取值来源</th><th>附加文案</th></tr></thead>
+      <tbody>
+        <tr><td>案例总数</td><td>本轮计划执行的案例数</td><td>"较上轮 ±N"</td></tr>
+        <tr><td>通过</td><td>执行结果=passed</td><td>占比 %（绿色）</td></tr>
+        <tr><td>失败</td><td>执行结果=failed</td><td>占比 %（红色）+ "已提 Bug M 个"</td></tr>
+        <tr><td>阻塞</td><td>执行结果=blocked</td><td>占比 %（橙色）</td></tr>
+        <tr><td>跳过</td><td>执行结果=skipped</td><td>占比 %</td></tr>
+        <tr><td>待执行</td><td>pending + running</td><td>"预计 X 天完成"</td></tr>
+      </tbody>
+    </table>
+
+    <h4>2.5.3 执行进度条</h4>
+    <ul>
+      <li>水平分段条：绿（通过）+ 红（失败）+ 橙（阻塞）+ 灰（跳过）。</li>
+      <li>右上角"通过率 %" = 通过 /（通过+失败+阻塞）。</li>
+      <li>右下角根据平均耗时预测"预计 X 月 X 日完成"（仅 pending+running &gt; 0 时显示）。</li>
+    </ul>
+
+    <h4>2.5.4 案例执行列表</h4>
+    <table class="doc-table">
+      <thead><tr><th style="width:120px">区域</th><th>内容</th></tr></thead>
+      <tbody>
+        <tr><td>工具栏</td><td>搜索（编号 / 名称 / 执行人）、执行状态、优先级（高 / 中 / 低）、执行方式（手工 / 自动化 / 界面）、执行人、关联缺陷（有 / 无）、重置</td></tr>
+        <tr><td>表头</td><td>全选、<strong>编号</strong>、<strong>名称</strong>、优先级、执行方式、执行状态、执行人、执行时间、耗时、关联缺陷、操作</td></tr>
+        <tr><td>批量</td><td>批量通过 / 批量标记失败 / 指派执行人</td></tr>
+        <tr><td>执行状态</td><td>待执行 / 执行中（脉冲）/ 通过 / 失败 / 阻塞 / 跳过</td></tr>
+        <tr><td>执行失败</td><td>操作列"提缺陷"按钮，快捷跳转缺陷管理并预填关联案例</td></tr>
+      </tbody>
+    </table>
+
+    <h4>2.5.5 执行详情 &amp; 缺陷联动</h4>
+    <ul>
+      <li>点击"执行"或"查看" → 进入执行详情：案例详情（步骤/预期） + 执行结果录入（结果、实际耗时、备注、截图） + 自动化脚本路径 + 最近 10 次执行历史。</li>
+      <li>标记"失败" + 点击"提缺陷" → 打开缺陷提交弹层，自动预填：关联案例编号、模块、阶段、轮次、发现人（当前用户）、严重度（默认主要）、标题（案例名）。</li>
+      <li>提交成功后，案例行"关联缺陷"列显示缺陷编号（可点击跳转）。</li>
+    </ul>
+
+    <div class="proto-embed">
+      <div class="proto-embed-header"><span class="proto-label">🎨 原型 — 执行管理</span><a class="proto-open" href="proto-execution.html" target="_blank">新窗口打开 ↗</a></div>
+      <div class="proto-embed-body" style="height:700px"><iframe src="proto-execution.html" style="height:1400px;transform:scale(.5)"></iframe></div>
+    </div>
+
+    <!-- ============ 2.6 缺陷管理 ============ -->
+    <h3 id="sec-bug">2.6 缺陷管理</h3>
+    <p>缺陷全生命周期管理。主视图为"表格"，在顶栏范围筛选（子任务 + 阶段）下支持搜索、多条件筛选、分页。</p>
+
+    <h4>2.6.1 顶栏范围筛选</h4>
+    <ul>
+      <li>测试子任务、测试阶段：与设计 / 执行管理共享选中值。</li>
+      <li>右上角操作：导出缺陷单 / + 提交缺陷。</li>
+    </ul>
+
+    <h4>2.6.2 缺陷概览（6 张卡片）</h4>
+    <table class="doc-table">
+      <thead><tr><th>卡片</th><th>统计口径</th><th>附加文案</th></tr></thead>
+      <tbody>
+        <tr><td>缺陷总数</td><td>当前范围全部缺陷</td><td>"较上阶段 ±N"</td></tr>
+        <tr><td>待处理</td><td>status=open</td><td>占比 %（红）</td></tr>
+        <tr><td>修复中</td><td>status ∈ {fixing, fixed}</td><td>占比 %（橙）</td></tr>
+        <tr><td>待验证</td><td>status=verifying</td><td>占比 %（蓝）</td></tr>
+        <tr><td>已关闭</td><td>status=closed</td><td>解决率 %（绿）</td></tr>
+        <tr><td>已拒绝 / 重开</td><td>status ∈ {reopened, rejected}</td><td>其中重开 M 个</td></tr>
+      </tbody>
+    </table>
+
+    <h4>2.6.3 缺陷列表</h4>
+    <table class="doc-table">
+      <thead><tr><th style="width:120px">区域</th><th>内容</th></tr></thead>
+      <tbody>
+        <tr><td>工具栏</td><td>搜索（编号 / 标题 / 模块 / 处理人）、状态、严重程度、优先级、类型、处理人、重置</td></tr>
+        <tr><td>表头</td><td>缺陷编号、缺陷标题（附模块 · 阶段 / 轮次副文案）、严重程度、优先级、类型、状态、所属模块、阶段 / 轮次、处理人、发现人、关联案例、提交时间、操作</td></tr>
+        <tr><td>操作列</td><td>查看 / 分配 / 关闭</td></tr>
+      </tbody>
+    </table>
+
+    <h4>2.6.4 状态与分级字典</h4>
+    <table class="doc-table">
+      <thead><tr><th>维度</th><th>取值</th></tr></thead>
+      <tbody>
+        <tr><td>状态</td><td><span class="tag tag-red">待处理</span><span class="tag tag-orange">修复中</span><span class="tag tag-orange">已修复</span><span class="tag tag-blue">验证中</span><span class="tag tag-green">已关闭</span><span class="tag tag-purple">重开</span><span class="tag tag-gray">已拒绝</span></td></tr>
+        <tr><td>严重程度</td><td>致命 Blocker / 严重 Critical / 主要 Major / 次要 Minor / 轻微 Trivial</td></tr>
+        <tr><td>优先级</td><td>P0 / P1 / P2 / P3</td></tr>
+        <tr><td>类型</td><td>功能 / UI / 性能 / 安全 / 兼容性 / 其他</td></tr>
+      </tbody>
+    </table>
+
+    <h4>2.6.5 状态流转</h4>
+    <div class="flow-diagram">
+      <div class="flow-steps">
+        <div class="flow-step">待处理</div><span class="flow-arrow">→</span>
+        <div class="flow-step warning-step">修复中</div><span class="flow-arrow">→</span>
+        <div class="flow-step warning-step">已修复</div><span class="flow-arrow">→</span>
+        <div class="flow-step">验证中</div><span class="flow-arrow">→</span>
+        <div class="flow-step success-step">已关闭</div>
+      </div>
+      <div style="margin-top:10px;font-size:11.5px;color:#888">验证不通过 → 重开 → 回到修复中；无效单 → 已拒绝；被拒绝后可申诉回到待处理；关闭后 30 天自动归档，归档单仅只读可查。</div>
+    </div>
+
+    <h4>2.6.6 缺陷提交表单</h4>
+    <ul>
+      <li><strong>必填</strong>：标题、所属模块、严重程度、优先级、类型、重现步骤、期望结果、实际结果。</li>
+      <li><strong>可选</strong>：处理人（默认为模块负责人）、关联案例（可多选）、影响版本、发现版本、截图/日志附件。</li>
+      <li><strong>校验</strong>：标题 5–80 字；重现步骤 ≥ 20 字；至少 1 个关联案例 <strong>或</strong> 1 张截图。</li>
+    </ul>
+
+    <div class="proto-embed">
+      <div class="proto-embed-header"><span class="proto-label">🎨 原型 — 缺陷管理</span><a class="proto-open" href="proto-defect.html" target="_blank">新窗口打开 ↗</a></div>
+      <div class="proto-embed-body" style="height:700px"><iframe src="proto-defect.html" style="height:1400px;transform:scale(.5)"></iframe></div>
+    </div>
+
+    <!-- ============ 2.7 测试报告 ============ -->
+    <h3 id="sec-report">2.7 测试报告</h3>
+    <p>测试报告菜单定位为"<strong>结果交付与归档</strong>"，面向测试负责人、产品 / 开发 Leader、QA 总监，支持 3 种级别的报告：<strong>阶段报告 / 子任务报告 / 任务总报告</strong>。</p>
+
+    <h4>2.7.1 顶栏范围筛选</h4>
+    <table class="doc-table">
+      <thead><tr><th>字段</th><th>是否必选</th><th>说明</th></tr></thead>
+      <tbody>
+        <tr><td>测试子任务</td><td>必选</td><td>与设计 / 执行 / 缺陷共享值</td></tr>
+        <tr><td>测试阶段</td><td><strong>阶段报告</strong>模式必选；子任务报告 / 任务总报告模式禁用</td><td>下拉禁用时置灰，仍显示但不可交互</td></tr>
+      </tbody>
+    </table>
+
+    <h4>2.7.2 报告元信息（头部卡）</h4>
+    <table class="doc-table">
+      <thead><tr><th style="width:120px">字段</th><th>示例 / 规则</th></tr></thead>
+      <tbody>
+        <tr><td>报告标题</td><td>"支付业务 2026Q2 迭代测试 · 系统测试（ST）阶段报告"，可手动编辑</td></tr>
+        <tr><td>报告类型标签</td><td><span class="tag tag-orange">阶段报告</span> / <span class="tag tag-blue">子任务报告</span> / <span class="tag tag-green">任务总报告</span></td></tr>
+        <tr><td>结论徽章</td><td><span class="tag tag-green">通过</span><span class="tag tag-orange">有条件通过</span><span class="tag tag-red">未通过</span><span class="tag tag-gray">草稿</span>（四色圆点徽章）</td></tr>
+        <tr><td>报告编号</td><td><code>R-{年}-{类型码}-{序号4位}</code>；类型码：SMOKE / ST / UAT / REG / SUB / TASK</td></tr>
+        <tr><td>测试任务</td><td>自动取当前任务</td></tr>
+        <tr><td>测试子任务</td><td>自动取范围筛选值</td></tr>
+        <tr><td>测试阶段</td><td>阶段报告模式显示具体阶段，其他模式显示"全部"</td></tr>
+        <tr><td>测试周期</td><td>自动取所选阶段 / 子任务的实际执行周期</td></tr>
+        <tr><td>报告生成时间</td><td>最后一次重新生成时间</td></tr>
+        <tr><td>负责人</td><td>当前任务测试负责人</td></tr>
+      </tbody>
+    </table>
+    <p><strong>右侧操作区</strong>：</p>
+    <ul>
+      <li>报告类型切换（Segmented）：<span class="tag tag-orange">阶段报告</span> / <span class="tag tag-blue">子任务报告</span> / <span class="tag tag-green">任务总报告</span>；</li>
+      <li><code>⟲ 历史报告</code>：弹出模态列出该任务的所有历史报告（编号 / 名称 / 类型 / 状态 / 负责人 / 生成时间 / 查看）；</li>
+      <li><code>🖶 打印</code>：调用 <code>window.print</code>，应用打印样式；</li>
+      <li><code>⤓ 导出</code>：导出 PDF / Word 两种格式；</li>
+      <li><code>发起评审</code>（主按钮）：自动创建"测试总结评审"，参与人默认为开发 / 产品 / 测试负责人。</li>
+    </ul>
+
+    <h4>2.7.3 核心 KPI（4 卡）</h4>
+    <table class="doc-table">
+      <thead><tr><th>KPI</th><th>口径</th><th>对比基线</th></tr></thead>
+      <tbody>
+        <tr><td>执行完成率</td><td>已执行 / 计划总数 × 100%</td><td>vs 上一阶段</td></tr>
+        <tr><td>用例通过率</td><td>通过 / (通过+失败+阻塞) × 100%</td><td>vs 上一阶段</td></tr>
+        <tr><td>缺陷总数</td><td>当前范围全部缺陷数；副文案"未关闭 X · 致命+严重 Y"</td><td>较上阶段 ±N</td></tr>
+        <tr><td>缺陷密度</td><td>缺陷总数 / 代码规模（KLOC）</td><td>基线 ≤ 1.5</td></tr>
+      </tbody>
+    </table>
+    <ul>
+      <li>4 卡等宽；主数值 26px · 700 字重；</li>
+      <li>执行完成率<span class="tag tag-blue">蓝</span>、通过率<span class="tag tag-green">绿</span>、缺陷总数<span class="tag tag-orange">橙</span>、缺陷密度<span class="tag tag-red">红</span>；</li>
+      <li>右上角趋势徽标：<code>↑ +8.2% vs 上一阶段</code>（升跌颜色区分）。</li>
+    </ul>
+
+    <h4>2.7.4 用例执行结果分布（环形图）</h4>
+    <ul>
+      <li>纯 SVG 实现，不依赖第三方图表库；</li>
+      <li>分段：通过（绿）/ 失败（红）/ 阻塞（橙）/ 跳过（灰）；</li>
+      <li>中心显示用例总数；右侧图例：色块 + 状态名 + 数量 + 百分比；</li>
+      <li>右上角切换：<strong>本阶段 / 子任务全量</strong>。</li>
+    </ul>
+
+    <h4>2.7.5 缺陷分布（多维度条形图）</h4>
+    <p>一个面板内切换 <strong>4 个维度</strong>：</p>
+    <table class="doc-table">
+      <thead><tr><th>维度</th><th>分组</th></tr></thead>
+      <tbody>
+        <tr><td>严重度</td><td>致命 / 严重 / 主要 / 次要 / 轻微</td></tr>
+        <tr><td>优先级</td><td>P0 / P1 / P2 / P3</td></tr>
+        <tr><td>类型</td><td>功能 / UI / 性能 / 安全 / 兼容性 / 其他</td></tr>
+        <tr><td>模块</td><td>支付下单 / 签约解约 / 退款流程 / 渠道路由 / 风控拦截 / 对账 …</td></tr>
+      </tbody>
+    </table>
+    <ul>
+      <li>横向条形图，按数量降序；每条：分组名（90px）/ 进度条 / 数值；</li>
+      <li>色值随维度：严重度红橙过渡；类型中 UI 紫、性能橙、安全红、功能蓝。</li>
+    </ul>
+
+    <h4>2.7.6 各测试阶段进度与通过率</h4>
+    <ul>
+      <li>每个阶段一行：阶段名 + 状态徽标（已完成 / 进行中 / 未开始）+ 时间范围；</li>
+      <li>分段进度条：通过 / 失败 / 阻塞 / 跳过 四段；</li>
+      <li>元信息：<code>通过 X · 失败 Y · 阻塞 Z · 跳过 W</code>，右侧"通过率 N%"；</li>
+      <li>右上角"前往执行管理 →" 跳 <code>proto-execution.html</code>。</li>
+    </ul>
+
+    <h4>2.7.7 团队负荷（处理缺陷数 TOP）</h4>
+    <ul>
+      <li>列出处理缺陷数排名前 5 的成员 + "其他"合并项；</li>
+      <li>每行：头像 + 姓名 + 水平柱（按占比）+ 数量；</li>
+      <li>用于评估修复压力分布，识别人员瓶颈。</li>
+    </ul>
+
+    <h4>2.7.8 风险与遗留问题</h4>
+    <ul>
+      <li>每项三级色带：<span class="tag tag-red">高</span> / <span class="tag tag-orange">中</span> / <span class="tag tag-blue">低</span>；</li>
+      <li>字段：图标 + 标题 + 描述（状态/处理人/附注）+ 元信息（遗留/建议/缺陷号）+ "查看 ›"；</li>
+      <li>点击"查看 ›" → 跳缺陷详情或文档页。</li>
+    </ul>
+
+    <h4>2.7.9 近 7 日缺陷新增 / 关闭趋势</h4>
+    <ul>
+      <li>SVG 双线图：新增（红）/ 关闭（绿）；</li>
+      <li>X 轴为日期（7 天），Y 轴自动计算 max；</li>
+      <li>底部图例 + 最后更新时间。</li>
+    </ul>
+
+    <h4>2.7.10 测试结论区</h4>
+    <p><strong>3 宫格摘要</strong>：</p>
+    <table class="doc-table">
+      <thead><tr><th>格</th><th>口径</th></tr></thead>
+      <tbody>
+        <tr><td>用例覆盖率</td><td>已设计案例数 / 需求点数 × 100%</td></tr>
+        <tr><td>P0/P1 缺陷修复率</td><td>P0+P1 已关闭 / P0+P1 总数 × 100%</td></tr>
+        <tr><td>回归通过率</td><td>回归用例通过 / 回归用例总数 × 100%</td></tr>
+      </tbody>
+    </table>
+    <p><strong>结论正文</strong>（富文本）：三段结构 <code>整体评估</code> / <code>遗留风险</code> / <code>建议</code>；每段带蓝色前置标签；支持加粗关键指标。</p>
+    <p><strong>签署区</strong>：</p>
+    <table class="doc-table">
+      <thead><tr><th>角色</th><th>签署要求</th><th>状态</th></tr></thead>
+      <tbody>
+        <tr><td>测试负责人</td><td>必签</td><td>已签署 / 待签署</td></tr>
+        <tr><td>开发负责人</td><td>必签</td><td>同上</td></tr>
+        <tr><td>产品负责人</td><td>必签</td><td>同上</td></tr>
+      </tbody>
+    </table>
+    <ul>
+      <li><strong>催签</strong>：向待签人发通知。</li>
+      <li><strong>归档</strong>：全部签署后可归档至知识库；归档后报告状态变为"已归档"，不可再编辑，但可查看 / 导出。</li>
+    </ul>
+
+    <h4>2.7.11 历史报告模态</h4>
+    <ul>
+      <li>弹窗 720px；字段：报告编号 / 名称 / 类型 / 状态（已归档 / 评审中 / 草稿）/ 负责人 / 生成时间 / 查看。</li>
+      <li>点击"查看"：关闭弹窗并加载该报告（替换主区数据）。</li>
+    </ul>
+
+    <h4>2.7.12 数据来源与刷新</h4>
+    <ul>
+      <li>所有指标实时计算自执行管理、缺陷管理、评审管理的数据，不额外存储；</li>
+      <li>点击"重新生成"或切换报告类型 → 重新拉取并计算；</li>
+      <li>为保证评审证据不变，<strong>归档</strong>时快照一份 JSON 数据存档。</li>
+    </ul>
+
+    <div class="proto-embed">
+      <div class="proto-embed-header"><span class="proto-label">🎨 原型 — 测试报告</span><a class="proto-open" href="proto-report.html" target="_blank">新窗口打开 ↗</a></div>
+      <div class="proto-embed-body" style="height:700px"><iframe src="proto-report.html" style="height:1400px;transform:scale(.5)"></iframe></div>
+    </div>
+
+    <!-- ============ 2.8 评审管理 ============ -->
+    <h3 id="sec-review">2.8 评审管理</h3>
+    <p>覆盖测试计划、测试设计、测试总结三类核心评审。主视图为"表格"，支持按子任务范围筛选与多条件搜索。</p>
+
+    <h4>2.8.1 顶栏范围筛选</h4>
+    <ul>
+      <li>测试子任务：支持"全部子任务"，与其他页面共享选中值（当选"全部子任务"时不回写全局，避免覆盖其他页面）。</li>
+      <li>主区范围：评审范围下拉（全部 / 我发起的 / 我参与的 / 待我评审）。</li>
+    </ul>
+
+    <h4>2.8.2 评审概览（6 张卡片）</h4>
+    <table class="doc-table">
+      <thead><tr><th>卡片</th><th>说明</th></tr></thead>
+      <tbody>
+        <tr><td>评审总数</td><td>当前范围全部评审</td></tr>
+        <tr><td>待评审</td><td>已发起未开始</td></tr>
+        <tr><td>评审中</td><td>进行中（脉冲指示）</td></tr>
+        <tr><td>已通过</td><td>通过数量 + 通过率 %（分母=已通过 + 未通过）</td></tr>
+        <tr><td>未通过</td><td>需重新评审</td></tr>
+        <tr><td>已取消</td><td>废弃 / 作废</td></tr>
+      </tbody>
+    </table>
+
+    <h4>2.8.3 评审列表</h4>
+    <table class="doc-table">
+      <thead><tr><th style="width:120px">区域</th><th>内容</th></tr></thead>
+      <tbody>
+        <tr><td>工具栏</td><td>搜索（编号 / 标题 / 发起人 / 参与人）、评审类型、评审方式、状态、发起人、重置</td></tr>
+        <tr><td>表头</td><td>评审编号、评审标题（附评语副文案）、评审类型、评审方式、关联子任务、发起人、参与人（头像组）、评审时间、状态、评审结果（进度条：通过数 / 总数）、操作（查看 / 结论 / 导出）</td></tr>
+      </tbody>
+    </table>
+    <p><strong>参与人头像组</strong>：最多显示 5 个头像，第 6+ 用"+N"圆形数字代替；悬浮显示完整成员列表。</p>
+
+    <h4>2.8.4 评审字典</h4>
+    <table class="doc-table">
+      <thead><tr><th>维度</th><th>取值</th></tr></thead>
+      <tbody>
+        <tr><td>评审类型</td><td>测试计划 / 测试设计 / 测试总结</td></tr>
+        <tr><td>评审方式</td><td>邮件评审 / 会议评审</td></tr>
+        <tr><td>评审状态</td><td><span class="tag tag-gray">待评审</span><span class="tag tag-blue">评审中</span><span class="tag tag-green">已通过</span><span class="tag tag-red">未通过</span><span class="tag tag-gray">已取消</span></td></tr>
+      </tbody>
+    </table>
+
+    <h4>2.8.5 评审 ↔ 待办 / 任务联动</h4>
+    <ul>
+      <li>作为参与人且评审处于待评审 / 评审中 → 自动出现在工作台"我的待办"的"评审"分类。</li>
+      <li>点击工作台待办项 → 跳转评审管理详情页，并携带评审编号定位。</li>
+      <li>评审结论（通过 / 未通过）会回写关联的任务 / 子任务状态：
+        <ul>
+          <li>测试计划评审通过 → 任务从"草稿"→"设计中"；</li>
+          <li>测试设计评审通过 → 相关案例批量变"已通过"，任务从"设计中"→"执行中"；</li>
+          <li>测试总结评审通过 → 任务从"评审中"→"已完成"。</li>
+        </ul>
+      </li>
+    </ul>
+
+    <h4>2.8.6 发起评审表单</h4>
+    <ul>
+      <li><strong>必填</strong>：标题、评审类型、评审方式、关联子任务、参与人（≥1）、评审时间、评审材料链接。</li>
+      <li><strong>可选</strong>：@特别提醒、截止时间、附件。</li>
+      <li><strong>校验</strong>：会议评审模式下必填"会议室 / 会议链接"；邮件评审模式下自动生成评审邮件草稿。</li>
+    </ul>
+
+    <div class="proto-embed">
+      <div class="proto-embed-header"><span class="proto-label">🎨 原型 — 评审管理</span><a class="proto-open" href="proto-review.html" target="_blank">新窗口打开 ↗</a></div>
+      <div class="proto-embed-body" style="height:700px"><iframe src="proto-review.html" style="height:1400px;transform:scale(.5)"></iframe></div>
+    </div>
+  </div>
+
+  <div class="section-divider"></div>
+
+  <!-- ===================== 第 3 章 非功能需求 ===================== -->
+  <div class="section" id="sec-nfr">
+    <h2>3. 非功能需求</h2>
+
+    <h3>3.1 性能</h3>
+    <table class="doc-table">
+      <thead><tr><th>指标</th><th>目标值</th></tr></thead>
+      <tbody>
+        <tr><td>首屏渲染（工作台）</td><td>≤ 1.5s（P95）</td></tr>
+        <tr><td>任务切换 → 页面刷新</td><td>≤ 500ms</td></tr>
+        <tr><td>表格分页切换</td><td>≤ 300ms</td></tr>
+        <tr><td>报告重新生成</td><td>≤ 2s</td></tr>
+        <tr><td>导出 PDF（单份报告）</td><td>≤ 5s</td></tr>
+      </tbody>
+    </table>
+
+    <h3>3.2 兼容性</h3>
+    <ul>
+      <li>浏览器：Chrome 100+ / Edge 100+ / Safari 15+；<strong>不兼容</strong> IE。</li>
+      <li>分辨率：最低 1366×768；主力适配 1440×900 / 1920×1080。</li>
+      <li>响应式：页面 ≤ 1200px 时 KPI / 任务卡自动降列。</li>
+    </ul>
+
+    <h3>3.3 可访问性</h3>
+    <ul>
+      <li>所有可点击元素有 hover / focus / active 三态样式；</li>
+      <li>颜色不作为唯一信息载体（徽章同时带文字）；</li>
+      <li>关键操作 Toast 提示 1.8s；危险操作（删除 / 归档）二次确认。</li>
+    </ul>
+
+    <h3>3.4 安全与合规</h3>
+    <ul>
+      <li>任务 / 子任务 / 报告等敏感数据按角色与任务参与关系鉴权；非参与人仅列表可见，详情需申请权限；</li>
+      <li>所有变更记录审计日志（操作人 / 时间 / IP / 变更字段）；</li>
+      <li>报告归档后数据做快照不可篡改；导出 PDF 加水印（报告编号 + 查阅人）。</li>
+    </ul>
+  </div>
+
+  <div class="section-divider"></div>
+
+  <!-- ===================== 第 4 章 附录 ===================== -->
+  <div class="section" id="sec-appendix">
+    <h2>4. 附录</h2>
+
+    <h3 id="sec-roadmap">4.1 实施路线图</h3>
+    <div class="phase-timeline">
+      <div class="phase-item active">
+        <div class="phase-num">PHASE 1</div>
+        <div class="phase-title">核心闭环上线</div>
+        <div class="phase-duration">6 周</div>
+        <div class="phase-desc">全局框架 + 工作台 + 测试任务 + 设计管理 + 执行管理 + 缺陷管理，跑通一个完整任务。</div>
+      </div>
+      <div class="phase-item">
+        <div class="phase-num">PHASE 2</div>
+        <div class="phase-title">报告与评审</div>
+        <div class="phase-duration">4 周</div>
+        <div class="phase-desc">测试报告（3 级 + KPI + 图表 + 签署）、评审管理、AI 案例草稿、历史数据导入。</div>
+      </div>
+      <div class="phase-item">
+        <div class="phase-num">PHASE 3</div>
+        <div class="phase-title">度量与智能</div>
+        <div class="phase-duration">4 周</div>
+        <div class="phase-desc">跨任务统计看板、异常缺陷智能归因、报告自然语言摘要、移动端适配。</div>
+      </div>
+    </div>
+
+    <h3 id="sec-risk">4.2 风险与应对</h3>
+    <table class="doc-table">
+      <thead><tr><th>风险</th><th style="width:70px">影响</th><th>应对措施</th></tr></thead>
+      <tbody>
+        <tr><td>历史数据迁移困难</td><td class="danger">高</td><td>提供 Excel / 禅道导入工具；迁移期允许新老系统并行 2 周。</td></tr>
+        <tr><td>用户习惯改变阻力</td><td class="warning">中</td><td>详细操作指引 + 专项培训；首页设置"新手引导"。</td></tr>
+        <tr><td>子任务 / 阶段 / 轮次上下文被误切换</td><td class="warning">中</td><td>切换时 Toast 提示 + 跨 Tab 同步；关键页增加范围回写提示；提供"恢复上次范围"按钮。</td></tr>
+        <tr><td>任务切换影响当前未保存内容</td><td class="warning">中</td><td>切换前检测表单脏数据并二次确认；案例编辑器启用自动草稿。</td></tr>
+        <tr><td>报告指标口径分歧</td><td class="warning">中</td><td>PRD 统一定义口径；报告页每张卡片悬浮显示公式说明；归档时快照数据源。</td></tr>
+      </tbody>
+    </table>
+
+    <h3 id="sec-metric">4.3 成功指标</h3>
+    <table class="doc-table">
+      <thead><tr><th>指标</th><th>基线</th><th>目标</th></tr></thead>
+      <tbody>
+        <tr><td>测试工程师 DAU</td><td>—</td><td>上线 3 个月 ≥ 85%</td></tr>
+        <tr><td>任务切换器日均使用次数（人均）</td><td>—</td><td>≥ 5 次</td></tr>
+        <tr><td>缺陷从发现到关闭平均时长</td><td>5 天</td><td>≤ 3 天</td></tr>
+        <tr><td>评审通过率（首轮）</td><td>—</td><td>≥ 75%</td></tr>
+        <tr><td>测试报告自动化率</td><td>10%</td><td>≥ 70%</td></tr>
+        <tr><td>报告从生成到签署完成周期</td><td>3 天</td><td>≤ 1 天</td></tr>
+      </tbody>
+    </table>
+
+    <h3 id="sec-glossary">4.4 术语表</h3>
+    <table class="doc-table">
+      <thead><tr><th style="width:140px">术语</th><th>释义</th></tr></thead>
+      <tbody>
+        <tr><td>任务 / 测试任务</td><td>对应一次版本迭代、一个需求集或一个上线包的测试工作集合</td></tr>
+        <tr><td>子任务 / 测试子任务</td><td>任务下的业务域切分，如"支付核心 API 重构"、"收银台前端改版"</td></tr>
+        <tr><td>阶段 / 测试阶段</td><td>子任务下的测试类型，枚举：冒烟 / 系统测试 ST / 回归 / 用户验收 UAT</td></tr>
+        <tr><td>轮次 / 测试轮次</td><td>同一阶段内的多次执行，如 ST-R1 / ST-R2</td></tr>
+        <tr><td>KLOC</td><td>千行代码（Kilo Lines Of Code），用于计算缺陷密度</td></tr>
+        <tr><td>TMSGlobal</td><td>全局任务切换 JS 模块；API：<code>mount / getCurrentId / setCurrent / upsertTask / onChange</code></td></tr>
+        <tr><td>TMSScope</td><td>全局测试范围切换 JS 模块；API：<code>get / set / pickMatch</code></td></tr>
+      </tbody>
+    </table>
+
+    <h3 id="sec-track">4.5 埋点建议</h3>
+    <table class="doc-table">
+      <thead><tr><th>事件</th><th>触发点</th><th>维度</th></tr></thead>
+      <tbody>
+        <tr><td><code>tms_task_switch</code></td><td>任务切换器选中某任务</td><td>from_task_id / to_task_id / source（topbar / card / list）</td></tr>
+        <tr><td><code>tms_scope_change</code></td><td>顶部范围下拉切换</td><td>page / subtask / stage / round</td></tr>
+        <tr><td><code>tms_workbench_stat_click</code></td><td>工作台统计卡点击</td><td>stat_key</td></tr>
+        <tr><td><code>tms_todo_process</code></td><td>待办"处理"按钮</td><td>type（bug / review / approve / exec）/ todo_id</td></tr>
+        <tr><td><code>tms_report_generate</code></td><td>测试报告生成</td><td>report_type（stage / subtask / task）</td></tr>
+        <tr><td><code>tms_report_export</code></td><td>导出报告</td><td>format（pdf / word）/ report_no</td></tr>
+        <tr><td><code>tms_review_create</code></td><td>发起评审</td><td>review_type / review_way</td></tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<script>
+// iframe 缩放自适应：父容器宽度 / 1400
+function fitProtoIframes(){
+  document.querySelectorAll('.proto-embed-body').forEach(function(body){
+    var iframe = body.querySelector('iframe'); if(!iframe) return;
+    var scale = body.clientWidth / 1400;
+    iframe.style.transform = 'scale(' + scale + ')';
+    iframe.style.width = '1400px';
+    iframe.style.height = (body.clientHeight / scale) + 'px';
+  });
+}
+window.addEventListener('load', fitProtoIframes);
+window.addEventListener('resize', fitProtoIframes);
+</script>
+</body>
+</html>

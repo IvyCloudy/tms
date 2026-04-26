@@ -1,0 +1,745 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<title>TMS 测试任务管理 — 评审管理</title>
+<link rel="stylesheet" href="tms-common.css">
+<style>
+/* ========== 页面特有样式 ========== */
+table{min-width:1420px}
+.scope-meta strong{color:#e34d59;font-weight:600;margin:0 3px}
+
+.rv-code{color:#0052d9;cursor:pointer;font-family:"SF Mono","Menlo",monospace;font-size:11.5px;font-weight:600}
+.rv-code:hover{text-decoration:underline}
+.rv-title{font-weight:500;color:#1a1a1a;display:inline-block;max-width:340px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;vertical-align:middle}
+.rv-title:hover{color:#0052d9;cursor:pointer}
+.rv-meta{font-size:10.5px;color:#999;margin-top:2px}
+.rv-meta .dot{margin:0 5px;color:#ddd}
+
+/* 评审类型 */
+.rv-type{display:inline-flex;align-items:center;gap:4px;padding:2px 8px;font-size:10.5px;border-radius:2px;font-weight:500;white-space:nowrap;border:1px solid transparent}
+.rt-plan{background:#e8f3ff;color:#0052d9;border-color:#bdd7ff}
+.rt-design{background:#f3e8ff;color:#7b3fe4;border-color:#dcc8ff}
+.rt-summary{background:#e8f8f0;color:#2ba471;border-color:#bfe7cf}
+
+/* 评审方式 */
+.rv-way{display:inline-flex;align-items:center;gap:4px;padding:2px 8px;font-size:10.5px;border-radius:2px;font-weight:500;white-space:nowrap}
+.rv-way::before{content:"";width:6px;height:6px;border-radius:50%;display:inline-block}
+.rw-email{background:#fff3e0;color:#e37318}.rw-email::before{background:#e37318}
+.rw-meeting{background:#e8f3ff;color:#0052d9}.rw-meeting::before{background:#0052d9}
+
+/* 评审状态 */
+.rv-status{display:inline-flex;align-items:center;gap:4px;padding:2px 8px;font-size:10.5px;border-radius:2px;font-weight:500;white-space:nowrap}
+.rv-status::before{content:"";width:6px;height:6px;border-radius:50%;display:inline-block}
+.rs-pending{background:#f0f2f5;color:#666}.rs-pending::before{background:#888}
+.rs-reviewing{background:#fff3e0;color:#e37318}.rs-reviewing::before{background:#e37318;animation:pulse 1.4s infinite}
+.rs-passed{background:#e8f8f0;color:#2ba471}.rs-passed::before{background:#2ba471}
+.rs-failed{background:#fde2e3;color:#e34d59}.rs-failed::before{background:#e34d59}
+.rs-canceled{background:#f0f2f5;color:#999}.rs-canceled::before{background:#bbb}
+
+/* 结果/通过率 */
+.result-pass{display:inline-block;padding:1px 7px;font-size:10.5px;border-radius:2px;background:#e8f8f0;color:#2ba471;font-weight:500}
+.result-fail{display:inline-block;padding:1px 7px;font-size:10.5px;border-radius:2px;background:#fde2e3;color:#e34d59;font-weight:500}
+.result-none{color:#bbb;font-size:11px}
+.pass-bar{display:inline-flex;align-items:center;gap:6px}
+.pass-bar .bar{width:60px;height:6px;background:#f0f2f5;border-radius:3px;overflow:hidden}
+.pass-bar .bar i{display:block;height:100%;background:#2ba471}
+.pass-bar .bar.warn i{background:#e37318}
+.pass-bar .bar.bad  i{background:#e34d59}
+.pass-bar .pct{font-size:11px;color:#666;min-width:34px;text-align:right}
+
+.avatars-group{display:inline-flex;align-items:center}
+.avatars-group .avatar-mini{margin-right:-6px;border:2px solid #fff}
+.avatars-group .more{margin-left:10px;font-size:11px;color:#888}
+</style>
+<link rel="stylesheet" href="tms-scope-dropdown.css">
+</head>
+<body>
+
+<div class="top-bar">
+  <div class="task-switcher" id="taskSwitcher">
+    <span class="ts-current"></span>
+    <span class="ts-arrow">▼</span>
+  </div>
+  <div class="top-page-title">评审管理</div>
+  <!-- 全局联动筛选：测试子任务 -->
+  <div class="top-filters">
+    <div class="tf-item">
+      <span class="tf-label"><em>*</em>测试子任务</span>
+      <select id="selSubtask" class="scope-select"></select>
+    </div>
+  </div>
+</div>
+
+<div class="layout">
+  <div class="side-menu">
+    <a href="proto-workbench.html" class="menu-item"><span class="menu-icon">◈</span>工作台</a>
+    <a href="proto-task-list.html" class="menu-item"><span class="menu-icon">◎</span>测试任务</a>
+    <a href="proto-task-detail.html" class="menu-item"><span class="menu-icon">▤</span>任务详情</a>
+    <a href="proto-design.html" class="menu-item"><span class="menu-icon">◇</span>设计管理</a>
+<a href="proto-execution.html" class="menu-item"><span class="menu-icon">▷</span>执行管理</a>
+<a href="proto-defect.html" class="menu-item"><span class="menu-icon">◆</span>缺陷管理</a>
+<a href="proto-report.html" class="menu-item"><span class="menu-icon">◫</span>测试报告</a>
+<a href="#" class="menu-item active"><span class="menu-icon">◐</span>评审管理</a>
+  </div>
+
+  <div class="main-content">
+
+    <!-- 概览 -->
+    <div class="stat-bar">
+      <div class="stat-mini active" data-stat="all">
+        <div class="sm-label">评审总数</div>
+        <div class="sm-value" id="ovTotal">0<span class="sm-sub">个</span></div>
+      </div>
+      <div class="stat-mini" data-stat="pending">
+        <div class="sm-label">待评审</div>
+        <div class="sm-value" id="ovPending" style="color:#666">0</div>
+      </div>
+      <div class="stat-mini" data-stat="reviewing">
+        <div class="sm-label">评审中</div>
+        <div class="sm-value" id="ovReviewing" style="color:#e37318">0</div>
+      </div>
+      <div class="stat-mini" data-stat="passed">
+        <div class="sm-label">已通过</div>
+        <div class="sm-value" id="ovPassed" style="color:#2ba471">0</div>
+      </div>
+      <div class="stat-mini" data-stat="failed">
+        <div class="sm-label">未通过</div>
+        <div class="sm-value" id="ovFailed" style="color:#e34d59">0</div>
+      </div>
+      <div class="stat-mini" data-stat="canceled">
+        <div class="sm-label">已取消</div>
+        <div class="sm-value" id="ovCanceled" style="color:#bbb">0</div>
+      </div>
+    </div>
+
+    <!-- 评审列表 -->
+    <div class="panel">
+      <div class="panel-head">
+        <div class="panel-title">评审列表 <span class="pt-count" id="listCount">0</span></div>
+        <div class="panel-actions">
+          <button class="btn btn-sm btn-primary" id="btnAddReview">+ 新增评审</button>
+          <button class="btn btn-sm btn-ghost" id="btnReset">重置筛选</button>
+          <button class="btn btn-sm">批量导出</button>
+        </div>
+      </div>
+
+      <div class="toolbar">
+        <div class="search-box">
+          <span class="ic">🔍</span>
+          <input id="rvKw" type="text" placeholder="搜索评审编号 / 标题 / 发起人 / 参与人"/>
+        </div>
+        <select id="selScope" class="filter-select">
+          <option value="">全部评审</option>
+          <option value="mine">我发起的</option>
+          <option value="join">我参与的</option>
+          <option value="todo">待我评审</option>
+        </select>
+        <select id="fType" class="filter-select">
+          <option value="">全部评审类型</option>
+          <option value="plan">测试计划</option>
+          <option value="design">测试设计</option>
+          <option value="summary">测试总结</option>
+        </select>
+        <select id="fWay" class="filter-select">
+          <option value="">全部评审方式</option>
+          <option value="email">邮件评审</option>
+          <option value="meeting">会议评审</option>
+        </select>
+        <select id="fStatus" class="filter-select">
+          <option value="">全部状态</option>
+          <option value="pending">待评审</option>
+          <option value="reviewing">评审中</option>
+          <option value="passed">已通过</option>
+          <option value="failed">未通过</option>
+          <option value="canceled">已取消</option>
+        </select>
+        <select id="fOwner" class="filter-select">
+          <option value="">全部发起人</option>
+        </select>
+      </div>
+
+      <div class="table-scroll">
+        <table>
+          <thead>
+            <tr>
+              <th style="width:110px">评审编号</th>
+              <th>评审标题</th>
+              <th style="width:90px">评审类型</th>
+              <th style="width:90px">评审方式</th>
+              <th style="width:160px">关联子任务</th>
+              <th style="width:120px">发起人</th>
+              <th style="width:150px">参与人</th>
+              <th style="width:150px">评审时间</th>
+              <th style="width:90px">状态</th>
+              <th style="width:140px">评审结果</th>
+              <th style="width:140px">操作</th>
+            </tr>
+          </thead>
+          <tbody id="tbody"></tbody>
+        </table>
+      </div>
+
+      <div class="pagination" id="pager"></div>
+    </div>
+
+  </div>
+</div>
+
+<div class="toast" id="toast"></div>
+
+<script src="tms-global-task.js"></script>
+<script src="tms-global-scope.js"></script>
+<script src="tms-scope-dropdown.js"></script>
+<script src="tms-api.js"></script>
+<script>
+/* ============ 工具 ============ */
+function escapeHtml(s){
+  return String(s == null ? "" : s).replace(/[&<>"']/g, function(c){
+    return ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"})[c];
+  });
+}
+function highlight(text, kw){
+  if(!kw) return escapeHtml(text);
+  var esc = escapeHtml(text);
+  var re = new RegExp(kw.replace(/[.*+?^${}()|[\]\\]/g, "\\$&"), "ig");
+  return esc.replace(re, function(m){ return "<mark>" + m + "</mark>"; });
+}
+function showToast(msg){
+  var el = document.getElementById("toast");
+  el.innerText = msg;
+  el.classList.add("show");
+  clearTimeout(el._t);
+  el._t = setTimeout(function(){ el.classList.remove("show"); }, 1800);
+}
+
+/* ============ 人员 ============ */
+var OWNERS = [
+  {name:"张小明",   short:"张", cls:""},
+  {name:"李工程师", short:"李", cls:"avatar-green"},
+  {name:"王测试",   short:"王", cls:"avatar-purple"},
+  {name:"赵架构师", short:"赵", cls:"avatar-orange"},
+  {name:"孙小红",   short:"孙", cls:"avatar-pink"},
+  {name:"陈开发",   short:"陈", cls:"avatar-red"},
+  {name:"刘产品",   short:"刘", cls:"avatar-green"},
+  {name:"周 TL",    short:"周", cls:"avatar-purple"}
+];
+function pickOwner(i){ return OWNERS[i % OWNERS.length]; }
+
+/* ============ 测试子任务联动数据（与其他页面保持一致） ============ */
+var SUBTASKS_BY_TASK = {
+  "T001": [
+    { id:"sub-pay-api", name:"支付核心 API 重构" },
+    { id:"sub-cashier", name:"收银台前端改版" },
+    { id:"sub-risk",    name:"风控规则引擎接入" },
+    { id:"sub-channel", name:"第三方渠道对接（银联/支付宝）" }
+  ],
+  "T002": [
+    { id:"sub-coupon-core",  name:"优惠券核心逻辑" },
+    { id:"sub-coupon-ui",    name:"优惠券领取页面 H5" },
+    { id:"sub-coupon-share", name:"优惠券分享与裂变" }
+  ],
+  "T003": [
+    { id:"sub-search-recall", name:"搜索召回算法回归" },
+    { id:"sub-search-rank",   name:"搜索排序算法回归" },
+    { id:"sub-search-ui",     name:"搜索结果页面兼容" }
+  ],
+  "T004": [
+    { id:"sub-fulfill-perf",  name:"履约引擎压测" },
+    { id:"sub-fulfill-break", name:"履约系统断路测试" }
+  ],
+  "T005": [
+    { id:"sub-i18n-gateway",  name:"国际化网关测试" },
+    { id:"sub-i18n-template", name:"多语言模板渲染" }
+  ],
+  "T006": [
+    { id:"sub-login-mfa",  name:"MFA 多因素认证流程" },
+    { id:"sub-login-risk", name:"登录风控拦截" }
+  ]
+};
+var DEFAULT_SUBTASKS = [{ id:"sub-default", name:"默认测试子任务" }];
+function resolveSubtasks(taskId){ return SUBTASKS_BY_TASK[taskId] || DEFAULT_SUBTASKS; }
+var SUBTASKS = resolveSubtasks(window.TMSGlobal ? TMSGlobal.getCurrentId() : "T001");
+
+/* ============ Mock 评审数据 ============ */
+var RAW_REVIEWS = [
+  // —— T001 / 支付核心 API 重构 ——
+  { id:"RV-0801", title:"支付中心重构 - 测试计划评审",                    type:"plan",    way:"meeting", subtask:"sub-pay-api", owner:0, members:[0,3,6,7], time:"2026-04-02 14:00", status:"passed",    pass:8, total:8 },
+  { id:"RV-0802", title:"支付核心 API 系统测试案例设计评审（ST）",        type:"design",  way:"meeting", subtask:"sub-pay-api", owner:0, members:[0,1,3,5,7], time:"2026-04-10 10:00", status:"passed",   pass:5, total:5 },
+  { id:"RV-0803", title:"支付核心 API 回归案例范围邮件评审",              type:"design",  way:"email",   subtask:"sub-pay-api", owner:1, members:[0,1,3],   time:"2026-04-17 18:00", status:"passed",    pass:3, total:3 },
+  { id:"RV-0804", title:"支付核心 API 第一轮 ST 测试总结评审",            type:"summary", way:"meeting", subtask:"sub-pay-api", owner:0, members:[0,1,3,7], time:"2026-04-18 15:00", status:"passed",    pass:4, total:4 },
+  { id:"RV-0805", title:"支付核心 API 第二轮 ST 测试总结评审（进行中）",   type:"summary", way:"meeting", subtask:"sub-pay-api", owner:0, members:[0,1,3,5,7], time:"2026-04-25 15:00", status:"reviewing", pass:2, total:5 },
+
+  // —— T001 / 收银台前端改版 ——
+  { id:"RV-0806", title:"收银台前端改版 - 测试计划评审",                  type:"plan",    way:"email",   subtask:"sub-cashier", owner:2, members:[0,2,6],   time:"2026-04-03 18:00", status:"passed",    pass:3, total:3 },
+  { id:"RV-0807", title:"收银台冒烟 + ST 案例设计评审",                   type:"design",  way:"meeting", subtask:"sub-cashier", owner:2, members:[0,2,5,6], time:"2026-04-11 14:30", status:"passed",    pass:4, total:4 },
+  { id:"RV-0808", title:"收银台 H5 兼容案例补充评审",                     type:"design",  way:"email",   subtask:"sub-cashier", owner:2, members:[2,5],     time:"2026-04-19 17:00", status:"failed",    pass:1, total:2, comment:"补充安卓低版本案例" },
+  { id:"RV-0809", title:"收银台 H5 兼容案例补充评审（v2）",               type:"design",  way:"email",   subtask:"sub-cashier", owner:2, members:[2,5,6],   time:"2026-04-22 11:00", status:"passed",    pass:3, total:3 },
+  { id:"RV-0810", title:"收银台 UAT 测试总结评审",                        type:"summary", way:"meeting", subtask:"sub-cashier", owner:2, members:[0,2,6,7], time:"2026-04-26 16:00", status:"pending",   pass:0, total:4 },
+
+  // —— T001 / 风控规则引擎接入 ——
+  { id:"RV-0811", title:"风控规则引擎 - 测试计划评审",                    type:"plan",    way:"meeting", subtask:"sub-risk",    owner:3, members:[0,3,4,7], time:"2026-04-05 10:00", status:"passed",    pass:4, total:4 },
+  { id:"RV-0812", title:"风控规则 ST 案例设计评审",                       type:"design",  way:"meeting", subtask:"sub-risk",    owner:3, members:[3,4,7],   time:"2026-04-12 14:00", status:"passed",    pass:3, total:3 },
+  { id:"RV-0813", title:"风控规则回归案例邮件评审",                       type:"design",  way:"email",   subtask:"sub-risk",    owner:4, members:[3,4],     time:"2026-04-20 17:00", status:"reviewing", pass:1, total:2 },
+  { id:"RV-0814", title:"风控规则第一轮 ST 测试总结评审",                 type:"summary", way:"meeting", subtask:"sub-risk",    owner:3, members:[0,3,4,7], time:"2026-04-22 16:00", status:"passed",    pass:4, total:4 },
+
+  // —— T001 / 第三方渠道对接 ——
+  { id:"RV-0815", title:"第三方渠道对接 - 测试计划评审",                  type:"plan",    way:"meeting", subtask:"sub-channel", owner:3, members:[0,3,5,7], time:"2026-04-06 11:00", status:"passed",    pass:4, total:4 },
+  { id:"RV-0816", title:"银联/支付宝 渠道案例设计评审",                   type:"design",  way:"meeting", subtask:"sub-channel", owner:3, members:[3,5,7],   time:"2026-04-13 15:30", status:"failed",    pass:1, total:3, comment:"缺少超时降级案例" },
+  { id:"RV-0817", title:"银联/支付宝 渠道案例设计评审（v2）",             type:"design",  way:"email",   subtask:"sub-channel", owner:3, members:[3,5,7],   time:"2026-04-16 17:00", status:"passed",    pass:3, total:3 },
+  { id:"RV-0818", title:"渠道对接 UAT 测试总结评审",                      type:"summary", way:"email",   subtask:"sub-channel", owner:3, members:[0,3,5,7], time:"2026-04-24 18:00", status:"pending",   pass:0, total:4 },
+  { id:"RV-0819", title:"废弃：渠道对接计划评审（错建）",                 type:"plan",    way:"email",   subtask:"sub-channel", owner:5, members:[3,5],     time:"2026-04-01 09:00", status:"canceled",  pass:0, total:2 },
+
+  // —— 其它任务若干（T002/T003） ——
+  { id:"RV-0820", title:"优惠券核心逻辑 - 测试计划评审",                  type:"plan",    way:"meeting", subtask:"sub-coupon-core", owner:1, members:[0,1,6], time:"2026-04-08 14:00", status:"passed",    pass:3, total:3 },
+  { id:"RV-0821", title:"优惠券核心 ST 案例设计评审",                     type:"design",  way:"meeting", subtask:"sub-coupon-core", owner:1, members:[1,5,6], time:"2026-04-15 15:00", status:"reviewing", pass:2, total:3 },
+  { id:"RV-0822", title:"搜索召回算法回归 - 测试计划评审",                type:"plan",    way:"email",   subtask:"sub-search-recall", owner:4, members:[0,4,7], time:"2026-04-09 17:00", status:"passed",    pass:3, total:3 },
+  { id:"RV-0823", title:"搜索排序回归案例设计评审",                       type:"design",  way:"meeting", subtask:"sub-search-rank",   owner:4, members:[4,5,7], time:"2026-04-18 10:30", status:"passed",    pass:3, total:3 },
+  { id:"RV-0824", title:"搜索结果页 UI 兼容案例评审",                     type:"design",  way:"email",   subtask:"sub-search-ui",     owner:2, members:[2,4],   time:"2026-04-21 17:00", status:"pending",   pass:0, total:2 }
+];
+
+/* 注入 owner/members 对象 */
+var REVIEWS = RAW_REVIEWS.map(function(r){
+  return Object.assign({}, r, {
+    ownerObj: OWNERS[r.owner] || OWNERS[0],
+    memberObjs: (r.members || []).map(function(i){ return OWNERS[i] || OWNERS[0]; })
+  });
+});
+
+/* ============ 状态 ============ */
+var state = {
+  subtask:"",
+  scope:"",
+  kw:"",
+  type:"",
+  way:"",
+  status:"",
+  statusIn: [],
+  ownerName:"",
+  page:1,
+  pageSize:10
+};
+
+var TYPE_META = {
+  plan:    { text:"测试计划", cls:"rt-plan" },
+  design:  { text:"测试设计", cls:"rt-design" },
+  summary: { text:"测试总结", cls:"rt-summary" }
+};
+var WAY_META = {
+  email:   { text:"邮件评审", cls:"rw-email" },
+  meeting: { text:"会议评审", cls:"rw-meeting" }
+};
+var STATUS_META = {
+  pending:   { text:"待评审", cls:"rs-pending" },
+  reviewing: { text:"评审中", cls:"rs-reviewing" },
+  passed:    { text:"已通过", cls:"rs-passed" },
+  failed:    { text:"未通过", cls:"rs-failed" },
+  canceled:  { text:"已取消", cls:"rs-canceled" }
+};
+
+/* 当前登录用户（用于"我发起的/我参与的/待我评审"） */
+var ME = "张小明";
+
+/* ============ 按范围 ============ */
+function reviewsInScope(){
+  return REVIEWS.filter(function(r){
+    if(state.subtask && r.subtask !== state.subtask) return false;
+    if(state.scope === "mine" && r.ownerObj.name !== ME) return false;
+    if(state.scope === "join"){
+      var hit = r.memberObjs.some(function(m){ return m.name === ME; });
+      if(!hit) return false;
+    }
+    if(state.scope === "todo"){
+      var hit2 = r.memberObjs.some(function(m){ return m.name === ME; });
+      if(!hit2 || (r.status !== "pending" && r.status !== "reviewing")) return false;
+    }
+    return true;
+  });
+}
+
+/* ============ 概览 ============ */
+function renderOverview(){
+  var list = reviewsInScope();
+  var total     = list.length;
+  var pending   = list.filter(function(r){return r.status==="pending";}).length;
+  var reviewing = list.filter(function(r){return r.status==="reviewing";}).length;
+  var passed    = list.filter(function(r){return r.status==="passed";}).length;
+  var failed    = list.filter(function(r){return r.status==="failed";}).length;
+  var canceled  = list.filter(function(r){return r.status==="canceled";}).length;
+
+  document.getElementById("ovTotal").innerText     = total;
+  document.getElementById("ovPending").innerText   = pending;
+  document.getElementById("ovReviewing").innerText = reviewing;
+  document.getElementById("ovPassed").innerText    = passed;
+  document.getElementById("ovFailed").innerText    = failed;
+  document.getElementById("ovCanceled").innerText  = canceled;
+
+  var finished = passed + failed;
+  var passPct  = finished ? Math.round(passed / finished * 100) : 0;
+  var passedPctEl = document.getElementById("ovPassedPct");
+  if(passedPctEl) passedPctEl.innerText = passPct + "% 通过率";
+
+  var mc = document.getElementById("metaScopeCount");
+  if(mc) mc.innerText = total;
+}
+
+/* ============ 过滤 ============ */
+function getFilteredList(){
+  var kw = state.kw.trim().toLowerCase();
+  return reviewsInScope().filter(function(r){
+    if(state.type    && r.type   !== state.type)   return false;
+    if(state.way     && r.way    !== state.way)    return false;
+    if(state.statusIn && state.statusIn.length){
+      if(state.statusIn.indexOf(r.status) < 0) return false;
+    } else if(state.status && r.status !== state.status){
+      return false;
+    }
+    if(state.ownerName && r.ownerObj.name !== state.ownerName) return false;
+    if(kw){
+      var memberTxt = r.memberObjs.map(function(m){return m.name;}).join(",");
+      var hay = (r.id + " " + r.title + " " + r.ownerObj.name + " " + memberTxt).toLowerCase();
+      if(hay.indexOf(kw) < 0) return false;
+    }
+    return true;
+  });
+}
+
+/* ============ 表格 ============ */
+function subtaskName(id){
+  var s = SUBTASKS.find(function(x){ return x.id === id; });
+  return s ? s.name : id;
+}
+
+function passBar(r){
+  if(r.status === "pending" || r.status === "canceled"){
+    return '<span class="result-none">—</span>';
+  }
+  var pct = r.total ? Math.round(r.pass / r.total * 100) : 0;
+  var cls = pct >= 80 ? "" : pct >= 50 ? "warn" : "bad";
+  return '<div class="pass-bar">' +
+           '<div class="bar ' + cls + '"><i style="width:' + pct + '%"></i></div>' +
+           '<span class="pct">' + r.pass + '/' + r.total + '</span>' +
+         '</div>';
+}
+
+function renderMembers(list){
+  var show = list.slice(0, 3);
+  var rest = list.length - show.length;
+  var html = '<div class="avatars-group">' +
+    show.map(function(m){
+      return '<span class="avatar-mini ' + m.cls + '" title="' + escapeHtml(m.name) + '">' + m.short + '</span>';
+    }).join("");
+  if(rest > 0) html += '<span class="more">+' + rest + '</span>';
+  html += '</div>';
+  return html;
+}
+
+function renderTable(){
+  var list = getFilteredList();
+  document.getElementById("listCount").innerText = list.length;
+
+  var tbody = document.getElementById("tbody");
+  if(list.length === 0){
+    tbody.innerHTML = '<tr><td colspan="11">' +
+      '<div class="empty-state"><div class="empty-icon">◌</div>' +
+      '<div class="empty-text">没有匹配的评审</div></div></td></tr>';
+    document.getElementById("pager").innerHTML = "";
+    return;
+  }
+
+  var totalPages = Math.max(1, Math.ceil(list.length / state.pageSize));
+  if(state.page > totalPages) state.page = totalPages;
+  var start = (state.page - 1) * state.pageSize;
+  var pageList = list.slice(start, start + state.pageSize);
+
+  var kw = state.kw.trim();
+  tbody.innerHTML = pageList.map(function(r){
+    var tp = TYPE_META[r.type]   || TYPE_META.plan;
+    var wy = WAY_META[r.way]     || WAY_META.email;
+    var st = STATUS_META[r.status] || STATUS_META.pending;
+
+    return '<tr>' +
+      '<td><span class="rv-code">' + highlight(r.id, kw) + '</span></td>' +
+      '<td>' +
+        '<div><span class="rv-title" title="' + escapeHtml(r.title) + '">' +
+          highlight(r.title, kw) + '</span></div>' +
+        (r.comment ? '<div class="rv-meta">评语：' + escapeHtml(r.comment) + '</div>' : '') +
+      '</td>' +
+      '<td><span class="rv-type ' + tp.cls + '">' + tp.text + '</span></td>' +
+      '<td><span class="rv-way ' + wy.cls + '">' + wy.text + '</span></td>' +
+      '<td>' + escapeHtml(subtaskName(r.subtask)) + '</td>' +
+      '<td><div class="owner-cell">' +
+        '<span class="avatar-mini ' + r.ownerObj.cls + '">' + r.ownerObj.short + '</span>' +
+        highlight(r.ownerObj.name, kw) +
+      '</div></td>' +
+      '<td>' + renderMembers(r.memberObjs) + '</td>' +
+      '<td style="color:#666">' + escapeHtml(r.time) + '</td>' +
+      '<td><span class="rv-status ' + st.cls + '">' + st.text + '</span></td>' +
+      '<td>' + passBar(r) + '</td>' +
+      '<td>' +
+        '<span class="op-link" data-act="detail" data-id="' + r.id + '">查看</span>' +
+        '<span class="op-link" data-act="result" data-id="' + r.id + '">结论</span>' +
+        '<span class="op-link" data-act="export" data-id="' + r.id + '">导出</span>' +
+      '</td>' +
+    '</tr>';
+  }).join("");
+
+  renderPagination(list.length, totalPages);
+}
+
+function renderPagination(total, totalPages){
+  var pager = document.getElementById("pager");
+  var html = '<span class="pg-total">共 ' + total + ' 条</span>';
+  html += '<button class="page-btn" data-go="prev"' + (state.page<=1?" disabled":"") + '>‹</button>';
+  var s = Math.max(1, state.page - 2);
+  var e = Math.min(totalPages, s + 4);
+  s = Math.max(1, e - 4);
+  for(var i=s; i<=e; i++){
+    html += '<button class="page-btn' + (i===state.page?' active':'') + '" data-go="' + i + '">' + i + '</button>';
+  }
+  html += '<button class="page-btn" data-go="next"' + (state.page>=totalPages?" disabled":"") + '>›</button>';
+  html += '<select class="page-size" id="pgSize">' +
+            '<option value="10"' + (state.pageSize===10?" selected":"") + '>10 条/页</option>' +
+            '<option value="20"' + (state.pageSize===20?" selected":"") + '>20 条/页</option>' +
+            '<option value="50"' + (state.pageSize===50?" selected":"") + '>50 条/页</option>' +
+          '</select>';
+  pager.innerHTML = html;
+}
+
+/* ============ 发起人下拉 ============ */
+function initOwnerOptions(){
+  var sel = document.getElementById("fOwner");
+  var names = {};
+  REVIEWS.forEach(function(r){ names[r.ownerObj.name] = true; });
+  sel.innerHTML = '<option value="">全部发起人</option>' +
+    Object.keys(names).map(function(n){
+      return '<option value="' + escapeHtml(n) + '">' + escapeHtml(n) + '</option>';
+    }).join("");
+}
+
+/* ============ 子任务下拉 ============ */
+function initSubtaskOptions(){
+  var sel = document.getElementById("selSubtask");
+  sel.innerHTML = '<option value="">全部子任务</option>' +
+    SUBTASKS.map(function(s){
+      return '<option value="' + s.id + '">' + escapeHtml(s.name) + '</option>';
+    }).join("");
+  // 先尝试按全局 scope 中保存的子任务名匹配
+  if(window.TMSScope){
+    var m = TMSScope.pickMatch(SUBTASKS, function(s){ return s.name; }, TMSScope.getSubtaskName());
+    if(m) state.subtask = m.id;
+    // 注：评审页面本身支持“全部子任务”，若全局无值则保留当前 state.subtask，不强制重置
+  }
+  sel.value = state.subtask;
+  // 只有在选中具体子任务时才回写，避免“全部子任务”覆盖其他页面的选择
+  if(window.TMSScope && state.subtask){
+    var cur = SUBTASKS.find(function(s){ return s.id === state.subtask; });
+    if(cur) TMSScope.setSubtaskName(cur.name);
+  }
+}
+
+/* ============ 事件 ============ */
+function bindEvents(){
+  var kw = document.getElementById("rvKw");
+  var t = null;
+  kw.addEventListener("input", function(){
+    clearTimeout(t);
+    t = setTimeout(function(){
+      state.kw = kw.value;
+      state.page = 1;
+      renderTable();
+    }, 200);
+  });
+
+  [
+    ["fType",   "type"],
+    ["fWay",    "way"],
+    ["fStatus", "status"],
+    ["fOwner",  "ownerName"]
+  ].forEach(function(p){
+    document.getElementById(p[0]).addEventListener("change", function(e){
+      state[p[1]] = e.target.value;
+      if(p[1] === "status"){
+        state.statusIn = e.target.value ? [e.target.value] : [];
+        if(typeof syncStatCards === "function") syncStatCards();
+      }
+      state.page = 1;
+      renderTable();
+    });
+  });
+
+  // 联动：子任务 / 评审范围
+  document.getElementById("selSubtask").addEventListener("change", function(e){
+    state.subtask = e.target.value;
+    if(window.TMSScope && state.subtask){
+      var cur = SUBTASKS.find(function(s){ return s.id === state.subtask; });
+      if(cur) TMSScope.setSubtaskName(cur.name);
+    }
+    state.page = 1;
+    renderOverview();
+    renderTable();
+  });
+  document.getElementById("selScope").addEventListener("change", function(e){
+    state.scope = e.target.value;
+    state.page = 1;
+    renderOverview();
+    renderTable();
+  });
+
+  // 订阅全局 scope 变化（由其他页面/标签页触发）
+  if(window.TMSScope){
+    TMSScope.onChange(function(ev){
+      if(!ev || !ev.crossTab) return;
+      if(ev.field === "subtask"){
+        var m = TMSScope.pickMatch(SUBTASKS, function(s){ return s.name; }, ev.to);
+        var newVal = m ? m.id : "";
+        if(newVal !== state.subtask){
+          state.subtask = newVal;
+          document.getElementById("selSubtask").value = state.subtask;
+          state.page = 1;
+          renderOverview();
+          renderTable();
+        }
+      }
+    });
+  }
+
+  document.getElementById("btnReset").addEventListener("click", function(){
+    state.kw = ""; state.type = ""; state.way = "";
+    state.status = ""; state.statusIn = []; state.ownerName = ""; state.scope = ""; state.page = 1;
+    document.getElementById("rvKw").value = "";
+    ["selScope","fType","fWay","fStatus","fOwner"].forEach(function(id){
+      document.getElementById(id).value = "";
+    });
+    if(typeof syncStatCards === "function") syncStatCards();
+    renderTable();
+    showToast("已重置筛选条件");
+  });
+
+  // 统计卡片点击筛选
+  function syncStatCards(){
+    var cur = (state.statusIn || []).slice().sort().join(",");
+    document.querySelectorAll(".stat-mini[data-stat]").forEach(function(c){
+      var s = c.getAttribute("data-stat");
+      var arr = (s === "all") ? [] : s.split(",").map(function(x){return x.trim();}).filter(Boolean);
+      var key = arr.slice().sort().join(",");
+      if(key === cur){ c.classList.add("active"); }
+      else { c.classList.remove("active"); }
+    });
+  }
+  document.querySelectorAll(".stat-mini[data-stat]").forEach(function(card){
+    card.addEventListener("click", function(){
+      var s = card.getAttribute("data-stat");
+      var arr = (s === "all") ? [] : s.split(",").map(function(x){return x.trim();}).filter(Boolean);
+      var curKey = (state.statusIn || []).slice().sort().join(",");
+      var newKey = arr.slice().sort().join(",");
+      if(curKey === newKey){
+        state.statusIn = []; state.status = "";
+      } else {
+        state.statusIn = arr;
+        state.status = arr.length === 1 ? arr[0] : "";
+      }
+      var fSel = document.getElementById("fStatus");
+      if(fSel) fSel.value = (state.statusIn.length === 1) ? state.statusIn[0] : "";
+      state.page = 1;
+      syncStatCards();
+      renderTable();
+    });
+  });
+  syncStatCards();
+
+  var btnAdd = document.getElementById("btnAddReview");
+  if(btnAdd){
+    btnAdd.addEventListener("click", function(){
+      showToast("打开新增评审表单");
+    });
+  }
+
+  // 分页
+  document.getElementById("pager").addEventListener("click", function(e){
+    var b = e.target.closest(".page-btn");
+    if(!b || b.disabled) return;
+    var go = b.getAttribute("data-go");
+    var totalPages = Math.max(1, Math.ceil(getFilteredList().length / state.pageSize));
+    if(go === "prev") state.page = Math.max(1, state.page - 1);
+    else if(go === "next") state.page = Math.min(totalPages, state.page + 1);
+    else state.page = parseInt(go, 10);
+    renderTable();
+  });
+  document.getElementById("pager").addEventListener("change", function(e){
+    if(e.target && e.target.id === "pgSize"){
+      state.pageSize = parseInt(e.target.value, 10);
+      state.page = 1;
+      renderTable();
+    }
+  });
+
+  // 表格操作
+  document.getElementById("tbody").addEventListener("click", function(e){
+    var el = e.target.closest(".op-link, .rv-code, .rv-title");
+    if(!el) return;
+    var id = el.getAttribute("data-id") || el.innerText;
+    if(el.classList.contains("op-link")){
+      var act = el.getAttribute("data-act");
+      if(act === "detail")      showToast("打开评审详情：" + id);
+      else if(act === "result") showToast("填写评审结论：" + id);
+      else if(act === "export") showToast("导出评审记录：" + id);
+    } else {
+      showToast("打开评审详情：" + id);
+    }
+  });
+}
+
+/* ============ 初始化 ============ */
+document.addEventListener("DOMContentLoaded", function(){
+  // 顶部任务切换（全局）
+  if(window.TMSGlobal){
+    if(typeof TMSGlobal.mount === "function"){
+      TMSGlobal.mount("#taskSwitcher", { showToast: true });
+    } else if(typeof TMSGlobal.mountSwitcher === "function"){
+      TMSGlobal.mountSwitcher(document.getElementById("taskSwitcher"));
+    }
+    TMSGlobal.onChange(function(){
+      SUBTASKS = resolveSubtasks(TMSGlobal.getCurrentId());
+      state.subtask = "";
+      state.page = 1;
+      initSubtaskOptions();
+      renderOverview();
+      renderTable();
+      showToast("任务已切换，评审列表已刷新");
+    });
+  } else {
+    var cur = document.querySelector(".task-switcher .ts-current");
+    if(cur) cur.innerText = "T001 · 支付业务 2026Q2 迭代测试";
+  }
+
+  initSubtaskOptions();
+  initOwnerOptions();
+  renderOverview();
+  renderTable();
+  bindEvents();
+});
+
+/* ===== TMS 扩展注入钩子（浏览器独立运行时仅挂载对象，不影响任何逻辑） ===== */
+window.__TMS_HOOKS__ = window.__TMS_HOOKS__ || {};
+window.__TMS_HOOKS__.review = {
+  setData: function(arr){
+    if(!Array.isArray(arr)) return;
+    var mapped = arr.map(function(r){
+      if(r && r.ownerObj) return r;
+      return Object.assign({}, r, {
+        ownerObj: OWNERS[r.owner] || OWNERS[0],
+        memberObjs: (r.members || []).map(function(i){ return OWNERS[i] || OWNERS[0]; })
+      });
+    });
+    REVIEWS.length = 0;
+    Array.prototype.push.apply(REVIEWS, mapped);
+    renderOverview();
+    renderTable();
+  },
+  getData: function(){ return REVIEWS; }
+};
+</script>
+
+</body>
+</html>

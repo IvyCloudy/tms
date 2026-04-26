@@ -1,0 +1,111 @@
+/* tms-scope-dropdown.css：顶部栏 scope 下拉的自定义样式，强制向下展开 */
+
+.top-filters .tms-dd-wrap{
+  position: relative;
+  display: inline-block;
+  vertical-align: middle;
+}
+.top-filters .tms-dd-wrap .tms-dd-native{
+  /* 隐藏原生 select，保留其交互能力 */
+  position: absolute !important;
+  width: 1px !important;
+  height: 1px !important;
+  padding: 0 !important;
+  margin: 0 !important;
+  overflow: hidden !important;
+  clip: rect(0,0,0,0) !important;
+  white-space: nowrap !important;
+  border: 0 !important;
+  opacity: 0;
+  pointer-events: none;
+}
+
+.top-filters .tms-dd-trigger{
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  min-width: 200px;
+  height: 28px;
+  padding: 0 26px 0 10px;
+  border: 1px solid #dde3ea;
+  border-radius: 3px;
+  background: #fff;
+  font-size: 12.5px;
+  color: #333;
+  cursor: pointer;
+  position: relative;
+  box-sizing: border-box;
+  user-select: none;
+  outline: none;
+  transition: border-color .15s;
+}
+.top-filters .tms-dd-wrap-round .tms-dd-trigger{ min-width: 160px; }
+
+.top-filters .tms-dd-trigger:hover,
+.top-filters .tms-dd-wrap.is-open .tms-dd-trigger{
+  border-color: #0052d9;
+}
+.top-filters .tms-dd-wrap.is-disabled .tms-dd-trigger{
+  background: #f5f7fa;
+  color: #bbb;
+  cursor: not-allowed;
+  border-color: #dde3ea;
+}
+
+.top-filters .tms-dd-label{
+  flex: 1;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+.top-filters .tms-dd-arrow{
+  position: absolute;
+  right: 8px;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 10px;
+  color: #888;
+  transition: transform .15s;
+  pointer-events: none;
+}
+.top-filters .tms-dd-wrap.is-open .tms-dd-arrow{
+  transform: translateY(-50%) rotate(180deg);
+  color: #0052d9;
+}
+
+/* 下拉面板：强制 top:100% 向下展开 */
+.top-filters .tms-dd-panel{
+  display: none;
+  position: absolute;
+  left: 0;
+  top: calc(100% + 4px);
+  min-width: 100%;
+  max-height: 280px;
+  overflow-y: auto;
+  background: #fff;
+  border: 1px solid #e5e9ef;
+  border-radius: 4px;
+  box-shadow: 0 4px 12px rgba(0,0,0,.08);
+  z-index: 1000;
+  padding: 4px 0;
+  box-sizing: border-box;
+}
+.top-filters .tms-dd-wrap.is-open .tms-dd-panel{ display: block; }
+
+.top-filters .tms-dd-item{
+  padding: 6px 12px;
+  font-size: 12.5px;
+  color: #333;
+  cursor: pointer;
+  white-space: nowrap;
+  line-height: 1.6;
+}
+.top-filters .tms-dd-item:hover{ background: #f0f5ff; color: #0052d9; }
+.top-filters .tms-dd-item.is-active{ background: #e8f0ff; color: #0052d9; font-weight: 500; }
+.top-filters .tms-dd-item.is-disabled{ color: #bbb; cursor: not-allowed; background: transparent; }
+.top-filters .tms-dd-empty{
+  padding: 12px;
+  text-align: center;
+  color: #999;
+  font-size: 12px;
+}

@@ -1,0 +1,126 @@
+{
+  "name": "tms-test-management",
+  "displayName": "测试任务管理",
+  "description": "在 VSCode 中管理测试任务、设计、执行、缺陷、报告与评审",
+  "version": "0.1.0",
+  "publisher": "tms",
+  "engines": {
+    "vscode": "^1.80.0"
+  },
+  "categories": [
+    "Other"
+  ],
+  "main": "./out/extension.js",
+  "activationEvents": [
+    "onStartupFinished"
+  ],
+  "contributes": {
+    "viewsContainers": {
+      "activitybar": [
+        {
+          "id": "tms-sidebar",
+          "title": "测试任务管理",
+          "icon": "resources/icon.svg"
+        }
+      ]
+    },
+    "views": {
+      "tms-sidebar": [
+        {
+          "id": "tms.sidebarView",
+          "name": "测试任务管理",
+          "type": "webview"
+        }
+      ]
+    },
+    "commands": [
+      {
+        "command": "tms.openWorkbench",
+        "title": "打开工作台",
+        "category": "测试任务管理"
+      },
+      {
+        "command": "tms.openTaskList",
+        "title": "打开测试任务列表",
+        "category": "测试任务管理"
+      },
+      {
+        "command": "tms.openTaskDetail",
+        "title": "打开任务详情",
+        "category": "测试任务管理"
+      },
+      {
+        "command": "tms.openDesign",
+        "title": "打开设计管理",
+        "category": "测试任务管理"
+      },
+      {
+        "command": "tms.openExecution",
+        "title": "打开执行管理",
+        "category": "测试任务管理"
+      },
+      {
+        "command": "tms.openDefect",
+        "title": "打开缺陷管理",
+        "category": "测试任务管理"
+      },
+      {
+        "command": "tms.openReport",
+        "title": "打开测试报告",
+        "category": "测试任务管理"
+      },
+      {
+        "command": "tms.openReview",
+        "title": "打开评审管理",
+        "category": "测试任务管理"
+      },
+      {
+        "command": "tms.switchTask",
+        "title": "切换当前测试任务",
+        "category": "测试任务管理"
+      },
+      {
+        "command": "tms.refreshData",
+        "title": "刷新任务数据",
+        "category": "测试任务管理"
+      },
+      {
+        "command": "tms.setApiBaseUrl",
+        "title": "设置后端地址",
+        "category": "测试任务管理"
+      }
+    ],
+    "configuration": {
+      "title": "测试任务管理",
+      "properties": {
+        "tms.api.baseUrl": {
+          "type": "string",
+          "default": "http://localhost:3001",
+          "description": "TMS 后端服务地址（Mock 服务默认 http://localhost:3001）"
+        },
+        "tms.api.timeout": {
+          "type": "number",
+          "default": 8000,
+          "description": "API 请求超时时间（毫秒）"
+        },
+        "tms.api.retry": {
+          "type": "number",
+          "default": 1,
+          "description": "网络/超时错误时的重试次数"
+        }
+      }
+    }
+  },
+  "scripts": {
+    "vscode:prepublish": "npm run compile",
+    "compile": "tsc -p ./",
+    "watch": "tsc -watch -p ./",
+    "package": "vsce package"
+  },
+  "devDependencies": {
+    "@types/node": "^18.0.0",
+    "@types/vscode": "^1.80.0",
+    "typescript": "^5.0.0",
+    "@vscode/vsce": "^2.20.0"
+  }
+}
