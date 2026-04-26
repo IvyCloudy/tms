@@ -457,7 +457,9 @@
 <div class="toast" id="toast"></div>
 
 <script src="tms-global-task.js"></script>
+<script src="tms-global-scope.js"></script>
 <script src="tms-api.js"></script>
+<script src="tms-scope-dropdown.js"></script>
 <script>
 /* ========== 工具 ========== */
 function escapeHtml(s){ return String(s==null?"":s).replace(/[&<>"']/g, function(c){ return {"&":"&amp;","<":"&lt;",">":"&gt;","\"":"&quot;","'":"&#39;"}[c]; }); }
@@ -471,7 +473,8 @@ function toast(msg){
 
 /* ========== 数据（前端 mock） ========== */
 // 子任务 → 阶段 & 报告指标（仅用于原型演示）
-var SUBTASKS = [
+// 老任务（T001 支付业务）兜底数据；脱机打开原型时仍能显示
+var SUBTASKS_FALLBACK = [
   { id:"st-pay",    name:"支付主流程",  stages:[
     { code:"smoke", name:"冒烟测试" },
     { code:"st",    name:"系统测试 ST" },
@@ -489,6 +492,18 @@ var SUBTASKS = [
     { code:"regression", name:"回归测试" }
   ]}
 ];
+/**
+ * 与其他业务页（design/execution/defect/review）保持一致：
+ * 优先用 tms-api.js 预拉取到 window.TMS_SUBTASKS[taskId] 的后端数据，
+ * 找不到时回退到 SUBTASKS_FALLBACK（老任务兜底）。
+ */
+function resolveSubtasks(taskId){
+  if(window.TMS_SUBTASKS && Array.isArray(window.TMS_SUBTASKS[taskId]) && window.TMS_SUBTASKS[taskId].length){
+    return window.TMS_SUBTASKS[taskId];
+  }
+  return SUBTASKS_FALLBACK;
+}
+var SUBTASKS = SUBTASKS_FALLBACK;
 
 // KPI / 图表数据（按报告类型切换）
 var REPORT_DATA = {
@@ -908,7 +923,21 @@ function initSubtaskOptions(){
   sel.innerHTML = SUBTASKS.map(function(s){
     return '<option value="'+s.id+'">'+escapeHtml(s.name)+'</option>';
   }).join("");
+  // 与其他业务页保持一致：优先按全局 TMSScope 的子任务名称匹配本页选项
+  // 仅在匹配成功时才回写，避免在本页不存在该子任务时覆盖全局选择
+  var globalMatched = false;
+  if(window.TMSScope){
+    var m = TMSScope.pickMatch(SUBTASKS, function(s){ return s.name; }, TMSScope.getSubtaskName());
+    if(m){ state.subtask = m.id; globalMatched = true; }
+  }
+  if(!SUBTASKS.find(function(s){ return s.id === state.subtask; })){
+    state.subtask = SUBTASKS[0] ? SUBTASKS[0].id : "";
+  }
   sel.value = state.subtask;
+  if(window.TMSScope && globalMatched){
+    var curSub = SUBTASKS.find(function(s){ return s.id === state.subtask; });
+    if(curSub) TMSScope.setSubtaskName(curSub.name);
+  }
 }
 function renderStageOptions(){
   var sub = SUBTASKS.find(function(s){ return s.id === state.subtask; });
@@ -920,10 +949,21 @@ function renderStageOptions(){
   // 阶段报告模式必选一个阶段；其他模式可为"全部"
   sel.disabled = (state.reportType !== "stage");
   if(state.reportType === "stage"){
+    // 阶段报告模式：优先按 TMSScope 的阶段名匹配
+    var stageMatched = false;
+    if(window.TMSScope){
+      var mStage = TMSScope.pickMatch(sub.stages, function(s){ return s.name; }, TMSScope.getStageName());
+      if(mStage){ state.stage = mStage.code; stageMatched = true; }
+    }
     if(!sub.stages.find(function(x){ return x.code === state.stage; })){
       state.stage = sub.stages[0] ? sub.stages[0].code : "";
     }
     sel.value = state.stage;
+    // 仅在成功匹配全局值时才回写
+    if(window.TMSScope && stageMatched){
+      var curStage = sub.stages.find(function(x){ return x.code === state.stage; });
+      if(curStage) TMSScope.setStageName(curStage.name);
+    }
   } else {
     sel.value = "";
   }
@@ -965,11 +1005,21 @@ function bindEvents(){
   });
   document.getElementById("selSubtask").addEventListener("change", function(){
     state.subtask = this.value;
+    // 广播到全局，保证其他业务页同步
+    if(window.TMSScope){
+      var cur = SUBTASKS.find(function(s){ return s.id === state.subtask; });
+      if(cur) TMSScope.setSubtaskName(cur.name);
+    }
     renderStageOptions();
     renderAll();
   });
   document.getElementById("selStage").addEventListener("change", function(){
     state.stage = this.value;
+    if(window.TMSScope){
+      var sub = SUBTASKS.find(function(s){ return s.id === state.subtask; });
+      var cur = sub && sub.stages.find(function(x){ return x.code === state.stage; });
+      if(cur) TMSScope.setStageName(cur.name);
+    }
     renderHead();
   });
   document.getElementById("donutSwitch").addEventListener("click", function(e){
@@ -1005,18 +1055,61 @@ document.addEventListener("DOMContentLoaded", function(){
       TMSGlobal.mountSwitcher(document.getElementById("taskSwitcher"));
     }
     TMSGlobal.onChange(function(){
+      rebuildBySubtasks();
       toast("任务已切换，报告已按新任务刷新");
-      renderAll();
     });
   } else {
     var cur = document.querySelector(".task-switcher .ts-current");
     if(cur) cur.innerText = "T001 · 支付业务 2026Q2 迭代测试";
   }
 
+  // 提取为独立函数，便于 onChange / tms_subtasks_ready 复用
+  function rebuildBySubtasks(){
+    SUBTASKS = resolveSubtasks(window.TMSGlobal && TMSGlobal.getCurrentId && TMSGlobal.getCurrentId());
+    state.subtask = SUBTASKS[0] ? SUBTASKS[0].id : "";
+    state.stage   = SUBTASKS[0] && SUBTASKS[0].stages && SUBTASKS[0].stages[0] ? SUBTASKS[0].stages[0].code : "";
+    initSubtaskOptions();
+    renderStageOptions();
+    renderAll();
+  }
+  /* 后端 /api/tasks/:id/subtasks 数据到货后重渲染（由 tms-api.js 派发） */
+  window.addEventListener("tms_subtasks_ready", function(ev){
+    var tid = ev && ev.detail && ev.detail.taskId;
+    var cur = window.TMSGlobal && TMSGlobal.getCurrentId && TMSGlobal.getCurrentId();
+    if(tid && cur && tid !== cur) return;
+    rebuildBySubtasks();
+  });
+
   initSubtaskOptions();
   renderStageOptions();
   renderAll();
   bindEvents();
+
+  /* 订阅全局范围变化：其他业务页（缺陷/执行/评审/设计）切换子任务或阶段时，本页跟随联动 */
+  if(window.TMSScope && typeof TMSScope.onChange === "function"){
+    TMSScope.onChange(function(ev){
+      if(!ev) return;
+      if(ev.field === "subtask"){
+        var m = TMSScope.pickMatch(SUBTASKS, function(s){ return s.name; }, ev.to);
+        if(m && m.id !== state.subtask){
+          state.subtask = m.id;
+          document.getElementById("selSubtask").value = state.subtask;
+          renderStageOptions();
+          renderAll();
+        }
+      } else if(ev.field === "stage"){
+        var sub = SUBTASKS.find(function(s){ return s.id === state.subtask; });
+        var mS = sub && TMSScope.pickMatch(sub.stages, function(s){ return s.name; }, ev.to);
+        if(mS && mS.code !== state.stage){
+          state.stage = mS.code;
+          if(state.reportType === "stage"){
+            document.getElementById("selStage").value = state.stage;
+            renderHead();
+          }
+        }
+      }
+    });
+  }
 
   /* === 接入后端报告列表 ===
    * tms-api.js 会扫描 __TMS_HOOKS__.report，按当前任务拉 /api/reports → setData

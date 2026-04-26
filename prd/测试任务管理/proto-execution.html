@@ -299,7 +299,14 @@ var SUBTASKS_BY_TASK = {
 var DEFAULT_SUBTASKS = [
   { id:"sub-default", name:"默认测试子任务", stages: FULL_STAGES }
 ];
+/**
+ * 优先使用 tms-api.js 预拉取并挂到 window.TMS_SUBTASKS[taskId] 的后端数据；
+ * 若未就绪，回退到本页本地 SUBTASKS_BY_TASK；再找不到用默认占位。
+ */
 function resolveSubtasks(taskId){
+  if(window.TMS_SUBTASKS && Array.isArray(window.TMS_SUBTASKS[taskId]) && window.TMS_SUBTASKS[taskId].length){
+    return window.TMS_SUBTASKS[taskId];
+  }
   return SUBTASKS_BY_TASK[taskId] || DEFAULT_SUBTASKS;
 }
 var SUBTASKS = resolveSubtasks(
@@ -561,18 +568,20 @@ function inferExecType(name){
 function initSubtaskOptions(){
   var sel = document.getElementById("selSubtask");
   sel.innerHTML = SUBTASKS.map(function(s){
-    return '<option value="' + s.id + '">' + escapeHtml(s.name) + '</option>';
+    return '<option value="' + s.id + '">' + s.name + '</option>';
   }).join("");
   // 先尝试按全局 scope 中保存的子任务名匹配
+  var globalMatched = false;
   if(window.TMSScope){
     var m = TMSScope.pickMatch(SUBTASKS, function(s){ return s.name; }, TMSScope.getSubtaskName());
-    if(m) state.subtask = m.id;
+    if(m){ state.subtask = m.id; globalMatched = true; }
   }
   if(!SUBTASKS.find(function(s){ return s.id === state.subtask; })){
     state.subtask = SUBTASKS[0] ? SUBTASKS[0].id : "";
   }
   sel.value = state.subtask;
-  if(window.TMSScope){
+  // 仅在本页成功匹配到全局值时才回写，避免在本页没有该子任务时覆盖全局
+  if(window.TMSScope && globalMatched){
     var cur = SUBTASKS.find(function(s){ return s.id === state.subtask; });
     if(cur) TMSScope.setSubtaskName(cur.name);
   }
@@ -585,15 +594,18 @@ function renderStageOptions(){
   sel.innerHTML = sub.stages.map(function(st){
     return '<option value="' + st.code + '">' + escapeHtml(st.name) + '</option>';
   }).join("");
+  // 先尝试按全局 scope 中保存的阶段名匹配
+  var stageMatched = false;
   if(window.TMSScope){
     var m = TMSScope.pickMatch(sub.stages, function(s){ return s.name; }, TMSScope.getStageName());
-    if(m) state.stage = m.code;
+    if(m){ state.stage = m.code; stageMatched = true; }
   }
   if(!sub.stages.find(function(s){ return s.code === state.stage; })){
     state.stage = sub.stages[0] ? sub.stages[0].code : "";
   }
   sel.value = state.stage;
-  if(window.TMSScope){
+  // 仅在成功匹配到全局值时才回写
+  if(window.TMSScope && stageMatched){
     var curStage = sub.stages.find(function(s){ return s.code === state.stage; });
     if(curStage) TMSScope.setStageName(curStage.name);
   }
@@ -627,7 +639,8 @@ function renderRoundOptions(){
          || state.rounds[0];
   state.roundId = def ? def.id : "";
   sel.value = state.roundId;
-  if(window.TMSScope && def) TMSScope.setRoundName(def.name);
+  // 仅在成功按全局 scope 匹配到时回写，避免覆盖其他来源
+  if(window.TMSScope && pickedByScope) TMSScope.setRoundName(pickedByScope.name);
 }
 
 /* ============ 重新构建当前轮次的执行记录 ============ */
@@ -985,7 +998,7 @@ function bindEvents(){
 /* ============ 初始化 ============ */
 TMSGlobal.mount("#taskSwitcher", { showToast: true });
 
-TMSGlobal.onChange(function(){
+function rebuildBySubtasks(){
   // 全局任务切换 → 重建 subtask/stage/round
   SUBTASKS = resolveSubtasks(TMSGlobal.getCurrentId());
   // 清空执行缓存，避免旧任务数据残留
@@ -1000,6 +1013,13 @@ TMSGlobal.onChange(function(){
   renderStageOptions();
   renderRoundOptions();
   refreshAll();
+}
+TMSGlobal.onChange(rebuildBySubtasks);
+/* 后端 /api/tasks/:id/subtasks 数据到货后重渲染（由 tms-api.js 派发） */
+window.addEventListener("tms_subtasks_ready", function(ev){
+  var tid = ev && ev.detail && ev.detail.taskId;
+  if(tid && tid !== TMSGlobal.getCurrentId()) return;
+  rebuildBySubtasks();
 });
 
 /* 把案例池构建逻辑封装成函数，便于任务切换后重建 */

@@ -258,7 +258,16 @@ var SUBTASKS_BY_TASK = {
   ]
 };
 var DEFAULT_SUBTASKS = [{ id:"sub-default", name:"默认测试子任务" }];
-function resolveSubtasks(taskId){ return SUBTASKS_BY_TASK[taskId] || DEFAULT_SUBTASKS; }
+/**
+ * 优先使用 tms-api.js 预拉取到的 window.TMS_SUBTASKS[taskId]（与 mock 一致的2b条）；
+ * 脱机打开原型时回退到本地 SUBTASKS_BY_TASK，均找不到用默认占位。
+ */
+function resolveSubtasks(taskId){
+  if(window.TMS_SUBTASKS && Array.isArray(window.TMS_SUBTASKS[taskId]) && window.TMS_SUBTASKS[taskId].length){
+    return window.TMS_SUBTASKS[taskId];
+  }
+  return SUBTASKS_BY_TASK[taskId] || DEFAULT_SUBTASKS;
+}
 var SUBTASKS = resolveSubtasks(window.TMSGlobal ? TMSGlobal.getCurrentId() : "T001");
 
 /* ============ Mock 评审数据 ============ */
@@ -699,14 +708,23 @@ document.addEventListener("DOMContentLoaded", function(){
     } else if(typeof TMSGlobal.mountSwitcher === "function"){
       TMSGlobal.mountSwitcher(document.getElementById("taskSwitcher"));
     }
-    TMSGlobal.onChange(function(){
+    function rebuildBySubtasks(){
       SUBTASKS = resolveSubtasks(TMSGlobal.getCurrentId());
       state.subtask = "";
       state.page = 1;
       initSubtaskOptions();
       renderOverview();
       renderTable();
+    }
+    TMSGlobal.onChange(function(){
+      rebuildBySubtasks();
       showToast("任务已切换，评审列表已刷新");
+    });
+    /* 后端 /api/tasks/:id/subtasks 数据到货后重渲染（由 tms-api.js 派发） */
+    window.addEventListener("tms_subtasks_ready", function(ev){
+      var tid = ev && ev.detail && ev.detail.taskId;
+      if(tid && tid !== TMSGlobal.getCurrentId()) return;
+      rebuildBySubtasks();
     });
   } else {
     var cur = document.querySelector(".task-switcher .ts-current");

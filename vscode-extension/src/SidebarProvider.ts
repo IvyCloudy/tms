@@ -83,10 +83,15 @@ export class SidebarProvider implements vscode.WebviewViewProvider {
     color: var(--vscode-foreground);
     background: var(--vscode-sideBar-background, transparent);
   }
-  body.is-dark .tc-tag.tag-exec   { background: rgba(227,115,24,.18);  color: #ffb070; }
-  body.is-dark .tc-tag.tag-design { background: rgba(0,82,217,.22);    color: #7fb3ff; }
-  body.is-dark .tc-tag.tag-review { background: rgba(123,63,228,.22);  color: #c7a8ff; }
-  body.is-dark .tc-tag.tag-done   { background: rgba(43,164,113,.20);  color: #6fd4a4; }
+  body.is-dark .tc-tag.tag-exec    { background: rgba(227,115,24,.18);  color: #ffb070; }
+  body.is-dark .tc-tag.tag-design  { background: rgba(0,82,217,.22);    color: #7fb3ff; }
+  body.is-dark .tc-tag.tag-review  { background: rgba(123,63,228,.22);  color: #c7a8ff; }
+  body.is-dark .tc-tag.tag-done    { background: rgba(43,164,113,.20);  color: #6fd4a4; }
+  body.is-dark .tc-tag.tag-draft   { background: rgba(136,136,136,.22); color: #c8c8c8; }
+  body.is-dark .tc-tag.tag-paused  { background: rgba(158,115,70,.22);  color: #d9b48a; }
+  body.is-dark .tc-tag.tag-pending { background: rgba(120,120,120,.22); color: #bdbdbd; }
+  body.is-dark .tc-tag.tag-delay   { background: rgba(227,77,89,.22);   color: #ff9299; }
+  body.is-dark .tc-tag.tag-closed  { background: rgba(90,102,119,.30);  color: #b6c0cc; }
 
   /* 滚动条美化 */
   ::-webkit-scrollbar { width: 8px; height: 8px; }
@@ -157,10 +162,16 @@ export class SidebarProvider implements vscode.WebviewViewProvider {
     font-size: 10px; line-height: 1.5;
     font-weight: 500;
   }
-  .tag-exec   { background: #fff3e0; color: #e37318; }
-  .tag-design { background: #e8f3ff; color: #0052d9; }
-  .tag-review { background: #f3e8ff; color: #7b3fe4; }
-  .tag-done   { background: #e8f8f0; color: #2ba471; }
+  /* 状态标签配色（与 proto-task-list.html / PRD 2.3.2 一致） */
+  .tag-exec    { background: #fff3e0; color: #e37318; } /* 执行中 */
+  .tag-design  { background: #e8f3ff; color: #0052d9; } /* 设计中 */
+  .tag-review  { background: #f3e8ff; color: #7b3fe4; } /* 评审中 */
+  .tag-done    { background: #e8f8f0; color: #2ba471; } /* 已完成 */
+  .tag-draft   { background: #f0f2f5; color: #888;    } /* 草稿   */
+  .tag-paused  { background: #fbf3e8; color: #9e7346; } /* 已暂停 */
+  .tag-pending { background: #f3f4f6; color: #78808a; } /* 待启动 */
+  .tag-delay   { background: #fde2e3; color: #e34d59; } /* 已延期 */
+  .tag-closed  { background: #eef0f3; color: #5a6677; } /* 已关闭 */
   .tc-owner { display: inline-flex; align-items: center; gap: 4px; }
   .tc-arrow {
     position: absolute; top: 50%; right: 10px;
@@ -511,8 +522,11 @@ export class SidebarProvider implements vscode.WebviewViewProvider {
   function tagClassOf(sc){
     return ({
       'status-exec':'tag-exec','status-design':'tag-design',
-      'status-review':'tag-review','status-done':'tag-done'
-    })[sc] || 'tag-exec';
+      'status-review':'tag-review','status-done':'tag-done',
+      'status-draft':'tag-draft','status-paused':'tag-paused',
+      'status-pending':'tag-pending','status-delay':'tag-delay',
+      'status-closed':'tag-closed'
+    })[sc] || 'tag-draft';
   }
 })();
 </script>
@@ -542,13 +556,18 @@ function taskOwner(tasks: Task[], id: string): string {
 }
 
 function tagClass(t: Task | undefined): string {
-    if (!t) return 'tag-exec';
+    if (!t) return 'tag-draft';
     return ({
         'status-exec': 'tag-exec',
         'status-design': 'tag-design',
         'status-review': 'tag-review',
-        'status-done': 'tag-done'
-    } as Record<string, string>)[t.statusClass] || 'tag-exec';
+        'status-done': 'tag-done',
+        'status-draft': 'tag-draft',
+        'status-paused': 'tag-paused',
+        'status-pending': 'tag-pending',
+        'status-delay': 'tag-delay',
+        'status-closed': 'tag-closed'
+    } as Record<string, string>)[t.statusClass] || 'tag-draft';
 }
 
 function taskCode(tasks: Task[], id: string): string {

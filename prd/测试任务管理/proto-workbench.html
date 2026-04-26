@@ -20,8 +20,8 @@
 /* 页面标题（工作台特有子标题） */
 .page-header{margin-bottom:18px;align-items:center}
 
-/* 数据总览卡片 */
-.stat-row{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-bottom:18px}
+/* 数据总览卡片：固定 4 列，每列设最小宽度，避免窄屏时被压扁、宽屏时被拉得过散 */
+.stat-row{display:grid;grid-template-columns:repeat(4,minmax(220px,1fr));gap:12px;margin-bottom:18px}
 .stat-card{background:#fff;border:1px solid #e5e9ef;border-radius:6px;padding:14px 18px;position:relative;overflow:hidden;cursor:pointer;transition:border-color .15s,box-shadow .15s,transform .1s}
 .stat-card:hover{border-color:#0052d9;box-shadow:0 2px 8px rgba(0,82,217,.08)}
 .stat-card:hover .sc-value{color:#0052d9}
@@ -50,8 +50,12 @@
   100%{box-shadow:0 0 0 0 rgba(0,82,217,0)}
 }
 
-/* 主内容网格 */
-.content-grid{display:grid;grid-template-columns:1fr 380px;gap:16px}
+/* 主内容网格：
+   - 左栏使用 minmax(560px,1fr)，保证“我的测试任务”+“快捷入口”区域不会被压到错行；
+   - 右栏固定 360px，保证“我的待办 / 团队动态 / 公告”宽度稳定；
+   - 整体 min-width 兜底，窄屏出现横向滚动也要保持布局不变形。
+*/
+.content-grid{display:grid;grid-template-columns:minmax(560px,1fr) 360px;gap:16px;min-width:960px}
 
 /* 面板 */
 .panel{background:#fff;border:1px solid #e5e9ef;border-radius:6px;margin-bottom:16px}
@@ -65,8 +69,8 @@
 .panel-tab.active{color:#0052d9;border-bottom-color:#0052d9;font-weight:500}
 .panel-body{padding:14px 18px}
 
-/* 任务卡片网格 */
-.task-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:12px}
+/* 任务卡片网格：固定 3 列，每列设最小宽度，保证卡片内部文案不被挤压 */
+.task-grid{display:grid;grid-template-columns:repeat(3,minmax(180px,1fr));gap:12px}
 .task-card{border:1px solid #e5e9ef;border-radius:6px;padding:14px;background:#fff;cursor:pointer;transition:all .15s;position:relative}
 .task-card:hover{border-color:#0052d9;box-shadow:0 2px 8px rgba(0,82,217,.08)}
 .task-card:hover .tc-switch-hint{opacity:1}
@@ -285,6 +289,8 @@
       </div>
     </div>
 
+    <!-- 工作台内容外层容器：设置 min-width 让内部布局不随窗口宽窄剧烈变化，过窄时出现横向滚动也优先保证布局稳定 -->
+    <div class="wb-wrap" style="min-width:960px">
     <!-- 数据总览（数字动态计算；点击联动下方面板） -->
     <div class="stat-row" id="statRow">
       <div class="stat-card sc-blue" data-action="task" title="点击查看我的测试任务">
@@ -480,6 +486,7 @@
         </div>
       </div>
     </div>
+    </div><!-- /.wb-wrap -->
   </div>
 </div>
 
@@ -688,8 +695,8 @@ syncCardsByCurrent();
   var moreRemain = document.getElementById('todoMoreRemain');
   if(!list || !tabs) return;
 
-  var PAGE_SIZE = 10;             // 默认显示条数
-  var visibleCount = PAGE_SIZE;   // 当前可见条数，点更多 +10
+  var PAGE_SIZE = 6;              // 默认显示条数：6 条
+  var visibleCount = PAGE_SIZE;   // 当前可见条数，点“更多”每次 +6
   var currentTab = 'all';
   var doneSet = {}; // 已处理的 id
 
@@ -814,7 +821,7 @@ syncCardsByCurrent();
     render();
   });
 
-  // 更多按钮：点击 +10
+  // 更多按钮：点击 +PAGE_SIZE（即每次加载 6 条）
   if(moreBtn){
     moreBtn.addEventListener('click', function(){
       visibleCount += PAGE_SIZE;
@@ -949,7 +956,9 @@ syncCardsByCurrent();
 
 /* ========= 我的测试任务：tab 筛选 + 更多展开收起 ========= */
 (function(){
-  var VISIBLE_LIMIT = 8; // 默认 4 列 × 2 行 = 8 张，超出折叠；点击「更多」按每次 +8 张展开
+  // 默认一行 3 列 × 2 行 = 6 张；超出折叠，点击「更多」每次 +3 张
+  var INITIAL_LIMIT = 6;
+  var LOAD_STEP     = 3;
   var grid     = document.getElementById('myTaskGrid');
   var filter   = document.getElementById('myTaskFilter');
   var moreBar  = document.getElementById('myTaskMoreBar');
@@ -957,7 +966,7 @@ syncCardsByCurrent();
   var countTip = document.getElementById('myTaskCount');
   if(!grid || !filter || !moreBtn) return;
 
-  var visibleNow = VISIBLE_LIMIT;   // 当前已展示数量（渐进式：每次 +VISIBLE_LIMIT）
+  var visibleNow = INITIAL_LIMIT;   // 当前已展示数量（渐进式：每次 +LOAD_STEP）
   var currentFilter = 'all';        // 当前 tab
 
   function getAllCards(){
@@ -1014,12 +1023,12 @@ syncCardsByCurrent();
     });
     // 更多按钮可见性：仅当还有更多可加载，或当前已展开超过初始量（可收起）时显示
     var hasMore      = matched.length > visibleCount;
-    var canCollapse  = !hasMore && visibleCount > VISIBLE_LIMIT;
+    var canCollapse  = !hasMore && visibleCount > INITIAL_LIMIT;
     var showBar      = hasMore || canCollapse;
     moreBar.style.display = showBar ? 'flex' : 'none';
     if(showBar){
       if(hasMore){
-        var nextStep = Math.min(VISIBLE_LIMIT, matched.length - visibleCount);
+        var nextStep = Math.min(LOAD_STEP, matched.length - visibleCount);
         moreBtn.querySelector('.txt').textContent = '更多 ' + nextStep + ' 个';
         moreBtn.classList.remove('expanded');
       } else {
@@ -1036,11 +1045,11 @@ syncCardsByCurrent();
     filter.querySelectorAll('.task-filter-item').forEach(function(el){ el.classList.remove('active'); });
     item.classList.add('active');
     currentFilter = item.getAttribute('data-filter') || 'all';
-    visibleNow = VISIBLE_LIMIT; // 切 tab 回到初始 3 张
+    visibleNow = INITIAL_LIMIT; // 切 tab 回到初始 6 张
     applyView();
   });
 
-  // 更多 / 收起：每次点击 +VISIBLE_LIMIT，直到全部展开；再点一次回到初始
+  // 更多 / 收起：每次点击 +LOAD_STEP，直到全部展开；再点一次回到初始
   moreBtn.addEventListener('click', function(e){
     e.stopPropagation();
     var cards = getUndoneCards();
@@ -1050,10 +1059,10 @@ syncCardsByCurrent();
     });
     if(visibleNow >= matched.length){
       // 已全部展开 -> 收起
-      visibleNow = VISIBLE_LIMIT;
+      visibleNow = INITIAL_LIMIT;
     } else {
       // 渐进加载下一批
-      visibleNow = Math.min(visibleNow + VISIBLE_LIMIT, matched.length);
+      visibleNow = Math.min(visibleNow + LOAD_STEP, matched.length);
     }
     applyView();
   });
@@ -1061,6 +1070,21 @@ syncCardsByCurrent();
   // 默认渲染：先算数，再布局
   updateCounts();
   applyView();
+
+  // 暴露给外部（如 VSCode 插件重建卡片后需要重新计数+折叠）
+  // 插件在 injectWorkbenchTasks() 完成 DOM 重建后，会调用 window.applyView() 来触发"6 条默认 + 更多 3"的折叠逻辑
+  window.applyView   = applyView;
+  window.updateCounts = updateCounts;
+  // 重置可见数量（外部重新注入数据后调用，确保回到默认 6 张）
+  window.resetMyTaskView = function(){
+    visibleNow = INITIAL_LIMIT;
+    currentFilter = 'all';
+    filter.querySelectorAll('.task-filter-item').forEach(function(el){
+      el.classList.toggle('active', (el.getAttribute('data-filter') || 'all') === 'all');
+    });
+    updateCounts();
+    applyView();
+  };
 })();
 
 /* ========= 统计卡：数字动态化 + 点击联动面板 ========= */

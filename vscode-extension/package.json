@@ -82,7 +82,8 @@
       {
         "command": "tms.refreshData",
         "title": "刷新任务数据",
-        "category": "测试任务管理"
+        "category": "测试任务管理",
+        "icon": "$(refresh)"
       },
       {
         "command": "tms.setApiBaseUrl",
@@ -90,6 +91,15 @@
         "category": "测试任务管理"
       }
     ],
+    "menus": {
+      "view/title": [
+        {
+          "command": "tms.refreshData",
+          "when": "view == tms.sidebarView",
+          "group": "navigation@1"
+        }
+      ]
+    },
     "configuration": {
       "title": "测试任务管理",
       "properties": {

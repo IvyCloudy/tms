@@ -282,7 +282,16 @@ var SUBTASKS_BY_TASK = {
   ]
 };
 var DEFAULT_SUBTASKS = [ { id:"sub-default", name:"默认测试子任务", stages: FULL_STAGES } ];
-function resolveSubtasks(taskId){ return SUBTASKS_BY_TASK[taskId] || DEFAULT_SUBTASKS; }
+/**
+ * 优先使用 tms-api.js 预拉取到的 window.TMS_SUBTASKS[taskId]（与 mock 一致的2b条）；
+ * 脱机打开原型时回退到本地 SUBTASKS_BY_TASK，均找不到用默认占位。
+ */
+function resolveSubtasks(taskId){
+  if(window.TMS_SUBTASKS && Array.isArray(window.TMS_SUBTASKS[taskId]) && window.TMS_SUBTASKS[taskId].length){
+    return window.TMS_SUBTASKS[taskId];
+  }
+  return SUBTASKS_BY_TASK[taskId] || DEFAULT_SUBTASKS;
+}
 var SUBTASKS = resolveSubtasks(window.TMSGlobal ? TMSGlobal.getCurrentId() : "T001");
 
 /* 模块 -> T001 子任务 映射（mock 数据均为 T001） */
@@ -707,15 +716,17 @@ function initSubtaskOptions(){
     return '<option value="' + s.id + '">' + escapeHtml(s.name) + '</option>';
   }).join("");
   // 先尝试按全局 scope 中保存的子任务名匹配
+  var globalMatched = false;
   if(window.TMSScope){
     var m = TMSScope.pickMatch(SUBTASKS, function(s){ return s.name; }, TMSScope.getSubtaskName());
-    if(m) state.subtask = m.id;
+    if(m){ state.subtask = m.id; globalMatched = true; }
   }
   if(!SUBTASKS.find(function(s){ return s.id === state.subtask; })){
     state.subtask = SUBTASKS[0] ? SUBTASKS[0].id : "";
   }
   sel.value = state.subtask;
-  if(window.TMSScope){
+  // 仅在本页成功匹配到全局值时才回写，避免在本页没有该子任务时覆盖全局
+  if(window.TMSScope && globalMatched){
     var cur = SUBTASKS.find(function(s){ return s.id === state.subtask; });
     if(cur) TMSScope.setSubtaskName(cur.name);
   }
@@ -729,15 +740,17 @@ function renderStageOptions(){
     return '<option value="' + st.code + '">' + escapeHtml(st.name) + '</option>';
   }).join("");
   // 先尝试按全局 scope 中保存的阶段名匹配
+  var stageMatched = false;
   if(window.TMSScope){
     var m = TMSScope.pickMatch(sub.stages, function(s){ return s.name; }, TMSScope.getStageName());
-    if(m) state.scopeStage = m.code;
+    if(m){ state.scopeStage = m.code; stageMatched = true; }
   }
   if(!sub.stages.find(function(s){ return s.code === state.scopeStage; })){
     state.scopeStage = sub.stages[0] ? sub.stages[0].code : "";
   }
   sel.value = state.scopeStage;
-  if(window.TMSScope){
+  // 仅在成功匹配到全局值时才回写
+  if(window.TMSScope && stageMatched){
     var curStage = sub.stages.find(function(s){ return s.code === state.scopeStage; });
     if(curStage) TMSScope.setStageName(curStage.name);
   }
@@ -752,7 +765,7 @@ document.addEventListener("DOMContentLoaded", function(){
     } else if(typeof TMSGlobal.mountSwitcher === "function"){
       TMSGlobal.mountSwitcher(document.getElementById("taskSwitcher"));
     }
-    TMSGlobal.onChange(function(){
+    function rebuildBySubtasks(){
       SUBTASKS = resolveSubtasks(TMSGlobal.getCurrentId());
       state.subtask = SUBTASKS[0] ? SUBTASKS[0].id : "";
       state.scopeStage = SUBTASKS[0] && SUBTASKS[0].stages[0] ? SUBTASKS[0].stages[0].code : "";
@@ -761,7 +774,16 @@ document.addEventListener("DOMContentLoaded", function(){
       renderStageOptions();
       renderOverview();
       renderTable();
+    }
+    TMSGlobal.onChange(function(){
+      rebuildBySubtasks();
       showToast("任务已切换，缺陷列表已刷新");
+    });
+    /* 后端 /api/tasks/:id/subtasks 数据到货后重渲染（由 tms-api.js 派发） */
+    window.addEventListener("tms_subtasks_ready", function(ev){
+      var tid = ev && ev.detail && ev.detail.taskId;
+      if(tid && tid !== TMSGlobal.getCurrentId()) return;
+      rebuildBySubtasks();
     });
   } else {
     var cur = document.querySelector(".task-switcher .ts-current");

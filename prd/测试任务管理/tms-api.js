@@ -305,8 +305,80 @@
     }
   }
 
+  /* ==================== 子任务下拉数据预拉取（design/execution/defect/review 共用） ====================
+   * 4 个业务页面都有独立的 #selSubtask 下拉，数据源依赖本地 SUBTASKS_BY_TASK，
+   * 但该字典只配置了老 legacyId(T001~T006)。若当前任务是扩展出来的新 id
+   * （如 T-2026-0115 会员体系 H5），resolveSubtasks 会落到 DEFAULT_SUBTASKS，
+   * 导致下拉里看不到真正的测试子任务（sub-coupon-core 等），无法过滤出用例/缺陷/评审。
+   *
+   * 做法：启动 / 切换任务时，从 /api/tasks/:id/subtasks 拉取完整子任务列表，
+   *      转为原型期望的 { id, name, stages:[{code,name}] } 结构，
+   *      挂到 window.TMS_SUBTASKS[taskId] 和 window.TMS_SUBTASKS_CURRENT，
+   *      并派发 'tms_subtasks_ready' 事件让页面重渲染下拉。
+   */
+  var STAGE_NAME_MAP = {
+    smoke: "冒烟测试", st: "系统测试（ST）", regression: "回归测试",
+    uat: "用户验收（UAT）", design: "设计中", merge: "合并测试"
+  };
+
+  function normalizeSubtasksPayload(raw) {
+    // 后端 /api/tasks/:id/subtasks 返回形态 {list:[{id,name,stages:[{c,n,...}]}]}
+    var list = (raw && raw.list) || (Array.isArray(raw) ? raw : []);
+    return list.map(function (s) {
+      var stages = Array.isArray(s.stages) ? s.stages : [];
+      var mapped = stages.map(function (st) {
+        // st 可能是 {c,n} 对象（详情页结构），也可能是纯 code 字符串（TASK_SUBTASKS 简化结构）
+        if (typeof st === "string") {
+          return { code: st, name: STAGE_NAME_MAP[st] || st };
+        }
+        var code = st.c || st.code || "";
+        var name = st.n || st.name || STAGE_NAME_MAP[code] || code;
+        return { code: code, name: name };
+      }).filter(function (x) { return x.code; });
+      return { id: s.id, name: s.name, stages: mapped };
+    });
+  }
+
+  function attachSubtasksPreloader() {
+    w.TMS_SUBTASKS = w.TMS_SUBTASKS || {};
+
+    function pullFor(tid) {
+      if (!tid) return Promise.resolve([]);
+      return TMSApi.listSubtasks(tid).then(function (data) {
+        var normalized = normalizeSubtasksPayload(data);
+        w.TMS_SUBTASKS[tid] = normalized;
+        return normalized;
+      }).catch(function (err) {
+        console.warn("[TMSApi] 预拉取 subtasks 失败：", err && err.message);
+        return [];
+      });
+    }
+
+    function refreshCurrent() {
+      var tid = null;
+      try { tid = w.TMSGlobal && w.TMSGlobal.getCurrentId && w.TMSGlobal.getCurrentId(); } catch (e) {}
+      if (!tid) return;
+      pullFor(tid).then(function (list) {
+        w.TMS_SUBTASKS_CURRENT = list;
+        try {
+          w.dispatchEvent(new CustomEvent("tms_subtasks_ready", {
+            detail: { taskId: tid, list: list }
+          }));
+        } catch (e) {}
+      });
+    }
+
+    refreshCurrent();
+    if (w.TMSGlobal && typeof w.TMSGlobal.onChange === "function") {
+      w.TMSGlobal.onChange(function () { setTimeout(refreshCurrent, 50); });
+    }
+    // 暴露手动刷新入口，便于页面调用
+    TMSApi.refreshSubtasks = refreshCurrent;
+  }
+
   /* ==================== 页面就绪后按 hook 匹配注入 ==================== */
   function autoAttach() {
+    attachSubtasksPreloader();
     attachHook({
       name: "测试任务", hookKey: "taskList", needTaskId: false,
       /**

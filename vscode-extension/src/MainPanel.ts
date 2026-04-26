@@ -694,7 +694,9 @@ function transformHtml(
       grid.insertBefore(frag, grid.firstChild);
 
       try {
-        if (typeof window.applyView === 'function') window.applyView();
+        // 优先走"重置 + 折叠"入口：默认只显示 6 张，点更多再加载
+        if (typeof window.resetMyTaskView === 'function') window.resetMyTaskView();
+        else if (typeof window.applyView === 'function') window.applyView();
         else if (typeof window.render === 'function') window.render();
       } catch(err) { console.warn('[TMS] applyView failed', err); }
     }).catch(function(err){ logApiFallback('workbench listTasks', err); });
@@ -706,7 +708,26 @@ function transformHtml(
       .then(function(arr){
         var hook = arr[0], resp = arr[1];
         if (!resp || !Array.isArray(resp.list) || !resp.list.length) return;
-        hook.setData(resp.list);
+        // ---- 字段归一化：后端 statusClass="status-exec"  →  原型 status="exec"
+        // 原型 proto-task-list 的统计卡片 / 筛选器按 t.status 短名计数，
+        // 若不做映射，所有状态数量都会是 0。
+        var STATUS_LABEL = {
+          draft:'草稿', design:'设计中', exec:'执行中', review:'评审中', done:'已完成',
+          paused:'已暂停', pending:'待启动', delay:'已延期', closed:'已关闭'
+        };
+        var normalized = resp.list.map(function(t){
+          var shortStatus = t.status;
+          if (!shortStatus && typeof t.statusClass === 'string') {
+            shortStatus = t.statusClass.replace(/^status-/, '');
+          }
+          if (!shortStatus) shortStatus = 'draft';
+          return Object.assign({}, t, {
+            status: shortStatus,
+            statusClass: t.statusClass || ('status-' + shortStatus),
+            statusText: t.statusText || STATUS_LABEL[shortStatus] || shortStatus
+          });
+        });
+        hook.setData(normalized);
       })
       .catch(function(err){ logApiFallback('taskList', err); });
   }
@@ -835,14 +856,23 @@ function transformHtml(
         { key: 'owner', label: '负责人', type: 'text', value: '张小明' },
         { key: 'desc', label: '描述', type: 'textarea', value: '' },
         { key: 'statusClass', label: '状态', type: 'select', value: 'status-design', options: [
-          { value: 'status-design', label: '设计中' },
-          { value: 'status-exec', label: '执行中' },
-          { value: 'status-review', label: '评审中' },
-          { value: 'status-done', label: '已完成' }
+          { value: 'status-draft',   label: '草稿' },
+          { value: 'status-design',  label: '设计中' },
+          { value: 'status-exec',    label: '执行中' },
+          { value: 'status-review',  label: '评审中' },
+          { value: 'status-done',    label: '已完成' },
+          { value: 'status-paused',  label: '已暂停' },
+          { value: 'status-pending', label: '待启动' },
+          { value: 'status-delay',   label: '已延期' },
+          { value: 'status-closed',  label: '已关闭' }
         ]}
       ], function(v){
         var id = uid('T');
-        var statusText = ({'status-design':'设计中','status-exec':'执行中','status-review':'评审中','status-done':'已完成'})[v.statusClass] || '设计中';
+        var statusText = ({
+          'status-draft':'草稿','status-design':'设计中','status-exec':'执行中',
+          'status-review':'评审中','status-done':'已完成','status-paused':'已暂停',
+          'status-pending':'待启动','status-delay':'已延期','status-closed':'已关闭'
+        })[v.statusClass] || '设计中';
         var today = new Date().toISOString().slice(0, 10);
         TMSApi.call('createTask', { payload: {
           id: id, code: 'T-' + id, name: v.name || '未命名任务', owner: v.owner || '张小明',

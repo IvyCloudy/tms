@@ -227,7 +227,7 @@ code{background:#f0f2f5;padding:1px 5px;border-radius:3px;font-size:12px;font-fa
     <table class="doc-table">
       <thead><tr><th style="width:110px">菜单</th><th>核心定位</th><th>主要页面 / 区块</th></tr></thead>
       <tbody>
-        <tr><td>工作台</td><td>个人聚合首页（跨任务）</td><td>数据总览（可点击联动）、我的测试任务（2×4 网格+更多）、快捷入口（6 项）、我的待办（分类 Tab）、团队动态、公告</td></tr>
+<tr><td>工作台</td><td>个人聚合首页（跨任务）</td><td>数据总览（可点击联动）、我的测试任务（2×3 网格+更多，每次加载 3 个）、快捷入口（6 项）、我的待办（分类 Tab）、团队动态、公告</td></tr>
         <tr><td>测试任务</td><td>任务生命周期管理</td><td>状态统计条、筛选区、任务表格（任务编号 / 名称 / 状态 / ST 双列 / UAT 双列 / 截止日期 / 操作）</td></tr>
         <tr><td>任务详情</td><td>单任务信息中枢（从测试任务列表"查看"进入）</td><td>任务元信息卡、Tab（概览 / 测试范围 / 成员 / 活动日志）；测试范围 Tab 承担子任务 / 阶段 / 轮次的 CRUD</td></tr>
         <tr><td>设计管理</td><td>案例设计与复用</td><td>子任务+阶段联动、案例管理（表格 + 搜索）、测试大纲（XMind）</td></tr>
@@ -313,7 +313,7 @@ code{background:#f0f2f5;padding:1px 5px;border-radius:3px;font-size:12px;font-fa
 ├─ <span class="hl">数据总览（4 张统计卡，可点击联动）</span>
 ├─ 左右主栏（grid: 1fr 380px）
 │   ├─ 左列
-│   │   ├─ 我的测试任务（2 行 × 4 列 + 更多）
+│   │   ├─ 我的测试任务（2 行 × 3 列 + 更多）
 │   │   ├─ 快捷入口（6 项）
 │   │   └─ 团队动态（时间线）
 │   └─ 右列
@@ -337,7 +337,7 @@ code{background:#f0f2f5;padding:1px 5px;border-radius:3px;font-size:12px;font-fa
       <li>点击：下方对应面板闪烁一次高亮边框（<code>panelFlash</code> 1.2s 动画）。</li>
     </ul>
 
-    <h4>2.2.3 我的测试任务（2 行 × 4 列 + 更多）</h4>
+<h4>2.2.3 我的测试任务（2 行 × 3 列 + 更多）</h4>
     <ul>
       <li><strong>布局</strong>：4 列固定，默认显示 2 行最多 8 张卡；超过 8 条时显示「<strong>更多 (剩余 N)</strong>」按钮，点击一次展开下一批 8 条（4×2），逐批懒加载，<strong>无上限</strong>。</li>
       <li><strong>Tab 筛选</strong>：全部 / 设计中 / 执行中 / 评审中 / 已完成；每 Tab 带数量角标。</li>
