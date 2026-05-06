@@ -25,7 +25,7 @@ function hashColor(name) {
 function wrapOwner(input, fallbackName) {
   if (input && typeof input === 'object' && input.name) return input;
   const name = (typeof input === 'string' && input) || fallbackName || '未分配';
-  return { name, avatar: name.charAt(0), color: hashColor(name) };
+  return { name, short: name.charAt(0), color: hashColor(name) };
 }
 /** 从 stages[*].status 汇总为整条子任务的 status */
 function aggStatus(stages) {

@@ -729,7 +729,7 @@ function renderOwnerGroup(subs){
   var title = owners.map(function(o){ return o.name; }).join("、");
   var html = '<span class="owner-group" title="' + escapeHtml(title) + '">';
   show.forEach(function(o){
-    html += '<span class="avatar-mini" style="background:' + o.color + '">' + o.short + '</span>';
+    html += '<span class="avatar-mini" style="background:' + o.color + '" title="' + escapeHtml(o.name) + '">' + o.short + '</span>';
   });
   if(rest > 0) html += '<span class="og-more">+' + rest + '</span>';
   html += '</span>';
